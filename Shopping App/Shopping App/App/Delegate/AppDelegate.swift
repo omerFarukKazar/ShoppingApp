@@ -10,8 +10,10 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: Properties
     var window: UIWindow? // Created window here because it is deleted with the SceneDelegate.swift file.
 
+    // MARK: - Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setWindow()
@@ -21,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Does the necessarry settings for window to present the viewController properly.
     func setWindow() {
         let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
-        let viewController = vc() // Got an instance of the first screen's ViewController.
+        let viewController = OnboardingViewController() // Got an instance of the first screen's ViewController.
         let navigationController = UINavigationController(rootViewController: viewController) // Embedded view controller into a navigation controller.
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
