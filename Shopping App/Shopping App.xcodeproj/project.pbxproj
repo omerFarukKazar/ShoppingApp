@@ -56,8 +56,6 @@
 		9D0431ED2992976B004F594B /* App */ = {
 			isa = PBXGroup;
 			children = (
-				9DE900EA2993E9BE0065416F /* Helpers */,
-				9DE900E92993E9BC0065416F /* Core */,
 				9DE900E82993E9B80065416F /* Extensions */,
 				9D0431EF2992978E004F594B /* Splash Screen */,
 				9D0431EE2992977F004F594B /* Asset */,
@@ -119,9 +117,7 @@
 		9DE900DC2993DF130065416F /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				9DE900DF2993DF300065416F /* Model */,
 				9DE900DD2993DF230065416F /* View */,
-				9DE900E02993DF340065416F /* ViewModel */,
 				9DE900E12993DF380065416F /* Controller */,
 			);
 			path = Onboarding;
@@ -133,20 +129,6 @@
 				9DE900E62993E84B0065416F /* OnboardingView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		9DE900DF2993DF300065416F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		9DE900E02993DF340065416F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9DE900E12993DF380065416F /* Controller */ = {
@@ -163,20 +145,6 @@
 				9DCCF41729953169009FAFEC /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		9DE900E92993E9BC0065416F /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		9DE900EA2993E9BE0065416F /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
