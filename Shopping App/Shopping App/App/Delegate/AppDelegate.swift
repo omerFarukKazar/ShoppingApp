@@ -16,18 +16,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        setWindow()
+        UserDefaults.standard.bool(forKey: "didOnboardingCompleted") ? setWindow() : setWindowForFirstRun()
         return true
     }
 
     /// Does the necessarry settings for window to present the viewController properly.
     func setWindow() {
         let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
-        let viewController = OnboardingViewController(viewModel: OnboardingViewModel()) // Got an instance of the first screen's ViewController.
-        let navigationController = UINavigationController(rootViewController: viewController) // Embedded view controller into a navigation controller.
+        let viewController = AuthViewController()
+        // Got an instance of the first screen's ViewController.
+        let navigationController = UINavigationController(rootViewController: viewController)
+        // Embedded view controller into a navigation controller.
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        self.window = window // Assigned the temporary window to AppDelegate's window.
+    }
+
+    /// Does the necessarry settings for window to present the viewController properly if onboarding isn't completed before.
+    func setWindowForFirstRun() {
+        let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
+        let viewController = OnboardingViewController(viewModel: OnboardingViewModel())
+        // Got an instance of the first screen's ViewController.
+        let navigationController = UINavigationController(rootViewController: viewController)
+        // Embedded view controller into a navigation controller.
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window // Assigned the temporary window to AppDelegate's window.
     }
 }
-
