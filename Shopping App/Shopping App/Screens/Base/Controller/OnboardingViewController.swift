@@ -53,6 +53,7 @@ final class OnboardingViewController: UIViewController {
 
         appendPages()
         setupView()
+        addButtonTargets()
     }
 
     // MARK: - Methods
@@ -112,7 +113,7 @@ final class OnboardingViewController: UIViewController {
                 page.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                 page.widthAnchor.constraint(equalToConstant: screenWidth),
                 page.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-                ])
+            ])
         }
     }
 
@@ -133,6 +134,44 @@ final class OnboardingViewController: UIViewController {
         }
     }
 
+    // MARK: - Button Actions
+    /// objc func for handling the taps on back button
+    @objc func backButtonTapped() {
+        if currentPageNumber != 0 {
+            currentPageNumber -= 1
+        }
+    }
+
+    /// objc func for handling the taps on next button
+    @objc func nextButtonTapped() {
+        if currentPageNumber < pagesArray.count - 1 {
+            currentPageNumber += 1
+        } else {
+            goToAuth()
+        }
+    }
+
+    /// objc func for handling the taps on skip button
+    @objc func skipButtonTapped() {
+        goToAuth()
+    }
+
+    /// objc func for handling the changes on page control.
+    @objc func didPageControlChanged() {
+        currentPageNumber = onboardingView.pageControl.currentPage
+    }
+
+    func goToAuth() {
+        print("Auth")
+    }
+
+    /// Adding each button it's own functionaly.
+    func addButtonTargets() {
+        onboardingView.backButton.addTarget(nil, action: #selector(backButtonTapped), for: .touchUpInside)
+        onboardingView.nextButton.addTarget(nil, action: #selector(nextButtonTapped), for: .touchUpInside)
+        onboardingView.skipButton.addTarget(nil, action: #selector(skipButtonTapped), for: .touchUpInside)
+        onboardingView.pageControl.addTarget(nil, action: #selector(didPageControlChanged), for: .allTouchEvents)
+    }
 }
 
 // MARK: - UIScrollViewDelegate
