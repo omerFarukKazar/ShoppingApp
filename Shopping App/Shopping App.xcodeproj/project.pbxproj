@@ -15,6 +15,7 @@
 		9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91440E29A9541B00065776 /* OnboardingViewModel.swift */; };
 		9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */; };
 		9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441229A95B2100065776 /* Placeholders.xcassets */; };
+		9D91441B29A966D900065776 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441A29A966D900065776 /* AuthViewController.swift */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
@@ -31,6 +32,7 @@
 		9D91440E29A9541B00065776 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OnboardingScreenAssets.xcassets; sourceTree = "<group>"; };
 		9D91441229A95B2100065776 /* Placeholders.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Placeholders.xcassets; sourceTree = "<group>"; };
+		9D91441A29A966D900065776 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -96,8 +98,8 @@
 		9D0431F02992987B004F594B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				9D91440729A94B5D00065776 /* Pages */,
-				9DE900DC2993DF130065416F /* Base */,
+				9D91441529A966A900065776 /* Authorization */,
+				9D91441429A9669A00065776 /* Onboarding */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -158,6 +160,55 @@
 				9D91440C29A94BBD00065776 /* OnboardingPageView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9D91441429A9669A00065776 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9D91440729A94B5D00065776 /* Pages */,
+				9DE900DC2993DF130065416F /* Base */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		9D91441529A966A900065776 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441629A966AE00065776 /* Model */,
+				9D91441729A966B600065776 /* View */,
+				9D91441829A966B900065776 /* ViewModel */,
+				9D91441929A966BC00065776 /* Controller */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		9D91441629A966AE00065776 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9D91441729A966B600065776 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9D91441829A966B900065776 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9D91441929A966BC00065776 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441A29A966D900065776 /* AuthViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		9DE900DC2993DF130065416F /* Base */ = {
@@ -291,6 +342,7 @@
 				9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */,
 				9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */,
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
+				9D91441B29A966D900065776 /* AuthViewController.swift in Sources */,
 				9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */,
 				9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */,
 				9D6A28442992829E002454ED /* AppDelegate.swift in Sources */,
