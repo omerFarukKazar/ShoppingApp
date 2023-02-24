@@ -13,6 +13,8 @@
 		9D91440B29A94BB300065776 /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91440A29A94BB300065776 /* PageModel.swift */; };
 		9D91440D29A94BBD00065776 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91440C29A94BBD00065776 /* OnboardingPageView.swift */; };
 		9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91440E29A9541B00065776 /* OnboardingViewModel.swift */; };
+		9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */; };
+		9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441229A95B2100065776 /* Placeholders.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
@@ -27,6 +29,8 @@
 		9D91440A29A94BB300065776 /* PageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageModel.swift; sourceTree = "<group>"; };
 		9D91440C29A94BBD00065776 /* OnboardingPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		9D91440E29A9541B00065776 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OnboardingScreenAssets.xcassets; sourceTree = "<group>"; };
+		9D91441229A95B2100065776 /* Placeholders.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Placeholders.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				9D6A284C2992829F002454ED /* Assets.xcassets */,
+				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
+				9D91441229A95B2100065776 /* Placeholders.xcassets */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -249,6 +255,8 @@
 			files = (
 				9D6A28502992829F002454ED /* LaunchScreen.storyboard in Resources */,
 				9D6A284D2992829F002454ED /* Assets.xcassets in Resources */,
+				9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */,
+				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
