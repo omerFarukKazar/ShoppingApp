@@ -16,6 +16,8 @@
 		9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */; };
 		9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D91441229A95B2100065776 /* Placeholders.xcassets */; };
 		9D91441B29A966D900065776 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441A29A966D900065776 /* AuthViewController.swift */; };
+		9D91442029A96F7900065776 /* SAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441F29A96F7900065776 /* SAViewController.swift */; };
+		9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91442129A96F9C00065776 /* AlertPresentable.swift */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
@@ -33,6 +35,8 @@
 		9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OnboardingScreenAssets.xcassets; sourceTree = "<group>"; };
 		9D91441229A95B2100065776 /* Placeholders.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Placeholders.xcassets; sourceTree = "<group>"; };
 		9D91441A29A966D900065776 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		9D91441F29A96F7900065776 /* SAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAViewController.swift; sourceTree = "<group>"; };
+		9D91442129A96F9C00065776 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,22 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		9D91441D29A96F3B00065776 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9D91442129A96F9C00065776 /* AlertPresentable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9D91441E29A96F5100065776 /* SAKit */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441F29A96F7900065776 /* SAViewController.swift */,
+			);
+			path = SAKit;
+			sourceTree = "<group>";
+		};
 		9DE900DC2993DF130065416F /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +370,8 @@
 			files = (
 				9D91440D29A94BBD00065776 /* OnboardingPageView.swift in Sources */,
 				9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */,
+				9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */,
+				9D91442029A96F7900065776 /* SAViewController.swift in Sources */,
 				9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */,
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
 				9D91441B29A966D900065776 /* AuthViewController.swift in Sources */,

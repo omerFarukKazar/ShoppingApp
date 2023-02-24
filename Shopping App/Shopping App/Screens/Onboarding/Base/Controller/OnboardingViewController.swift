@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: SAViewController {
 
     // MARK: - Properties
     let screenWidth = UIScreen.main.bounds.width
@@ -153,7 +153,12 @@ final class OnboardingViewController: UIViewController {
 
     /// objc func for handling the taps on skip button
     @objc func skipButtonTapped() {
-        goToAuth()
+        showAlert(title: "Warning",
+                  message: "If you press OK, you won't be able to see Onboarding Pages again.",
+                  cancelButtonTitle: "Cancel") { _ in
+            self.goToAuth()
+        }
+
     }
 
     /// objc func for handling the changes on page control.
