@@ -7,7 +7,8 @@
 
 import UIKit
 
-// Since screenWidth and screenHeight will be used a lot in different ViewControllers for reactive layout design, this extension added.
+// Since screenWidth and screenHeight will be used a lot in different ViewControllers for reactive
+// layout design, this extension added.
 // Maybe in the future, Custom View can be created.
 
 extension UIView {

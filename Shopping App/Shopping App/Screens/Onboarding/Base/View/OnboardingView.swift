@@ -19,7 +19,8 @@ final class OnboardingView: UIView {
     // MARK: - Properties
     var pagesView = OnboardingPageView()
 
-    // Initialized properties below by using Initialization with closures because made some additional changes on the UI elements.
+    // Initialized properties below by using Initialization with closures because made some additional
+    // changes on the UI elements.
     let backButton: UIButton = {
         let button = UIButton()
         button.setTitle(ButtonTitles.backButton.rawValue, for: .normal)
