@@ -9,48 +9,59 @@ import UIKit
 
 final class OnboardingView: UIView {
 
+    /// This enum contains Button titles for OnboardingView.
+    enum ButtonTitles: String, RawRepresentable {
+        case backButton = "Back"
+        case nextButton = "Next"
+        case skipButton = "Skip"
+        case doneButton = "Done"
+    }
     // MARK: - Properties
-    /// Initialized properties by using Initialization with closures because made some additional changes on the UI elements.
-    private let backButton: UIButton = {
+    var pagesView = OnboardingPageView()
+
+    // Initialized properties below by using Initialization with closures because made some additional changes on the UI elements.
+    let backButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Back", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle(ButtonTitles.backButton.rawValue, for: .normal)
+        button.setTitleColor(.blue, for: .normal)
         return button
     }()
 
-    private let nextButton: UIButton = {
+     let nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Next", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle(ButtonTitles.nextButton.rawValue, for: .normal)
+        button.setTitleColor(.blue, for: .normal)
         return button
     }()
 
-    private let skipButton: UIButton = {
+    let skipButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Skip", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitle(ButtonTitles.skipButton.rawValue, for: .normal)
+        button.setTitleColor(.blue, for: .normal)
         return button
     }()
 
-    private let pageControl: UIPageControl = {
+    let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
+        pageControl.currentPageIndicatorTintColor = .blue
         return pageControl
     }()
 
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
-        [backButton, pageControl, nextButton].forEach { stackView.addArrangedSubview($0) }
-        return stackView
+     var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        let screenWidth = UIScreen.main.bounds.width
+        scrollView.isPagingEnabled = true
+        scrollView.scrollsToTop = false
+        scrollView.isDirectionalLockEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
     }()
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .darkGray
-        setLayout()
+        backgroundColor = .lightGray
+        setConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -59,18 +70,45 @@ final class OnboardingView: UIView {
 
     // MARK: - Methods
     /// Set Up Constraints of UI Elements.
-    private func setLayout() {
+    private func setConstraints() {
+        let screenHeight = screenHeight
 
-        self.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
-                                     stackView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-                                     stackView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)])
+        self.addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+            backButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+                                    ])
+
+        self.addSubview(pageControl)
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+        ])
+
+        self.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            nextButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
+        ])
 
         self.addSubview(skipButton)
         skipButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([skipButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
-                                     skipButton.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor)])
+        NSLayoutConstraint.activate([
+            skipButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            skipButton.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor)
+        ])
+
+        self.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: skipButton.bottomAnchor, constant: screenHeight * 0.02),
+            scrollView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -screenHeight * 0.02)
+        ])
     }
-    
+
 }
