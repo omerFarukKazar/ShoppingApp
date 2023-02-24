@@ -68,7 +68,7 @@
 		9D0431ED2992976B004F594B /* App */ = {
 			isa = PBXGroup;
 			children = (
-				9DE900E82993E9B80065416F /* Extensions */,
+				9D91441C29A96F0A00065776 /* Core */,
 				9D0431EF2992978E004F594B /* Splash Screen */,
 				9D0431EE2992977F004F594B /* Asset */,
 				9D0431EC29929769004F594B /* Plist */,
@@ -209,6 +209,16 @@
 				9D91441A29A966D900065776 /* AuthViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9D91441C29A96F0A00065776 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441E29A96F5100065776 /* SAKit */,
+				9D91441D29A96F3B00065776 /* Helpers */,
+				9DE900E82993E9B80065416F /* Extensions */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		9DE900DC2993DF130065416F /* Base */ = {
