@@ -10,7 +10,7 @@ import UIKit
 final class OnboardingViewController: SAViewController {
 
     // MARK: - Properties
-    let screenWidth = UIScreen.main.bounds.width
+    private let screenWidth = UIScreen.main.bounds.width
     private var onboardingView = OnboardingView()
     private let viewModel: OnboardingViewModel // Not used as an instance. That property could've been deleted.
     private var pageCount = OnboardingViewModel.Page.allCases.count
@@ -136,14 +136,14 @@ final class OnboardingViewController: SAViewController {
 
     // MARK: - Button Actions
     /// objc func for handling the taps on back button
-    @objc func backButtonTapped() {
+    @objc private func backButtonTapped() {
         if currentPageNumber != 0 {
             currentPageNumber -= 1
         }
     }
 
     /// objc func for handling the taps on next button
-    @objc func nextButtonTapped() {
+    @objc private func nextButtonTapped() {
         if currentPageNumber < pagesArray.count - 1 {
             currentPageNumber += 1
         } else {
@@ -152,7 +152,7 @@ final class OnboardingViewController: SAViewController {
     }
 
     /// objc func for handling the taps on skip button
-    @objc func skipButtonTapped() {
+    @objc private func skipButtonTapped() {
         showAlert(title: "Warning",
                   message: "If you press OK, you won't be able to see Onboarding Pages again.",
                   cancelButtonTitle: "Cancel") { _ in
@@ -162,17 +162,17 @@ final class OnboardingViewController: SAViewController {
     }
 
     /// objc func for handling the changes on page control.
-    @objc func didPageControlChanged() {
+    @objc private func didPageControlChanged() {
         currentPageNumber = onboardingView.pageControl.currentPage
     }
 
-    func goToAuth() {
+    private func goToAuth() {
         UserDefaults.standard.set(true, forKey: "didOnboardingCompleted")
         navigationController?.pushViewController(AuthViewController(), animated: true)
     }
 
     /// Adding each button it's own functionaly.
-    func addButtonTargets() {
+    private func addButtonTargets() {
         onboardingView.backButton.addTarget(nil, action: #selector(backButtonTapped), for: .touchUpInside)
         onboardingView.nextButton.addTarget(nil, action: #selector(nextButtonTapped), for: .touchUpInside)
         onboardingView.skipButton.addTarget(nil, action: #selector(skipButtonTapped), for: .touchUpInside)

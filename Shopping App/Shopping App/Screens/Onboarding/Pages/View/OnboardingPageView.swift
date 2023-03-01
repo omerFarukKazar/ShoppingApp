@@ -63,7 +63,7 @@ final class OnboardingPageView: UIView {
 
     // MARK: - Methods
 
-    func setConstraints() {
+    private func setConstraints() {
         let screenWidth = screenWidth // Since screenWidth is a computed property, i don't want to
         // compute that everytime it's used. That's why i create a local stored property.
         let screenHeight = screenHeight
