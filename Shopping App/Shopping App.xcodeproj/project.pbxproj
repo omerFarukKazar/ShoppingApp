@@ -21,10 +21,12 @@
 		9D91441B29A966D900065776 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441A29A966D900065776 /* AuthViewController.swift */; };
 		9D91442029A96F7900065776 /* SAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441F29A96F7900065776 /* SAViewController.swift */; };
 		9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91442129A96F9C00065776 /* AlertPresentable.swift */; };
+		9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9AAA9629B0D5420019F7EE /* SATextViewWithSecureEntry.swift */; };
 		9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
+		9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED6C3229B7E0C400366D2E /* SATextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,10 +46,12 @@
 		9D91441A29A966D900065776 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		9D91441F29A96F7900065776 /* SAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAViewController.swift; sourceTree = "<group>"; };
 		9D91442129A96F9C00065776 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
+		9D9AAA9629B0D5420019F7EE /* SATextViewWithSecureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextViewWithSecureEntry.swift; sourceTree = "<group>"; };
 		9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EyeIcons.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9DED6C3229B7E0C400366D2E /* SATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				9D91441F29A96F7900065776 /* SAViewController.swift */,
+				9D9AAA9629B0D5420019F7EE /* SATextViewWithSecureEntry.swift */,
+				9DED6C3229B7E0C400366D2E /* SATextView.swift */,
 			);
 			path = SAKit;
 			sourceTree = "<group>";
@@ -405,9 +411,11 @@
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
 				9D91441B29A966D900065776 /* AuthViewController.swift in Sources */,
 				9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */,
+				9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */,
 				9D7D6EBF29AFE0EE007A9F47 /* AuthViewModel.swift in Sources */,
 				9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */,
 				9D12994129B4C2A7006A1E4A /* SignUpView.swift in Sources */,
+				9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */,
 				9D7D6EBD29AFE06D007A9F47 /* LogInView.swift in Sources */,
 				9D6A28442992829E002454ED /* AppDelegate.swift in Sources */,
 			);
