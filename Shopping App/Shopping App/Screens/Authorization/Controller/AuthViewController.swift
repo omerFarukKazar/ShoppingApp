@@ -32,10 +32,11 @@ final class AuthViewController: UIViewController {
     }
 
     // MARK: - Methods
+    // MARK: Switch View Methods
     /// Changes the 'self.view' to 'logInView' and does the necessary preparations.
     private func switchToLogInView() {
-        logInView.createNewAccountButton.addTarget(nil,
-                                                   action: #selector(createNewAccountButtonTapped), for: .allEvents)
+        addCreateNewAccountButtonTarget()
+
         self.view = logInView
         logInView.fadeOut(duration: 0.5)
         logInView.fadeIn(duration: 0.5)
@@ -43,12 +44,23 @@ final class AuthViewController: UIViewController {
 
     /// Changes the 'self.view' to 'signUpView' and does the necessary preparations.
     private func switchToSignUpView() {
-        signUpView.alreadyHaveAnAccountButton.addTarget(nil,
-                                                        action: #selector(alreadyHaveAnAccountButtonTapped), for: .allEvents)
+        addAlreadyHaveAnAccountButtonTarget()
         addDatePickerTarget()
+
         self.view = signUpView
         signUpView.fadeOut(duration: 0.5)
         signUpView.fadeIn(duration: 0.5)
+    }
+
+    // MARK: Button Target Methods
+    func addCreateNewAccountButtonTarget() {
+        logInView.createNewAccountButton.addTarget(nil,
+                                                   action: #selector(createNewAccountButtonTapped), for: .allEvents)
+    }
+
+    func addAlreadyHaveAnAccountButtonTarget() {
+        signUpView.alreadyHaveAnAccountButton.addTarget(nil,
+                                                        action: #selector(alreadyHaveAnAccountButtonTapped), for: .allEvents)
     }
 
     /// Selector method of createNewAccountButton
