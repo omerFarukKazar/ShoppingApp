@@ -21,6 +21,7 @@
 		9D91441B29A966D900065776 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441A29A966D900065776 /* AuthViewController.swift */; };
 		9D91442029A96F7900065776 /* SAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91441F29A96F7900065776 /* SAViewController.swift */; };
 		9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D91442129A96F9C00065776 /* AlertPresentable.swift */; };
+		9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
@@ -43,6 +44,7 @@
 		9D91441A29A966D900065776 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		9D91441F29A96F7900065776 /* SAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAViewController.swift; sourceTree = "<group>"; };
 		9D91442129A96F9C00065776 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
+		9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EyeIcons.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				9D6A284C2992829F002454ED /* Assets.xcassets */,
 				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
 				9D91441229A95B2100065776 /* Placeholders.xcassets */,
+				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				9D6A28502992829F002454ED /* LaunchScreen.storyboard in Resources */,
 				9D6A284D2992829F002454ED /* Assets.xcassets in Resources */,
 				9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */,
+				9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */,
 				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
