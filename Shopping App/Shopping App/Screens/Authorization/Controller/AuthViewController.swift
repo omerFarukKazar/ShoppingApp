@@ -37,6 +37,8 @@ final class AuthViewController: UIViewController {
         logInView.createNewAccountButton.addTarget(nil,
                                                    action: #selector(createNewAccountButtonTapped), for: .allEvents)
         self.view = logInView
+        logInView.fadeOut(duration: 0.5)
+        logInView.fadeIn(duration: 0.5)
     }
 
     /// Changes the 'self.view' to 'signUpView' and does the necessary preparations.
@@ -44,6 +46,8 @@ final class AuthViewController: UIViewController {
         signUpView.alreadyHaveAnAccountButton.addTarget(nil,
                                                         action: #selector(alreadyHaveAnAccountButtonTapped), for: .allEvents)
         self.view = signUpView
+        signUpView.fadeOut(duration: 0.5)
+        signUpView.fadeIn(duration: 0.5)
     }
 
     /// Selector method of createNewAccountButton
