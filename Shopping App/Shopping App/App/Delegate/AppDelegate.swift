@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // swiftlint:disable:next void_function_in_ternary
         UserDefaults.standard.bool(forKey: "didOnboardingCompleted") ? setWindow() : setWindowForFirstRun()
+        FirebaseApp.configure()
         return true
     }
 
