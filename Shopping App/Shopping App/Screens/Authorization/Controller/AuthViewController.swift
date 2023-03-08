@@ -45,6 +45,7 @@ final class AuthViewController: UIViewController {
     private func switchToSignUpView() {
         signUpView.alreadyHaveAnAccountButton.addTarget(nil,
                                                         action: #selector(alreadyHaveAnAccountButtonTapped), for: .allEvents)
+        addDatePickerTarget()
         self.view = signUpView
         signUpView.fadeOut(duration: 0.5)
         signUpView.fadeIn(duration: 0.5)
@@ -59,4 +60,19 @@ final class AuthViewController: UIViewController {
     @objc private func alreadyHaveAnAccountButtonTapped() {
         switchToLogInView()
     }
+
+    // MARK: Date Picker Methods
+    private func addDatePickerTarget() {
+        signUpView.birthdayPicker.addTarget(nil,
+                                            action: #selector(didDatePickerValueChanged(_:)),
+                                            for: .valueChanged)
+    }
+
+    @objc private func didDatePickerValueChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MMM/yyyy"
+        let date = formatter.string(from: sender.date)
+        print(date)
+    }
+
 }
