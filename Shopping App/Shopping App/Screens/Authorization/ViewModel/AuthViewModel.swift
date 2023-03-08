@@ -7,8 +7,13 @@
 
 import Foundation
 
-final class AuthViewModel {
+protocol AuthDelegate: AnyObject {
+    func isSignUpSuccessful()
+    func isLogInSuccessful()
+}
 
+final class AuthViewModel {
+    // MARK: - Enums
     /// Auth
     enum AuthOption: String {
         case logIn
@@ -32,4 +37,9 @@ final class AuthViewModel {
         case signUpButton = "Sign Up"
     }
 
+    // MARK: - Properties
+    weak var delegate: AuthDelegate?
+    private var user: User?
+
+    
 }
