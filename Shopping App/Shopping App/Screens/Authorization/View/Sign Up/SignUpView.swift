@@ -34,12 +34,28 @@ final class SignUpView: UIView {
         return textView
     }()
 
-    private let birthdayTextView: SATextView = {
-        let textView = SATextView()
-        textView.title = AuthViewModel.Placeholders.birthday.rawValue
-        return textView
+    let birthdayLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.text = AuthViewModel.Placeholders.birthday.rawValue
+        return label
     }()
 
+    let birthdayPicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        return datePicker
+    }()
+
+    private lazy var birthdayStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .leading
+        stackView.axis = .vertical
+        stackView.spacing = 8.0
+        [birthdayLabel,
+         birthdayPicker].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
     private let signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle(AuthViewModel.ButtonTitles.signUpButton.rawValue, for: .normal)
@@ -64,7 +80,7 @@ final class SignUpView: UIView {
          emailTextView,
          passwordTextView,
          passwordAgainTextView,
-         birthdayTextView,
+         birthdayStackView,
          signUpButton].forEach { stackView.addArrangedSubview($0) }
         stackView.distribution = .equalSpacing
         stackView.spacing = 16
