@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Encodable {
     let username: String?
-    let mail: String?
-    let password: String?
+    let email: String?
     let birthday: String?
 }
 
@@ -19,8 +18,7 @@ extension User {
     // This init method allows us to fetch and decode that dictionary into User struct.
     init(from dict: [String: Any]) {
         username = dict["username"] as? String
-        mail = dict["mail"] as? String
-        password = dict["password"] as? String
+        email = dict["email"] as? String
         birthday = dict["birthday"] as? String
     }
 }
