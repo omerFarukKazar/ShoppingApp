@@ -31,6 +31,10 @@
 		9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9AAA9629B0D5420019F7EE /* SATextViewWithSecureEntry.swift */; };
 		9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */; };
 		9D9E132C29BA03DD00B10C62 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E132B29BA03DD00B10C62 /* MainTabBarViewController.swift */; };
+		9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E132D29BA58B300B10C62 /* ProductsViewController.swift */; };
+		9D9E133029BA58C600B10C62 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E132F29BA58C600B10C62 /* SearchViewController.swift */; };
+		9D9E133229BA58CE00B10C62 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E133129BA58CE00B10C62 /* ProfileViewController.swift */; };
+		9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
@@ -60,6 +64,10 @@
 		9D9AAA9629B0D5420019F7EE /* SATextViewWithSecureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextViewWithSecureEntry.swift; sourceTree = "<group>"; };
 		9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EyeIcons.xcassets; sourceTree = "<group>"; };
 		9D9E132B29BA03DD00B10C62 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		9D9E132D29BA58B300B10C62 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		9D9E132F29BA58C600B10C62 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9D9E133129BA58CE00B10C62 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MainTabBarAssets.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +127,7 @@
 				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
 				9D91441229A95B2100065776 /* Placeholders.xcassets */,
 				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
+				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -364,6 +373,7 @@
 		9D9E131D29BA030100B10C62 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9D9E132D29BA58B300B10C62 /* ProductsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -371,6 +381,7 @@
 		9D9E131E29BA031600B10C62 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9D9E133129BA58CE00B10C62 /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -399,6 +410,7 @@
 		9D9E132229BA033300B10C62 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9D9E132F29BA58C600B10C62 /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -573,6 +585,7 @@
 				9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */,
 				9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */,
 				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
+				9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */,
 				9D83EB4029B8EC4700B14C81 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,12 +620,14 @@
 				9D91440D29A94BBD00065776 /* OnboardingPageView.swift in Sources */,
 				9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */,
 				9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */,
+				9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */,
 				9D9E132C29BA03DD00B10C62 /* MainTabBarViewController.swift in Sources */,
 				9D91442029A96F7900065776 /* SAViewController.swift in Sources */,
 				9D83EB3329B8D3F900B14C81 /* User.swift in Sources */,
 				9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */,
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
 				9D91441B29A966D900065776 /* AuthViewController.swift in Sources */,
+				9D9E133029BA58C600B10C62 /* SearchViewController.swift in Sources */,
 				9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */,
 				9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */,
 				9D7D6EBF29AFE0EE007A9F47 /* AuthViewModel.swift in Sources */,
@@ -620,6 +635,7 @@
 				9D12994129B4C2A7006A1E4A /* SignUpView.swift in Sources */,
 				9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */,
 				9D7D6EBD29AFE06D007A9F47 /* LogInView.swift in Sources */,
+				9D9E133229BA58CE00B10C62 /* ProfileViewController.swift in Sources */,
 				9D6A28442992829E002454ED /* AppDelegate.swift in Sources */,
 				9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */,
 			);
