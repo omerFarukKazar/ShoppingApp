@@ -34,6 +34,7 @@
 		9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E132D29BA58B300B10C62 /* ProductsViewController.swift */; };
 		9D9E133029BA58C600B10C62 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E132F29BA58C600B10C62 /* SearchViewController.swift */; };
 		9D9E133229BA58CE00B10C62 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E133129BA58CE00B10C62 /* ProfileViewController.swift */; };
+		9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
@@ -66,6 +67,7 @@
 		9D9E132D29BA58B300B10C62 /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		9D9E132F29BA58C600B10C62 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9D9E133129BA58CE00B10C62 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MainTabBarAssets.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
 				9D91441229A95B2100065776 /* Placeholders.xcassets */,
 				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
+				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				9D91441129A95B1A00065776 /* OnboardingScreenAssets.xcassets in Resources */,
 				9D9AAA9929B0D6700019F7EE /* EyeIcons.xcassets in Resources */,
 				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
+				9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */,
 				9D83EB4029B8EC4700B14C81 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
