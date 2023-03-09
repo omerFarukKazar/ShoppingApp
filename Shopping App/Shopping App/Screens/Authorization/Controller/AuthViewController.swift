@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class AuthViewController: UIViewController {
+final class AuthViewController: SAViewController {
 
     // MARK: - Properties
     private let logInView = LogInView()
     private let signUpView = SignUpView()
     private let viewModel: AuthViewModel
+    private var birthdayDate: String?
 
     // MARK: - Init
     init(viewModel: AuthViewModel) {
@@ -28,6 +29,7 @@ final class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel.delegate = self
         switchToLogInView()
     }
 
@@ -36,6 +38,7 @@ final class AuthViewController: UIViewController {
     /// Changes the 'self.view' to 'logInView' and does the necessary preparations.
     private func switchToLogInView() {
         addCreateNewAccountButtonTarget()
+        addLogInButtonTarget()
 
         self.view = logInView
         logInView.fadeOut(duration: 0.5)
@@ -46,6 +49,7 @@ final class AuthViewController: UIViewController {
     private func switchToSignUpView() {
         addAlreadyHaveAnAccountButtonTarget()
         addDatePickerTarget()
+        addSignUpButtonTarget()
 
         self.view = signUpView
         signUpView.fadeOut(duration: 0.5)
@@ -53,19 +57,23 @@ final class AuthViewController: UIViewController {
     }
 
     // MARK: Button Target Methods
+    // Create New Account Button Methods
     func addCreateNewAccountButtonTarget() {
         logInView.createNewAccountButton.addTarget(nil,
-                                                   action: #selector(createNewAccountButtonTapped), for: .allEvents)
-    }
-
-    func addAlreadyHaveAnAccountButtonTarget() {
-        signUpView.alreadyHaveAnAccountButton.addTarget(nil,
-                                                        action: #selector(alreadyHaveAnAccountButtonTapped), for: .allEvents)
+                                                   action: #selector(createNewAccountButtonTapped),
+                                                   for: .touchUpInside)
     }
 
     /// Selector method of createNewAccountButton
     @objc private func createNewAccountButtonTapped() {
         switchToSignUpView()
+    }
+
+    // Already Have An Account Button Methods
+    func addAlreadyHaveAnAccountButtonTarget() {
+        signUpView.alreadyHaveAnAccountButton.addTarget(nil,
+                                                        action: #selector(alreadyHaveAnAccountButtonTapped),
+                                                        for: .touchUpInside)
     }
 
     /// Selector method of alreadyHaveAnAccountButton.
@@ -83,8 +91,65 @@ final class AuthViewController: UIViewController {
     @objc private func didDatePickerValueChanged(_ sender: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MMM/yyyy"
-        let date = formatter.string(from: sender.date)
-        print(date)
+        birthdayDate = formatter.string(from: sender.date)
     }
 
+    // MARK: Authorization Button Methods
+    // Log In Button Methods
+    private func addLogInButtonTarget() {
+        logInView.logInButton.addTarget(nil, action: #selector(logInButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func logInButtonTapped() {
+        guard let email = logInView.emailTextView.text,
+              let password = logInView.passwordTextView.text
+                // email.isEmpty || password.isEmpty
+                // This could be a solution
+        else {
+            // showAlert(title: "Error", message: "Please fill all the fields.")
+            return
+        }
+
+        viewModel.logIn(email: email, password: password)
+    }
+
+    // Sign Up Button Methods
+    private func addSignUpButtonTarget() {
+        signUpView.signUpButton.addTarget(nil, action: #selector(signUpButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func signUpButtonTapped() {
+        guard let username = signUpView.usernameTextView.text,
+              let email = signUpView.emailTextView.text,
+              let password = signUpView.passwordTextView.text,
+              let passwordAgain = signUpView.passwordAgainTextView.text,
+              let birthday = birthdayDate
+        else { return }
+
+        if password != passwordAgain {
+            showAlert(title: "Error", message: "Passwords do not match.")
+            return
+        }
+
+        viewModel.signUp(username: username,
+                         email: email,
+                         password: password,
+                         birthday: birthday)
+    }
+
+}
+
+// MARK: - AuthDelegate
+extension AuthViewController: AuthDelegate {
+    func isSignUpSuccessful() {
+        showAlert(title: "Success", message: "Sign Up Successful")
+    }
+
+    func isLogInSuccessful() {
+        showAlert(title: "Success", message: "Log In Successful")
+    }
+
+    func didErrorOccured(_ error: Error) {
+        showError(error)
+    }
 }
