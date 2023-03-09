@@ -9,32 +9,32 @@ import UIKit
 
 final class LogInView: UIView {
     // MARK: - Properties
-    private let emailTextView: SATextView = {
+    let emailTextView: SATextView = {
         let textView = SATextView()
-        textView.title = AuthViewModel.Placeholders.email.rawValue
+        textView.title = AuthTextViewTitles.email.rawValue
         return textView
     }()
 
-    private let passwordTextView: SATextViewWithSecureEntry = {
+    let passwordTextView: SATextViewWithSecureEntry = {
         let textView = SATextViewWithSecureEntry()
-        textView.title = AuthViewModel.Placeholders.password.rawValue
+        textView.title = AuthTextViewTitles.password.rawValue
         return textView
     }()
 
-    private let logInButton: UIButton = {
+    let logInButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .init(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0)
-        button.setTitle(AuthViewModel.ButtonTitles.logInButton.rawValue, for: .normal)
+        button.setTitle(AuthButtonTitles.logInButton.rawValue, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.borderWidth = 0.5
         button.layer.cornerRadius = 10
         return button
     }()
 
-    private let forgotPasswordButton: UIButton = {
+    let forgotPasswordButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.setTitle(AuthViewModel.ButtonTitles.forgotPasswordButton.rawValue, for: .normal)
+        button.setTitle(AuthButtonTitles.forgotPasswordButton.rawValue, for: .normal)
         button.setTitleColor(.blue, for: .normal)
         return button
     }()
@@ -42,7 +42,7 @@ final class LogInView: UIView {
     let createNewAccountButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.setTitle(AuthViewModel.ButtonTitles.dontYouHaveAnAccountButton.rawValue, for: .normal)
+        button.setTitle(AuthButtonTitles.dontYouHaveAnAccountButton.rawValue, for: .normal)
         button.setTitleColor(.blue, for: .normal)
         return button
     }()

@@ -10,34 +10,34 @@ import UIKit
 final class SignUpView: UIView {
 
     // MARK: - Properties
-    private let usernameTextView: SATextView = {
+    let usernameTextView: SATextView = {
         let textView = SATextView()
-        textView.title = AuthViewModel.Placeholders.username.rawValue
+        textView.title = AuthTextViewTitles.username.rawValue
         return textView
     }()
 
-    private let emailTextView: SATextView = {
+    let emailTextView: SATextView = {
         let textView = SATextView()
-        textView.title = AuthViewModel.Placeholders.email.rawValue
+        textView.title = AuthTextViewTitles.email.rawValue
         return textView
     }()
 
-    private let passwordTextView: SATextViewWithSecureEntry = {
+    let passwordTextView: SATextViewWithSecureEntry = {
         let textView = SATextViewWithSecureEntry()
-        textView.title = AuthViewModel.Placeholders.password.rawValue
+        textView.title = AuthTextViewTitles.password.rawValue
         return textView
     }()
 
-    private let passwordAgainTextView: SATextViewWithSecureEntry = {
+    let passwordAgainTextView: SATextViewWithSecureEntry = {
         let textView = SATextViewWithSecureEntry()
-        textView.title = AuthViewModel.Placeholders.passwordAgain.rawValue
+        textView.title = AuthTextViewTitles.passwordAgain.rawValue
         return textView
     }()
 
     let birthdayLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
-        label.text = AuthViewModel.Placeholders.birthday.rawValue
+        label.text = AuthTextViewTitles.birthday.rawValue
         return label
     }()
 
@@ -56,9 +56,10 @@ final class SignUpView: UIView {
          birthdayPicker].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
-    private let signUpButton: UIButton = {
+    
+    let signUpButton: UIButton = {
         let button = UIButton()
-        button.setTitle(AuthViewModel.ButtonTitles.signUpButton.rawValue, for: .normal)
+        button.setTitle(AuthButtonTitles.signUpButton.rawValue, for: .normal)
         button.backgroundColor = .init(red: 0.0, green: 0.5, blue: 0.3, alpha: 1.0)
         button.setTitleColor(.white, for: .normal)
         button.layer.borderWidth = 0.5
@@ -69,7 +70,7 @@ final class SignUpView: UIView {
     let alreadyHaveAnAccountButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.setTitle(AuthViewModel.ButtonTitles.alreadyHaveAnAccountButton.rawValue, for: .normal)
+        button.setTitle(AuthButtonTitles.alreadyHaveAnAccountButton.rawValue, for: .normal)
         button.setTitleColor(.blue, for: .normal)
         return button
     }()
