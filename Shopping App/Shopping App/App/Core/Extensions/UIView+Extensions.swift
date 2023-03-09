@@ -22,4 +22,18 @@ extension UIView {
         UIScreen.main.bounds.height
     }
 
+    /// Fade in animation
+    func fadeIn(duration: TimeInterval = 1.0) {
+         UIView.animate(withDuration: duration, animations: {
+            self.alpha = 1.0
+         })
+     }
+
+    /// Fade out animation
+    func fadeOut(duration: TimeInterval = 1.0) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0.75
+        })
+      }
+
 }

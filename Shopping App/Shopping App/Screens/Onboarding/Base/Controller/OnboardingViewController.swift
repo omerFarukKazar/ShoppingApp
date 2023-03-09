@@ -168,7 +168,7 @@ final class OnboardingViewController: SAViewController {
 
     private func goToAuth() {
         UserDefaults.standard.set(true, forKey: "didOnboardingCompleted")
-        navigationController?.pushViewController(AuthViewController(), animated: true)
+        navigationController?.pushViewController(AuthViewController(viewModel: AuthViewModel()), animated: true)
     }
 
     /// Adding each button it's own functionaly.
