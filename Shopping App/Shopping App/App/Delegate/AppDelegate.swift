@@ -17,10 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Methods
     // swiftlint:disable:next line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         // Override point for customization after application launch.
         // swiftlint:disable:next void_function_in_ternary
         UserDefaults.standard.bool(forKey: "didOnboardingCompleted") ? setWindow() : setWindowForFirstRun()
-        FirebaseApp.configure()
         return true
     }
 

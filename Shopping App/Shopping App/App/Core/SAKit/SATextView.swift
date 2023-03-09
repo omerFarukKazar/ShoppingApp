@@ -11,7 +11,7 @@ import UIKit
 class SATextView: UIView {
 
     // MARK: - Properties
-    /// Stands for 'titlelabel.text'. Shortened the property's name.
+    /// Stands for 'titleLabel.text'. Shortened the property's name.
     var title: String? {
         didSet {
             titleLabel.text = title
@@ -21,7 +21,13 @@ class SATextView: UIView {
     /// Stands for 'textField.text'. Shortened the property's name.
     var text: String? {
         get {
-            textField.text
+            if textField.text == "" {
+                shake()
+                changeColor()
+                return nil // I'll unwrap it before use anyways.
+            } else {
+                return textField.text
+            }
         }
         set {
             textField.text = newValue
@@ -52,6 +58,27 @@ class SATextView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Methods
+    /// Shake animation for the view.
+    private func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        layer.add(animation, forKey: "shake")
+    }
+
+    /// Change color to red and original back.
+    private func changeColor() {
+        let latestColor = titleLabel.textColor // Created a variable to get latest color to be able to return it.
+        // Could've write .lightGray but this is a better approach in case of
+        // default color of SATextView is changed after definition.
+        titleLabel.textColor = .red
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.titleLabel.textColor = latestColor
+        }
+    }
+
     // MARK: - Constraints
     func setLabelConstraints() {
         addSubview(titleLabel)
@@ -59,7 +86,7 @@ class SATextView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor)
-    ])
+        ])
     }
 
     func setTextFieldConstraints() {

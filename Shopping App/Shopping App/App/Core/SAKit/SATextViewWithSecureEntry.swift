@@ -29,7 +29,7 @@ final class SATextViewWithSecureEntry: SATextView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        super.textField.isSecureTextEntry = false
+        textField.isSecureTextEntry = false
         addSecureEntry()
     }
 
