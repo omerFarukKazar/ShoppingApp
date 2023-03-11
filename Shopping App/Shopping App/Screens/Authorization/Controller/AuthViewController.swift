@@ -143,12 +143,12 @@ final class AuthViewController: SAViewController {
 extension AuthViewController: AuthDelegate {
     func isSignUpSuccessful() {
         // TODO: - Will change this later.
-        navigationController?.pushViewController(MainTabBarViewController(), animated: true)
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
     }
 
     func isLogInSuccessful() {
         // TODO: - Will change this later.
-        navigationController?.pushViewController(MainTabBarViewController(), animated: true)
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
     }
 
     func didErrorOccured(_ error: Error) {
