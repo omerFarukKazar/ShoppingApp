@@ -40,6 +40,7 @@
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
 		9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED6C3229B7E0C400366D2E /* SATextView.swift */; };
+		9DFDFF6729BCE7EF001EF43E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		9DED6C3229B7E0C400366D2E /* SATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextView.swift; sourceTree = "<group>"; };
+		9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +478,16 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
+		9D9E133729BA8EF100B10C62 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9DFDFF6129BCE481001EF43E /* Base */,
+				9DFDFF6229BCE484001EF43E /* Endpoints */,
+				9DFDFF6329BCE488001EF43E /* Services */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		9DE900DC2993DF130065416F /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +521,14 @@
 				9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9DFDFF6129BCE481001EF43E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -617,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DFDFF6729BCE7EF001EF43E /* HTTPMethod.swift in Sources */,
 				9D91440D29A94BBD00065776 /* OnboardingPageView.swift in Sources */,
 				9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */,
 				9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */,
