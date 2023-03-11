@@ -292,6 +292,7 @@
 		9D91441C29A96F0A00065776 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9D9E133729BA8EF100B10C62 /* Network */,
 				9D91441E29A96F5100065776 /* SAKit */,
 				9D91441D29A96F3B00065776 /* Helpers */,
 				9DE900E82993E9B80065416F /* Extensions */,
