@@ -47,6 +47,7 @@
 		9DFDFF6929BCE814001EF43E /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6829BCE814001EF43E /* RequestError.swift */; };
 		9DFDFF6B29BCE854001EF43E /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6A29BCE854001EF43E /* HTTPClient.swift */; };
 		9DFDFF6F29BCF1F4001EF43E /* ProductsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6E29BCF1F4001EF43E /* ProductsEndpoint.swift */; };
+		9DFDFF7129BCF85E001EF43E /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF7029BCF85E001EF43E /* ProductsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		9DFDFF6829BCE814001EF43E /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		9DFDFF6A29BCE854001EF43E /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		9DFDFF6E29BCF1F4001EF43E /* ProductsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsEndpoint.swift; sourceTree = "<group>"; };
+		9DFDFF7029BCF85E001EF43E /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +559,14 @@
 			path = Endpoints;
 			sourceTree = "<group>";
 		};
+		9DFDFF6329BCE488001EF43E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9DFDFF7029BCF85E001EF43E /* ProductsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -691,6 +701,7 @@
 				9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */,
 				9D9E134529BBC8D900B10C62 /* Products.swift in Sources */,
 				9DFDFF6529BCE4FE001EF43E /* Endpoint.swift in Sources */,
+				9DFDFF7129BCF85E001EF43E /* ProductsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
