@@ -42,6 +42,7 @@
 		9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED6C3229B7E0C400366D2E /* SATextView.swift */; };
 		9DFDFF6529BCE4FE001EF43E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6429BCE4FE001EF43E /* Endpoint.swift */; };
 		9DFDFF6729BCE7EF001EF43E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */; };
+		9DFDFF6929BCE814001EF43E /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6829BCE814001EF43E /* RequestError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		9DED6C3229B7E0C400366D2E /* SATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextView.swift; sourceTree = "<group>"; };
 		9DFDFF6429BCE4FE001EF43E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		9DFDFF6829BCE814001EF43E /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,6 +532,7 @@
 			children = (
 				9DFDFF6429BCE4FE001EF43E /* Endpoint.swift */,
 				9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */,
+				9DFDFF6829BCE814001EF43E /* RequestError.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */,
 				9D9E132C29BA03DD00B10C62 /* MainTabBarViewController.swift in Sources */,
 				9D91442029A96F7900065776 /* SAViewController.swift in Sources */,
+				9DFDFF6929BCE814001EF43E /* RequestError.swift in Sources */,
 				9D83EB3329B8D3F900B14C81 /* User.swift in Sources */,
 				9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */,
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
