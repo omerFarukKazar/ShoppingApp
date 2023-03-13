@@ -139,11 +139,11 @@
 		9D0431EE2992977F004F594B /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA3B1829BD6C510068FF2B /* ProductsScreen */,
 				9D6A284C2992829F002454ED /* Assets.xcassets */,
-				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
-				9D91441229A95B2100065776 /* Placeholders.xcassets */,
-				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
-				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
+				9DAA3B1729BD6C3A0068FF2B /* MainTabBar */,
+				9DAA3B1629BD6C2B0068FF2B /* AuthScreen */,
+				9DAA3B1529BD6C200068FF2B /* OnboardingScreen */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -505,6 +505,39 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		9DAA3B1529BD6C200068FF2B /* OnboardingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
+			);
+			path = OnboardingScreen;
+			sourceTree = "<group>";
+		};
+		9DAA3B1629BD6C2B0068FF2B /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441229A95B2100065776 /* Placeholders.xcassets */,
+				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
+			);
+			path = AuthScreen;
+			sourceTree = "<group>";
+		};
+		9DAA3B1729BD6C3A0068FF2B /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		9DAA3B1829BD6C510068FF2B /* ProductsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */,
+			);
+			path = ProductsScreen;
+			sourceTree = "<group>";
+		};
 		9DE900DC2993DF130065416F /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +676,7 @@
 				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
 				9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */,
 				9D83EB4029B8EC4700B14C81 /* GoogleService-Info.plist in Resources */,
+				9DAA3B1A29BD6C9D0068FF2B /* ProductsScreen.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
