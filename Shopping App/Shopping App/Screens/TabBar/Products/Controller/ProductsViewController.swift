@@ -7,37 +7,48 @@
 
 import UIKit
 
-final class ProductsViewController: UIViewController {
-    //TODO: Move to ViewModel
-    var service: ProductsServiceable
+final class ProductsViewController: SAViewController {
+    // MARK: - Properties
+    var collectionView: UICollectionView!
+    let viewModel: ProductsViewModel
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .lightGray
-
-    }
-
-    // TODO: Move to ViewModel
-    init(service: ProductsServiceable) {
-        self.service = service
+    // MARK: - Init
+    init(viewModel: ProductsViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // TODO: Remove the pilotMethod function.
-    /// Function to try if generic network is working
-    func pilotMethod() {
-        service.getProducts(completion: { result in
-            switch result {
-            case .success(let products):
-                print(products)
-            case .failure(let error):
-                print(error)
-            }
-        })
+    // MARK: Lifecycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setCollectionView()
+    }
+
+    // MARK: - Methods
+    /// Instantiates and sets a UICollectionViewFlowLayout, uses it to create a CollectionView.
+    /// Assigns that collectionview to self.view
+    private func setCollectionView() {
+        let layout: UICollectionViewFlowLayout = {
+            let layout = UICollectionViewFlowLayout()
+            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            layout.itemSize = CGSize(width: screenWidth / 2.2, height: 320)
+            layout.scrollDirection = .vertical
+            return layout
+        }()
+
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        collectionView.register(ProductsViewCell.self, forCellWithReuseIdentifier: "cell")
+
+        self.view = collectionView
+    }
+
+    }
+}
+    }
+
     }
 }
