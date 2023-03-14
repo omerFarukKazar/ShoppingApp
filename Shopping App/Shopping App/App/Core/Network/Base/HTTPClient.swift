@@ -8,10 +8,11 @@
 import Foundation
 
 // I was going to use async but since URLSession.shared.data(for: isn't supported below ios 15.0
-// I seek for the ways to return result and i seek for the ways to return that
+// I seek for the ways to return result
 // and i wanted to create class and return the result with delegate.
 // After making a research i saw another example with closure as a completion.
 // Maybe a delegation would look better. There is @escaping everywhere right now :)
+
 protocol HTTPClient {
     func sendRequest<T: Decodable>(endpoint: Endpoint,
                                    responseModel: T.Type,

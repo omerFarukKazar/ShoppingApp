@@ -21,7 +21,6 @@ enum TabBarImageNames: String {
     case profile
 }
 
-
 final class MainTabBarController: UITabBarController {
 
     // MARK: - Lifecycle Methods
