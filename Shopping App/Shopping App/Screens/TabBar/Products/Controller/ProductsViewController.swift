@@ -26,6 +26,7 @@ final class ProductsViewController: SAViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setCollectionView()
+        self.setCollectionViewDelegateAndDataSource()
     }
 
     // MARK: - Methods
@@ -46,9 +47,29 @@ final class ProductsViewController: SAViewController {
         self.view = collectionView
     }
 
+    /// Sets collectionView's delegate and data source to self.
+    private func setCollectionViewDelegateAndDataSource() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }
+
+extension ProductsViewController: UICollectionViewDelegate {
+
+}
+
+extension ProductsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
     }
 
+    // swiftlint:disable:next line_length
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell
+        guard let cell = cell else { fatalError("ProductsViewCell can not found.") }
+        cell.backgroundColor = .lightGray
+
+        return cell
     }
+
 }

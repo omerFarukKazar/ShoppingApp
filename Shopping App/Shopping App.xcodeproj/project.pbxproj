@@ -37,6 +37,7 @@
 		9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */; };
 		9D9E134529BBC8D900B10C62 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E134429BBC8D900B10C62 /* Products.swift */; };
 		9D9E134729BBC8E100B10C62 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E134629BBC8E100B10C62 /* Rating.swift */; };
+		9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */; };
 		9DAA3B1429BD694B0068FF2B /* ProductsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */; };
 		9DAA3B1A29BD6C9D0068FF2B /* ProductsScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
@@ -80,6 +81,7 @@
 		9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MainTabBarAssets.xcassets; sourceTree = "<group>"; };
 		9D9E134429BBC8D900B10C62 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		9D9E134629BBC8E100B10C62 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewCell.swift; sourceTree = "<group>"; };
 		9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ProductsScreen.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		9D9E131C29BA02FC00B10C62 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */,
 				9D7D6EBF29AFE0EE007A9F47 /* AuthViewModel.swift in Sources */,
 				9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */,
+				9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */,
 				9D12994129B4C2A7006A1E4A /* SignUpView.swift in Sources */,
 				9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */,
 				9DFDFF6F29BCF1F4001EF43E /* ProductsEndpoint.swift in Sources */,
