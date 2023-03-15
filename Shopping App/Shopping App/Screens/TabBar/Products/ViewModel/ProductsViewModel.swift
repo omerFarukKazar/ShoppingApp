@@ -18,16 +18,34 @@ protocol ProductsViewModelDelegate: AnyObject {
 final class ProductsViewModel {
     // MARK: - Properties
     private var service: ProductsServiceable
+    lazy var products: Products = [] {
+        didSet {
+            delegate?.didFetchProducts()
+        }
+    }
     weak var delegate: ProductsViewModelDelegate?
 
     // MARK: - Init
     init(service: ProductsServiceable) {
         self.service = service
+        fetchProducts()
     }
 
     required init?(coder: NSCoder) {
         fatalError("NSCoder not found.")
     }
+
+    func fetchProducts() {
+        service.getProducts(completion: { result in
+            switch result {
+            case .success(let products):
+                self.products = products
+            case .failure(let error):
+                self.delegate?.didErrorOccured(error)
+            }
+        })
+    }
+
     }
 
 }
