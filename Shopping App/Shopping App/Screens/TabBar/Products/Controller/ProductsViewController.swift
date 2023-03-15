@@ -29,6 +29,7 @@ final class ProductsViewController: SAViewController {
         setCollectionViewDelegateAndDataSource()
         setProductsViewModelDelegate()
         viewModel.fetchProducts()
+        viewModel.fetchFavoritesFromDB()
     }
 
     // MARK: - Methods
@@ -62,6 +63,8 @@ final class ProductsViewController: SAViewController {
 }
 
 extension ProductsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
 
 }
 
@@ -74,30 +77,50 @@ extension ProductsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell
         guard let cell = cell else { fatalError("ProductsViewCell can not found.") }
-
         guard let product = viewModel.productFor(indexPath) else {
             fatalError("Product could not found.")
         }
 
+        // Unwrap product properties and shorten their names.
         guard let rate = product.rating?.rate,
               let count = product.rating?.count,
-              let price = product.price else { return cell }
+              let price = product.price,
+              let id = product.id else { return cell }
         cell.rateLabel.text = "\(rate)"
         cell.countLabel.text = "(\(count))"
         cell.titleLabel.text = product.title
         cell.priceLabel.text = "$ \(price)"
 
-        cell.backgroundColor = .lightGray
-        cell.didTapFavoriteButton = {
-            cell.isFavorite.toggle()
+        // Fetch the latest favorite items from DB
+        viewModel.fetchFavoritesFromDB()
+        cell.isFavorite = viewModel.favorites.contains(id)
 
+        // This can be added to UIColor as an extension. UIColor(rate: ) -> UIColor
+        let rgbaValues = viewModel.setRatingViewBackgroundColor(withRespectTo: rate)
+        cell.ratingStackView.backgroundColor = UIColor(red: rgbaValues[0], green: rgbaValues[1], blue: rgbaValues[2], alpha: rgbaValues[3])
+
+        // If favorite button is triggered, this closure will work for that cell.
+        cell.didTapFavoriteButton = {
+            if cell.isFavorite {
+                self.viewModel.removeFromFavoritesWith(id: id) {
+                    cell.isFavorite.toggle()
+                    // TODO:
+                    // Network call causes a little delay to toggle button state.
+                    // Button can be toggled before network call and due to response, it can toggled again or kept at the same state?
+                }
+            } else {
+                self.viewModel.addToFavoritesWith(id: id) {
+                    cell.isFavorite.toggle()
+                }
+            }
         }
         return cell
     }
 
 }
 
-extension ProductsViewController: ProductsViewDelegate {
+extension ProductsViewController: ProductsViewModelDelegate {
+    /// Reloads collectionView data if fetch is successful.
     func didFetchProducts() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -113,11 +136,9 @@ extension ProductsViewController: ProductsViewDelegate {
     }
 
     func didAddToFavorites() {
-        print("added to fav")
     }
 
     func didRemoveFromFavorites() {
-        print("removed from fav")
     }
 
 }
