@@ -74,8 +74,24 @@ extension ProductsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell
         guard let cell = cell else { fatalError("ProductsViewCell can not found.") }
-        cell.backgroundColor = .lightGray
 
+        guard let product = viewModel.productFor(indexPath) else {
+            fatalError("Product could not found.")
+        }
+
+        guard let rate = product.rating?.rate,
+              let count = product.rating?.count,
+              let price = product.price else { return cell }
+        cell.rateLabel.text = "\(rate)"
+        cell.countLabel.text = "(\(count))"
+        cell.titleLabel.text = product.title
+        cell.priceLabel.text = "$ \(price)"
+
+        cell.backgroundColor = .lightGray
+        cell.didTapFavoriteButton = {
+            cell.isFavorite.toggle()
+
+        }
         return cell
     }
 
