@@ -74,6 +74,27 @@ final class ProductsViewModel {
         }
     }
 
+    // At first i thought about storing this in CoreData but
+    // if user would like to access favorites from another device or another platform
+    // it wouldn't be possible. So i choose to store that in server side.
+    /// Accesses FireStore database with user's uid stored in defaults and adds product's id to favorites array that is stored in firestore db.
+    /// - parameters:
+    ///     - id:: The id of the product whose Favorite button was tapped on.
+    func addToFavoritesWith(id: Int?, completion: @escaping (() -> Void)) {
+        let uid = defaults.string(forKey: "uid")
+        guard let id = id,
+              let uid = uid else { return }
+        db.collection("users").document(uid).updateData(["favorites": FieldValue.arrayUnion([id])]) { error in
+            if let error = error {
+                self.delegate?.didErrorOccured(error)
+                return
+            } else {
+                self.delegate?.didAddToFavorites()
+                completion()
+            }
+        }
+    }
+
     }
 
 }
