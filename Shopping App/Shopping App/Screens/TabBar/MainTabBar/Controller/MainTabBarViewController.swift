@@ -35,7 +35,9 @@ final class MainTabBarController: UITabBarController {
     /// Adds them into UITabBarController.
     private func setTabBarControllers() {
         // Instantiate ViewControllers for each tab.
-        let productsViewController = ProductsViewController(service: ProductsService())
+        let productsViewModel = ProductsViewModel(service: ProductsService())
+        let productsViewController = ProductsViewController(viewModel: productsViewModel)
+        
         let searchViewController = SearchViewController()
         let profileViewController = ProfileViewController()
 

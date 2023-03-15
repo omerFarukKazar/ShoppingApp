@@ -27,6 +27,8 @@ final class ProductsViewController: SAViewController {
         super.viewDidLoad()
         self.setCollectionView()
         self.setCollectionViewDelegateAndDataSource()
+        setCollectionView()
+        setCollectionViewDelegateAndDataSource()
     }
 
     // MARK: - Methods

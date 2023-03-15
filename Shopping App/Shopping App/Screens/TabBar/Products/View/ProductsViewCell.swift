@@ -14,8 +14,8 @@ enum ProductsViewCellIcons: String {
 }
 
 final class ProductsViewCell: UICollectionViewCell {
-    // MARK: Properties
     var isFavorite: Bool = false
+    // MARK: - Properties
 
     lazy var cellWidth: CGFloat = {
         self.bounds.width
@@ -31,7 +31,7 @@ final class ProductsViewCell: UICollectionViewCell {
         }
     }
 
-    // MARK: UI Elements
+    // MARK: - UI Elements
     // MARK: ProducImageView
     let favoriteButton: UIButton = {
         let favoriteButton = UIButton()
@@ -39,7 +39,7 @@ final class ProductsViewCell: UICollectionViewCell {
         return favoriteButton
     }()
 
-    private let productImageView: UIImageView = {
+    let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.image = UIImage(named: "imagePlaceholder")
@@ -47,13 +47,13 @@ final class ProductsViewCell: UICollectionViewCell {
     }()
 
     // MARK: RatingView
-    private let starImageView: UIImageView = {
+    let starImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: ProductsViewCellIcons.starFill.rawValue)
         return imageView
     }()
 
-    private let rateLabel: UILabel = {
+    let rateLabel: UILabel = {
         let rateLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 14.0)
         rateLabel.font = font
@@ -61,7 +61,7 @@ final class ProductsViewCell: UICollectionViewCell {
         return rateLabel
     }()
 
-    private let countLabel: UILabel = {
+    let countLabel: UILabel = {
         let countLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 12.0)
         countLabel.font = font
@@ -82,7 +82,7 @@ final class ProductsViewCell: UICollectionViewCell {
     }()
 
     // MARK: Title Stack View
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .left
@@ -92,7 +92,7 @@ final class ProductsViewCell: UICollectionViewCell {
         return titleLabel
     }()
 
-    private let priceLabel: UILabel = {
+    let priceLabel: UILabel = {
         let priceLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 16.0)
         priceLabel.font = font
@@ -104,14 +104,14 @@ final class ProductsViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.spacing = 4
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.alignment = .leading
         [titleLabel,
          priceLabel].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
 
-    // MARK: Init
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setProductImageViewConstraints()
@@ -136,7 +136,7 @@ final class ProductsViewCell: UICollectionViewCell {
     }
 
     private func setFavoriteButtonConstraints() {
-        productImageView.addSubview(favoriteButton)
+        addSubview(favoriteButton)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([favoriteButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
                                      favoriteButton.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
@@ -160,7 +160,7 @@ final class ProductsViewCell: UICollectionViewCell {
             titleStackView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
             titleStackView.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 8.0),
             titleStackView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
-            titleStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            titleStackView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor)
         ])
     }
 
