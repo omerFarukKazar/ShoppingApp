@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct User: Encodable {
+struct User: Codable {
     let username: String?
     let email: String?
     let birthday: String?
+    var favorites: [Int]? = []
 }
 
 extension User {
@@ -20,5 +21,6 @@ extension User {
         username = dict["username"] as? String
         email = dict["email"] as? String
         birthday = dict["birthday"] as? String
+        favorites = dict["favorites"] as? [Int]
     }
 }
