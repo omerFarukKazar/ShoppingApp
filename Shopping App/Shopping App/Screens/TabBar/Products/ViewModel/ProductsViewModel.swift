@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 protocol ProductsViewModelDelegate: AnyObject {
     func didFetchProducts()
@@ -24,6 +25,9 @@ final class ProductsViewModel {
         }
     }
     weak var delegate: ProductsViewModelDelegate?
+    private let db = Firestore.firestore()
+    private let defaults = UserDefaults.standard
+    lazy var favorites: [Int] = []
 
     // MARK: - Init
     init(service: ProductsServiceable) {
@@ -34,7 +38,11 @@ final class ProductsViewModel {
     required init?(coder: NSCoder) {
         fatalError("NSCoder not found.")
     }
-
+    /// Takes the indexpath parameter and returns the corresponding product.
+    func productFor(_ indexPath: IndexPath) -> Product? {
+        products[indexPath.row]
+    }
+    /// Fetches products from api and handles the possible responses.
     func fetchProducts() {
         service.getProducts(completion: { result in
             switch result {
