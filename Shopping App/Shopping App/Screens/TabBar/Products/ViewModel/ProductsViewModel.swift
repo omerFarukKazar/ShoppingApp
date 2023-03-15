@@ -54,6 +54,26 @@ final class ProductsViewModel {
         })
     }
 
+    /// Fetch user's favorite products list from Firestore Database.
+    /// If fetch failures, trigger the 'delegate.didErrorOccured'
+    /// If fetch is success, assign that data to 'favorites' array in viewModel.
+    func fetchFavoritesFromDB() {
+        let uid = defaults.string(forKey: "uid")
+        guard let uid = uid else { return }
+        db.collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                self.delegate?.didErrorOccured(error)
+                return
+            } else {
+                if let data = snapshot?.data() {
+                    let dataAsInt = data["favorites"] as? [Int]
+                    guard let dataAsInt = dataAsInt else { return }
+                    self.favorites = dataAsInt
+                }
+            }
+        }
+    }
+
     }
 
 }
