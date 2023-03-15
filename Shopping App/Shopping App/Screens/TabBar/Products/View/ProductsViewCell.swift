@@ -39,7 +39,9 @@ final class ProductsViewCell: UICollectionViewCell {
 
     var productImage: UIImage? {
         didSet {
-            productImageView.image = productImage
+            DispatchQueue.main.async {
+                self.productImageView.image = self.productImage
+            }
         }
     }
 
@@ -55,7 +57,6 @@ final class ProductsViewCell: UICollectionViewCell {
     let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
-        imageView.image = UIImage(named: "imagePlaceholder")
         return imageView
     }()
 
@@ -86,6 +87,7 @@ final class ProductsViewCell: UICollectionViewCell {
         stackView.spacing = 4
         stackView.axis = .horizontal
         stackView.autoresizesSubviews = true
+        stackView.layer.cornerRadius = 5
         [starImageView,
          rateLabel,
          countLabel].forEach { stackView.addArrangedSubview($0) }
@@ -124,9 +126,11 @@ final class ProductsViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setProductImageViewConstraints()
+        setFavoriteButtonConstraints()
         setRatingStackViewConstraints()
         setTitleStackViewConstraints()
-        setFavoriteButtonConstraints()
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.darkGray.cgColor
     }
 
     required init?(coder: NSCoder) {
@@ -141,29 +145,32 @@ final class ProductsViewCell: UICollectionViewCell {
     private func setProductImageViewConstraints() {
         addSubview(productImageView)
         productImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                                     productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                                     productImageView.topAnchor.constraint(equalTo: self.topAnchor),
-                                     productImageView.heightAnchor.constraint(equalToConstant: cellHeight * 0.65)
-                                    ])
+        NSLayoutConstraint.activate([
+            productImageView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+            productImageView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            productImageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor, constant: cellWidth * 0.15),
+            productImageView.heightAnchor.constraint(equalToConstant: cellHeight * 0.55)
+        ])
     }
 
     private func setFavoriteButtonConstraints() {
         addSubview(favoriteButton)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([favoriteButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
-                                     favoriteButton.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
-                                     favoriteButton.widthAnchor.constraint(equalToConstant: cellWidth * 0.15),
-                                     favoriteButton.heightAnchor.constraint(equalToConstant: cellWidth * 0.15)])
+        NSLayoutConstraint.activate([
+            favoriteButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            favoriteButton.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
+            favoriteButton.widthAnchor.constraint(equalToConstant: cellWidth * 0.15),
+            favoriteButton.heightAnchor.constraint(equalToConstant: cellWidth * 0.15)])
     }
 
     private func setRatingStackViewConstraints() {
         productImageView.addSubview(ratingStackView)
         ratingStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([ratingStackView.leadingAnchor.constraint(equalTo: productImageView.leadingAnchor),
-                                     ratingStackView.bottomAnchor.constraint(equalTo: productImageView.bottomAnchor),
-                                     ratingStackView.heightAnchor.constraint(equalToConstant: cellHeight * 0.06)
-                                    ])
+        NSLayoutConstraint.activate([
+            ratingStackView.leadingAnchor.constraint(equalTo: productImageView.leadingAnchor),
+            ratingStackView.bottomAnchor.constraint(equalTo: productImageView.bottomAnchor),
+            ratingStackView.heightAnchor.constraint(equalToConstant: cellHeight * 0.06)
+                                ])
     }
 
     private func setTitleStackViewConstraints() {
