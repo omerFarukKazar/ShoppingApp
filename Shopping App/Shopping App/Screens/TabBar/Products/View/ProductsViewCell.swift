@@ -16,6 +16,7 @@ enum ProductsViewCellIcons: String {
 final class ProductsViewCell: UICollectionViewCell {
     var isFavorite: Bool = false
     // MARK: - Properties
+    var didTapFavoriteButton: (() -> Void)?
 
     lazy var cellWidth: CGFloat = {
         self.bounds.width
@@ -36,6 +37,7 @@ final class ProductsViewCell: UICollectionViewCell {
     let favoriteButton: UIButton = {
         let favoriteButton = UIButton()
         favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heart.rawValue), for: .normal)
+        favoriteButton.addTarget(nil, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         return favoriteButton
     }()
 
@@ -84,7 +86,7 @@ final class ProductsViewCell: UICollectionViewCell {
     // MARK: Title Stack View
     let titleLabel: UILabel = {
         let titleLabel = UILabel()
-        titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = 3
         titleLabel.textAlignment = .left
         let font = UIFont.systemFont(ofSize: 14.0)
         titleLabel.font = font
@@ -125,6 +127,10 @@ final class ProductsViewCell: UICollectionViewCell {
     }
 
     // MARK: - Methods
+    @objc func favoriteButtonTapped() {
+        didTapFavoriteButton?()
+    }
+
     private func setProductImageViewConstraints() {
         addSubview(productImageView)
         productImageView.translatesAutoresizingMaskIntoConstraints = false
