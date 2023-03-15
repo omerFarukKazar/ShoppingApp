@@ -95,6 +95,22 @@ final class ProductsViewModel {
         }
     }
 
+    /// Accesses FireStore database with user's uid stored in defaults and removes the product's id from favorites array that is stored in firestore db.
+    /// - parameters:
+    ///     - id:: The id of the product whose Favorite button was tapped on.
+    func removeFromFavoritesWith(id: Int?, completion: @escaping (() -> Void)) {
+        let uid = defaults.string(forKey: "uid")
+        guard let id = id,
+              let uid = uid else { return }
+        db.collection("users").document(uid).updateData(["favorites": FieldValue.arrayRemove([id])]) { error in
+            if let error = error {
+                self.delegate?.didErrorOccured(error)
+                return
+            } else {
+                self.delegate?.didRemoveFromFavorites()
+                completion()
+            }
+        }
     }
 
 }
