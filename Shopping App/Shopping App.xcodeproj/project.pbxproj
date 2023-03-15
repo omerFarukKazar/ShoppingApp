@@ -37,6 +37,9 @@
 		9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */; };
 		9D9E134529BBC8D900B10C62 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E134429BBC8D900B10C62 /* Products.swift */; };
 		9D9E134729BBC8E100B10C62 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E134629BBC8E100B10C62 /* Rating.swift */; };
+		9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */; };
+		9DAA3B1429BD694B0068FF2B /* ProductsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */; };
+		9DAA3B1A29BD6C9D0068FF2B /* ProductsScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
@@ -78,6 +81,9 @@
 		9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MainTabBarAssets.xcassets; sourceTree = "<group>"; };
 		9D9E134429BBC8D900B10C62 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		9D9E134629BBC8E100B10C62 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
+		9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewCell.swift; sourceTree = "<group>"; };
+		9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ProductsScreen.xcassets; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -139,11 +145,11 @@
 		9D0431EE2992977F004F594B /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA3B1829BD6C510068FF2B /* ProductsScreen */,
 				9D6A284C2992829F002454ED /* Assets.xcassets */,
-				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
-				9D91441229A95B2100065776 /* Placeholders.xcassets */,
-				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
-				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
+				9DAA3B1729BD6C3A0068FF2B /* MainTabBar */,
+				9DAA3B1629BD6C2B0068FF2B /* AuthScreen */,
+				9DAA3B1529BD6C200068FF2B /* OnboardingScreen */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 		9D9E131A29BA02F500B10C62 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -385,6 +392,7 @@
 		9D9E131C29BA02FC00B10C62 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -503,6 +511,39 @@
 				9DFDFF6329BCE488001EF43E /* Services */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		9DAA3B1529BD6C200068FF2B /* OnboardingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441029A95B1A00065776 /* OnboardingScreenAssets.xcassets */,
+			);
+			path = OnboardingScreen;
+			sourceTree = "<group>";
+		};
+		9DAA3B1629BD6C2B0068FF2B /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9D91441229A95B2100065776 /* Placeholders.xcassets */,
+				9D9AAA9829B0D6700019F7EE /* EyeIcons.xcassets */,
+			);
+			path = AuthScreen;
+			sourceTree = "<group>";
+		};
+		9DAA3B1729BD6C3A0068FF2B /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9D9E133529BA5CDB00B10C62 /* MainTabBarAssets.xcassets */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		9DAA3B1829BD6C510068FF2B /* ProductsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */,
+			);
+			path = ProductsScreen;
 			sourceTree = "<group>";
 		};
 		9DE900DC2993DF130065416F /* Base */ = {
@@ -643,6 +684,7 @@
 				9D91441329A95B2100065776 /* Placeholders.xcassets in Resources */,
 				9D9E133629BA5CDB00B10C62 /* MainTabBarAssets.xcassets in Resources */,
 				9D83EB4029B8EC4700B14C81 /* GoogleService-Info.plist in Resources */,
+				9DAA3B1A29BD6C9D0068FF2B /* ProductsScreen.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DAA3B1429BD694B0068FF2B /* ProductsViewCell.swift in Sources */,
 				9DFDFF6729BCE7EF001EF43E /* HTTPMethod.swift in Sources */,
 				9D91440D29A94BBD00065776 /* OnboardingPageView.swift in Sources */,
 				9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */,
@@ -691,6 +734,7 @@
 				9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */,
 				9D7D6EBF29AFE0EE007A9F47 /* AuthViewModel.swift in Sources */,
 				9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */,
+				9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */,
 				9D12994129B4C2A7006A1E4A /* SignUpView.swift in Sources */,
 				9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */,
 				9DFDFF6F29BCF1F4001EF43E /* ProductsEndpoint.swift in Sources */,

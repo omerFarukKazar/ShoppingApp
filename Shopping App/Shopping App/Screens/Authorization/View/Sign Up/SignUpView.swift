@@ -56,7 +56,7 @@ final class SignUpView: UIView {
          birthdayPicker].forEach { stackView.addArrangedSubview($0) }
         return stackView
     }()
-    
+
     let signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle(AuthButtonTitles.signUpButton.rawValue, for: .normal)

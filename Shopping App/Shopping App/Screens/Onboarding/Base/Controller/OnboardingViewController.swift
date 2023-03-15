@@ -10,7 +10,6 @@ import UIKit
 final class OnboardingViewController: SAViewController {
 
     // MARK: - Properties
-    private let screenWidth = UIScreen.main.bounds.width
     private var onboardingView = OnboardingView()
     private let viewModel: OnboardingViewModel // Not used as an instance. That property could've been deleted.
     private var pageCount = OnboardingViewModel.Page.allCases.count

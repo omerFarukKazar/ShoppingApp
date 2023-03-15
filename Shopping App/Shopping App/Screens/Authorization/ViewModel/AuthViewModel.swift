@@ -44,6 +44,7 @@ final class AuthViewModel {
     // MARK: - Properties
     weak var delegate: AuthDelegate?
     private let defaults = UserDefaults.standard
+    // swiftlint:disable:next identifier_name
     private let db = Firestore.firestore()
 
     /// Sends a Sign In request to Firebase Auth and handles the possible outcomes with delegate.

@@ -29,7 +29,6 @@ extension ProductsEndpoint: Endpoint {
         }
     }
 
-
     var queryItems: [String: String]? {
         return nil // If a different case needs to be added in the future, this can be changed with switch self block.
     }
