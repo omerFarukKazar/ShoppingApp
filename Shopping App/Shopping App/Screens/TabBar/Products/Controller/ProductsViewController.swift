@@ -85,11 +85,21 @@ extension ProductsViewController: UICollectionViewDataSource {
         guard let rate = product.rating?.rate,
               let count = product.rating?.count,
               let price = product.price,
-              let id = product.id else { return cell }
+              let id = product.id,
+              let imageUrl = product.image else { return cell }
         cell.rateLabel.text = "\(rate)"
         cell.countLabel.text = "(\(count))"
         cell.titleLabel.text = product.title
         cell.priceLabel.text = "$ \(price)"
+
+        // Download image with product's url
+        viewModel.downloadImageData(imageUrl) { imageData, error in
+            if let error = error {
+                self.didErrorOccured(error)
+            }
+            guard let data = imageData else { return }
+            cell.productImage = UIImage(data: data)
+        }
 
         // Fetch the latest favorite items from DB
         viewModel.fetchFavoritesFromDB()
