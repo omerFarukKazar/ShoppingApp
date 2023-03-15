@@ -19,11 +19,12 @@ final class ProductsViewCell: UICollectionViewCell {
 
     var isFavorite: Bool = false {
         didSet {
-            switch isFavorite {
-            case false:
-                favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heart.rawValue), for: .normal)
-            case true:
-                favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heartFill.rawValue), for: .normal)
+            DispatchQueue.main.async {
+                if self.isFavorite {
+                    self.favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heartFill.rawValue), for: .normal)
+                } else {
+                    self.favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heart.rawValue), for: .normal)
+                }
             }
         }
     }
@@ -69,7 +70,6 @@ final class ProductsViewCell: UICollectionViewCell {
         let rateLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 14.0)
         rateLabel.font = font
-        rateLabel.text = "3.4"
         return rateLabel
     }()
 
@@ -77,7 +77,6 @@ final class ProductsViewCell: UICollectionViewCell {
         let countLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 12.0)
         countLabel.font = font
-        countLabel.text = "(30)"
         return countLabel
     }()
 
@@ -100,7 +99,6 @@ final class ProductsViewCell: UICollectionViewCell {
         titleLabel.textAlignment = .left
         let font = UIFont.systemFont(ofSize: 14.0)
         titleLabel.font = font
-        titleLabel.text = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"
         return titleLabel
     }()
 
@@ -108,7 +106,6 @@ final class ProductsViewCell: UICollectionViewCell {
         let priceLabel = UILabel()
         let font = UIFont.systemFont(ofSize: 16.0)
         priceLabel.font = font
-        priceLabel.text = "$ 109.95"
         return priceLabel
     }()
 
