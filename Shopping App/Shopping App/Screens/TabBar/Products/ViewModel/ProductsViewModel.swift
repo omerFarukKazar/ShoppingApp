@@ -7,9 +7,18 @@
 
 import Foundation
 
+protocol ProductsViewModelDelegate: AnyObject {
+    func didFetchProducts()
+    func didErrorOccured(_ error: Error)
+    func didFetchImage()
+    func didAddToFavorites()
+    func didRemoveFromFavorites()
+}
+
 final class ProductsViewModel {
     // MARK: - Properties
     private var service: ProductsServiceable
+    weak var delegate: ProductsViewModelDelegate?
 
     // MARK: - Init
     init(service: ProductsServiceable) {
@@ -17,7 +26,8 @@ final class ProductsViewModel {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("NSCoder not found.")
+    }
     }
 
 }
