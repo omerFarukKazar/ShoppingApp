@@ -14,9 +14,19 @@ enum ProductsViewCellIcons: String {
 }
 
 final class ProductsViewCell: UICollectionViewCell {
-    var isFavorite: Bool = false
     // MARK: - Properties
     var didTapFavoriteButton: (() -> Void)?
+
+    var isFavorite: Bool = false {
+        didSet {
+            switch isFavorite {
+            case false:
+                favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heart.rawValue), for: .normal)
+            case true:
+                favoriteButton.setImage(UIImage(named: ProductsViewCellIcons.heartFill.rawValue), for: .normal)
+            }
+        }
+    }
 
     lazy var cellWidth: CGFloat = {
         self.bounds.width
