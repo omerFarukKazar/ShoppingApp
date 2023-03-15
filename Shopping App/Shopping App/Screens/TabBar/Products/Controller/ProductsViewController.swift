@@ -25,10 +25,10 @@ final class ProductsViewController: SAViewController {
     // MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setCollectionView()
-        self.setCollectionViewDelegateAndDataSource()
         setCollectionView()
         setCollectionViewDelegateAndDataSource()
+        setProductsViewModelDelegate()
+        viewModel.fetchProducts()
     }
 
     // MARK: - Methods
@@ -54,6 +54,11 @@ final class ProductsViewController: SAViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+
+    private func setProductsViewModelDelegate() {
+        viewModel.delegate = self
+    }
+
 }
 
 extension ProductsViewController: UICollectionViewDelegate {
@@ -62,7 +67,7 @@ extension ProductsViewController: UICollectionViewDelegate {
 
 extension ProductsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return viewModel.products.count
     }
 
     // swiftlint:disable:next line_length
@@ -72,6 +77,31 @@ extension ProductsViewController: UICollectionViewDataSource {
         cell.backgroundColor = .lightGray
 
         return cell
+    }
+
+}
+
+extension ProductsViewController: ProductsViewDelegate {
+    func didFetchProducts() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+
+    func didErrorOccured(_ error: Error) {
+        print(error.localizedDescription)
+    }
+
+    func didFetchImage() {
+        print("imageFetched")
+    }
+
+    func didAddToFavorites() {
+        print("added to fav")
+    }
+
+    func didRemoveFromFavorites() {
+        print("removed from fav")
     }
 
 }
