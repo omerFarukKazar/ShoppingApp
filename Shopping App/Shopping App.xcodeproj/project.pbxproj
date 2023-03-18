@@ -16,6 +16,8 @@
 		9D5BB69D29C3FAB3008CA7CD /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB69C29C3FAB3008CA7CD /* CartViewController.swift */; };
 		9D5BB69F29C3FABF008CA7CD /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB69E29C3FABF008CA7CD /* CartView.swift */; };
 		9D5BB6A329C4B3C8008CA7CD /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6A229C4B3C8008CA7CD /* CartViewModel.swift */; };
+		9D5BB6AF29C51B4A008CA7CD /* FireStoreReadAndWritable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */; };
+		9D5BB6B129C556BF008CA7CD /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6B029C556BF008CA7CD /* DataDownloader.swift */; };
 		9D5BB6B329C61DE9008CA7CD /* UserDefaultsAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6B229C61DE9008CA7CD /* UserDefaultsAccessible.swift */; };
 		9D5BB6B529C61E5F008CA7CD /* FireStoreAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */; };
 		9D5BB6B729C61E70008CA7CD /* SAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5BB6B629C61E70008CA7CD /* SAViewModel.swift */; };
@@ -74,6 +76,8 @@
 		9D5BB69C29C3FAB3008CA7CD /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		9D5BB69E29C3FABF008CA7CD /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		9D5BB6A229C4B3C8008CA7CD /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreReadAndWritable.swift; sourceTree = "<group>"; };
+		9D5BB6B029C556BF008CA7CD /* DataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
 		9D5BB6B229C61DE9008CA7CD /* UserDefaultsAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessible.swift; sourceTree = "<group>"; };
 		9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreAccessible.swift; sourceTree = "<group>"; };
 		9D5BB6B629C61E70008CA7CD /* SAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAViewModel.swift; sourceTree = "<group>"; };
@@ -423,6 +427,7 @@
 			children = (
 				9D91442129A96F9C00065776 /* AlertPresentable.swift */,
 				9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */,
+				9D5BB6B029C556BF008CA7CD /* DataDownloader.swift */,
 				9D5BB69629C3F80B008CA7CD /* ProductsManager.swift */,
 				9D5BB6B229C61DE9008CA7CD /* UserDefaultsAccessible.swift */,
 				9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */,
@@ -841,6 +846,7 @@
 				9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */,
 				9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */,
 				9D9E132C29BA03DD00B10C62 /* MainTabBarViewController.swift in Sources */,
+				9D5BB6B129C556BF008CA7CD /* DataDownloader.swift in Sources */,
 				9D91442029A96F7900065776 /* SAViewController.swift in Sources */,
 				9D5BB69729C3F80B008CA7CD /* ProductsManager.swift in Sources */,
 				9D2AA65329C28CB700F84527 /* ProductDetailView.swift in Sources */,
