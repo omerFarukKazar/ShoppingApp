@@ -98,5 +98,70 @@ final class ProductDetailViewController: SAViewController {
                                              action: #selector(favoriteButtonTapped),
                                              for: .touchUpInside)
     }
+
+    /// Checks the isFavorite property and oggles the favorite state of product.
+    /// Updates database
+    /// Updates static 'favorites' property.
     @objc private func favoriteButtonTapped() {
+        let favorites = FirestoreDocumentPath.favorites.rawValue
+        if isFavorite {
+            removeProductFrom(documentPath: favorites,
+                              withId: productId) { error in
+                if let error = error {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                    return
+                } else {
+                    if let index = ProductsManager.favorites.firstIndex(of: self.productId!) {
+                        ProductsManager.favorites.remove(at: index)
+                    }
+                    self.isFavorite.toggle()
+                }
+            }
+        } else {
+            addProductTo(documentPath: favorites,
+                         withId: productId) { error in
+                if let error = error {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                    return
+                } else {
+                    if ProductsManager.favorites.firstIndex(of: self.productId!) != nil { return }
+                    ProductsManager.favorites.append(self.productId!)
+                    self.isFavorite.toggle()
+                }
+            }
+        }
     }
+
+    // MARK: AddToCartButtonFunctionality
+    private func addCartButtonTarget() {
+        productDetailView.addToCartButton.addTarget(nil,
+                                              action: #selector(addToCartButtonTapped),
+                                              for: .touchUpInside)
+
+    }
+
+    /// Adds product to "cart" in FireStore
+    /// Updates singleton cart property.
+    @objc private func addToCartButtonTapped() {
+        addProductTo(documentPath: "cart", withId: viewModel.product.id) { error in
+            if let error = error {
+                self.showAlert(title: "Error",
+                               message: error.localizedDescription)
+                return
+            } else {
+
+                self.productDetailView.addToCartButton.backgroundColor = UIColor(hex: "539165")
+
+                guard let id = self.productId else { return }
+                ProductsManager.cart[id] = 1
+                self.updateIsCartEmptyProperty()
+                self.showAlert(title: "Product added to Cart")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.dismiss(animated: true)
+                    self.productDetailView.addToCartButton.backgroundColor = .blue
+                }
+            }
+        }
+}
+
+extension ProductDetailViewController: FirestoreReadAndWritable {}
