@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProductDetailViewController: SAViewController, FirestoreReadAndWritable {
+final class ProductDetailViewController: SAViewController {
 
     // MARK: - Properties
     let viewModel: ProductDetailViewModel
