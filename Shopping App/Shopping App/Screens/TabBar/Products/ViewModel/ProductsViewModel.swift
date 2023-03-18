@@ -8,26 +8,24 @@
 import Foundation
 import FirebaseFirestore
 
+/// Delegate protocol to handle possible outcomes from network calls.
 protocol ProductsViewModelDelegate: AnyObject {
     func didFetchProducts()
     func didErrorOccured(_ error: Error)
-    func didFetchImage()
-    func didAddToFavorites()
-    func didRemoveFromFavorites()
 }
 
-final class ProductsViewModel {
+final class ProductsViewModel: FireBaseFireStoreAccessible,
+                               UserDefaultsAccessible {
     // MARK: - Properties
     private var service: ProductsServiceable
+    weak var delegate: ProductsViewModelDelegate?
+
     lazy var products: Products = [] {
         didSet {
             delegate?.didFetchProducts()
         }
     }
-    weak var delegate: ProductsViewModelDelegate?
-    private let db = Firestore.firestore()
-    private let defaults = UserDefaults.standard
-    lazy var favorites: [Int] = []
+//    lazy var favorites: [Int] = []
 
     // MARK: - Init
     init(service: ProductsServiceable) {
@@ -38,6 +36,9 @@ final class ProductsViewModel {
     required init?(coder: NSCoder) {
         fatalError("NSCoder not found.")
     }
+
+    // MARK: - Methods
+    // MARK: Product Methods
     /// Takes the indexpath parameter and returns the corresponding product.
     func productFor(_ indexPath: IndexPath) -> Product? {
         products[indexPath.row]
@@ -54,42 +55,11 @@ final class ProductsViewModel {
         })
     }
 
-    /// Takes a url input and sends dataTask request to that url.
-    /// Handles the possible outcomes with completion.
-    /// - parameters:
-    ///     - urlString: String of the url for the desired image data.
-    ///     - completion: Closure to handle data or error values.
-    func downloadImageData(_ urlString: String,
-                           completion: ((_ imageData: Data?, _ error: Error?) -> Void)? ) {
-        guard let url = URL(string: urlString) else {
-            completion?(nil, NSError(domain: "fakestore.api", code: 400))
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion?(nil, error)
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            guard (200...299).contains(httpResponse.statusCode) else {
-                completion?(nil, NSError(domain: "fakestore.api", code: httpResponse.statusCode))
-                return
-            }
-
-            if let data = data {
-                completion?(data, nil)
-                return
-            }
-        }.resume()
-    }
-
+    // MARK: Favorite Methods
     /// Fetch user's favorite products list from Firestore Database.
     /// If fetch failures, trigger the 'delegate.didErrorOccured'
     /// If fetch is success, assign that data to 'favorites' array in viewModel.
     func fetchFavoritesFromDB() {
-        let uid = defaults.string(forKey: "uid")
         guard let uid = uid else { return }
         db.collection("users").document(uid).getDocument { snapshot, error in
             if let error = error {
@@ -99,51 +69,13 @@ final class ProductsViewModel {
                 if let data = snapshot?.data() {
                     let dataAsInt = data["favorites"] as? [Int]
                     guard let dataAsInt = dataAsInt else { return }
-                    self.favorites = dataAsInt
+                    ProductsManager.favorites = dataAsInt
                 }
             }
         }
     }
 
-    // At first i thought about storing this in CoreData but
-    // if user would like to access favorites from another device or another platform
-    // it wouldn't be possible. So i choose to store that in server side.
-    /// Accesses FireStore database with user's uid stored in defaults and adds product's id to favorites array that is stored in firestore db.
-    /// - parameters:
-    ///     - id:: The id of the product whose Favorite button was tapped on.
-    func addToFavoritesWith(id: Int?, completion: @escaping (() -> Void)) {
-        let uid = defaults.string(forKey: "uid")
-        guard let id = id,
-              let uid = uid else { return }
-        db.collection("users").document(uid).updateData(["favorites": FieldValue.arrayUnion([id])]) { error in
-            if let error = error {
-                self.delegate?.didErrorOccured(error)
-                return
-            } else {
-                self.delegate?.didAddToFavorites()
-                completion()
-            }
-        }
-    }
-
-    /// Accesses FireStore database with user's uid stored in defaults and removes the product's id from favorites array that is stored in firestore db.
-    /// - parameters:
-    ///     - id:: The id of the product whose Favorite button was tapped on.
-    func removeFromFavoritesWith(id: Int?, completion: @escaping (() -> Void)) {
-        let uid = defaults.string(forKey: "uid")
-        guard let id = id,
-              let uid = uid else { return }
-        db.collection("users").document(uid).updateData(["favorites": FieldValue.arrayRemove([id])]) { error in
-            if let error = error {
-                self.delegate?.didErrorOccured(error)
-                return
-            } else {
-                self.delegate?.didRemoveFromFavorites()
-                completion()
-            }
-        }
-    }
-
+    // MARK: Color Method
     /// Takes the rate parameter and converts it into a CGFloat array to be used in initiating UIColor()
     /// - parameters:
     ///     - rate:: rate property of product that comes from API.
@@ -166,5 +98,24 @@ final class ProductsViewModel {
         default:
             return [1.0, 1.0, 1.0, 1.0]
         }
+    }
+}
+// MARK: - Extensions
+// MARK: Extension FirestoreReadAndWritable Protocol
+extension ProductsViewModel: FirestoreReadAndWritable {
+    func addProductToFavorites(documentPath: String, productId: Int, completion: @escaping ((Error?) -> Void)) {
+        addProductTo(documentPath: documentPath, withId: productId, completion: completion)
+    }
+
+    func removeProductFromFavorites(documentPath: String, productId: Int, completion: @escaping ((Error?) -> Void)) {
+        removeProductFrom(documentPath: documentPath, withId: productId, completion: completion)
+    }
+
+}
+
+// MARK: Extension DataDownloader Protocol
+extension ProductsViewModel: DataDownloader {
+    func downloadImageWith(_ urlString: String, completion: ((Data?, Error?) -> Void)?) {
+        downloadImageData(urlString, completion: completion)
     }
 }
