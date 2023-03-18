@@ -27,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Does the necessarry settings for window to present the viewController properly.
     func setWindow() {
         let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
-        let viewController = ProductsViewController(viewModel: ProductsViewModel(service: ProductsService()))
+        let viewModel = AuthViewModel()
+        let viewController = AuthViewController(viewModel: viewModel)
         // Got an instance of the first screen's ViewController.
         let navigationController = UINavigationController(rootViewController: viewController)
         // Embedded view controller into a navigation controller.

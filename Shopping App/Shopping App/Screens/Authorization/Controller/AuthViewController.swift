@@ -31,6 +31,7 @@ final class AuthViewController: SAViewController {
 
         viewModel.delegate = self
         switchToLogInView()
+
     }
 
     // MARK: - Methods
@@ -39,6 +40,12 @@ final class AuthViewController: SAViewController {
     private func switchToLogInView() {
         addCreateNewAccountButtonTarget()
         addLogInButtonTarget()
+
+
+#if targetEnvironment(simulator)
+        logInView.emailTextView.text = "deneme@gmail.com"
+        logInView.passwordTextView.text = "123456"
+#endif
 
         self.view = logInView
         logInView.fadeOut(duration: 0.5)
