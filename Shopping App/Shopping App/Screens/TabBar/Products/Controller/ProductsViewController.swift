@@ -41,6 +41,14 @@ final class ProductsViewController: SAViewController {
         viewModel.fetchProducts()
     }
 
+    // Used to reload cell in case of some changes in ProductDetailView made.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        updateIsCartEmptyProperty()
+
+        guard let indexPath = selectedCellIndexPath else { return }
+        collectionView.reloadItems(at: [indexPath])
     }
 
     // MARK: - Methods
@@ -166,15 +174,26 @@ extension ProductsViewController: UICollectionViewDataSource {
         // Adds or removes product according to the state of cell's isFavorite property.
         cell.didTapFavoriteButton = {
             if cell.isFavorite {
-                self.viewModel.removeFromFavoritesWith(id: id) {
-                    cell.isFavorite.toggle()
-                    // TODO:
-                    // Network call causes a little delay to toggle button state.
-                    // Button can be toggled before network call and due to response, it can toggled again or kept at the same state?
+                self.viewModel.removeProductFromFavorites(documentPath: "favorites", productId: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                        guard let index = ProductsManager.favorites.firstIndex(of: id) else { return }
+                        ProductsManager.favorites.remove(at: index)
+                    }
                 }
             } else {
-                self.viewModel.addToFavoritesWith(id: id) {
-                    cell.isFavorite.toggle()
+                self.viewModel.addProductToFavorites(documentPath: "favorites", productId: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                        guard let index = ProductsManager.favorites.firstIndex(of: id) else { return }
+                        ProductsManager.favorites.remove(at: index)
+                    }
                 }
             }
         }
