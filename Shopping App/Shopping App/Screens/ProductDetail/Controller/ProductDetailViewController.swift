@@ -162,6 +162,7 @@ final class ProductDetailViewController: SAViewController {
                 }
             }
         }
+    }
 }
 
 extension ProductDetailViewController: FirestoreReadAndWritable {}
