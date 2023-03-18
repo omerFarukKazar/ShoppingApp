@@ -11,6 +11,7 @@ import FirebaseFirestore
 struct ProductDetailViewModel {
     // MARK: - Properties
     let product: Product
+    lazy var favorites: [Int] = []
 
     // MARK: - Init
     init(product: Product) {
