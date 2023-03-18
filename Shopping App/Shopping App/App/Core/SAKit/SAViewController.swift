@@ -14,4 +14,3 @@ class SAViewController: UIViewController,
     let screenHeight = UIScreen.main.bounds.height
 
 }
-

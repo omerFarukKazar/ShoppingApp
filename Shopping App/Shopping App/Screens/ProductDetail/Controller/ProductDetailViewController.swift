@@ -25,6 +25,14 @@ final class ProductDetailViewController: SAViewController {
             }
         }
     }
+    var isCartEmpty = true {
+        didSet {
+            let image = isCartEmpty ? UIImage(named: ProductViewAssets.cart.rawValue) : UIImage(named: ProductViewAssets.cartCheckout.rawValue)
+            navigationBarCartButton(with: image)
+        }
+    }
+    var productId: Int?
+
     // MARK: - Init
     init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -39,7 +47,49 @@ final class ProductDetailViewController: SAViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = productDetailView
+
+        updateIsCartEmptyProperty()
+        setViewData()
         addFavoriteButtonTarget()
+        addCartButtonTarget()
+    }
+
+    // MARK: - Methods
+    /// Unwraps product properties form viewModel and assigns them to productView.
+    private func setViewData() {
+        guard let title = viewModel.product.title,
+              let rate = viewModel.product.rating?.rate,
+              let count = viewModel.product.rating?.count,
+              let price = viewModel.product.price,
+              let description = viewModel.product.description else { return }
+
+        productDetailView.rate = "\(rate)"
+        productDetailView.count = "(\(count))"
+        productDetailView.priceLabel.text = "$ \(price)"
+        productDetailView.titleLabel.text = "Name: \(title)"
+        productDetailView.descriptionLabel.text = "Description: \(description)"
+
+    }
+
+    // MARK: NavigationBarCartButton
+    /// Sets navigation cart button with the given image.
+    private func navigationBarCartButton(with image: UIImage?) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(cartButtonTapped))
+    }
+
+    private func updateIsCartEmptyProperty() {
+        isCartEmpty = ProductsManager.cart.isEmpty
+    }
+
+    /// set and push CartViewController
+    @objc private func cartButtonTapped() {
+        let viewModel = CartViewModel()
+        let viewController = CartViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     // MARK: FavoriteButtonFunctionality

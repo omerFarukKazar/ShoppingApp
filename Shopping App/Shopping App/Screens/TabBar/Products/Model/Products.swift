@@ -14,6 +14,7 @@ enum Category: String, Decodable {
     case womenSClothing = "women's clothing"
 }
 
+/// Represents a collection of products
 typealias Products = [Product]
 
 // MARK: - Product
