@@ -129,26 +129,16 @@ extension ProductsViewController: UICollectionViewDataSource {
 
 }
 
+// MARK: - ProductsViewModelDelegate
 extension ProductsViewController: ProductsViewModelDelegate {
-    /// Reloads collectionView data if fetch is successful.
+    /// Reloads collectionView data when triggered..
     func didFetchProducts() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
-
+    /// Presents an alert when triggered.
     func didErrorOccured(_ error: Error) {
-        print(error.localizedDescription)
+        self.showAlert(title: "Error", message: error.localizedDescription)
     }
-
-    func didFetchImage() {
-        print("imageFetched")
-    }
-
-    func didAddToFavorites() {
-    }
-
-    func didRemoveFromFavorites() {
-    }
-
 }
