@@ -97,6 +97,21 @@ final class ProductsViewController: SAViewController {
 // MARK: - UICollectionViewDelegate
 extension ProductsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Instantiate View Controller
+        guard let product = viewModel.productFor(indexPath) else { return }
+        let viewModel = ProductDetailViewModel(product: product)
+        let viewController = ProductDetailViewController(viewModel: viewModel)
+
+        // Pass the data to selected cell and pushVC.
+        if let cell = collectionView.cellForItem(at: indexPath) as? ProductsViewCell {
+            viewController.isFavorite = cell.isFavorite
+            viewController.productDetailView.image = cell.productImage
+            viewController.productId = product.id
+            self.selectedCellIndexPath = indexPath
+            navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            showAlert(title: "Error", message: "Product not found!")
+        }
     }
 
 }
