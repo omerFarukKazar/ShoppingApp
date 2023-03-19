@@ -7,7 +7,7 @@
 
 import Foundation
 
-// I was going to use async but since URLSession.shared.data(for: isn't supported below ios 15.0
+// I was going to use async but since 'URLSession.shared.data(for:' method isn't supported below ios 15.0
 // I seek for the ways to return result
 // and i wanted to create class and return the result with delegate.
 // After making a research i saw another example with closure as a completion.
