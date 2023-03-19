@@ -11,14 +11,14 @@ final class OnboardingViewController: SAViewController {
 
     // MARK: - Properties
     private var onboardingView = OnboardingView()
-    private let viewModel: OnboardingViewModel // Not used as an instance. That property could've been deleted.
-    private var pageCount = OnboardingViewModel.Page.allCases.count
+    private let viewModel: OnboardingViewModel // Not used as an instance.
+    private var pageCount = OnboardingPage.allCases.count
     private var pagesArray: [OnboardingPageView] = [] {
         didSet {
             setLayout()
         }
     }
-    private var currentPageNumber: OnboardingViewModel.Page.RawValue = .zero {
+    private var currentPageNumber: OnboardingPage.RawValue = .zero {
         didSet {
             if currentPageNumber == pagesArray.count - 1 {
                 onboardingView.nextButton.setTitle("Done", for: .normal)
@@ -118,7 +118,7 @@ final class OnboardingViewController: SAViewController {
 
     /// Initiates pageview's with the data on Page enum. Then appends pages to the pagesArray one by one.
     private func appendPages() {
-        let pageModelsArray = OnboardingViewModel.Page.allCases // loop range.
+        let pageModelsArray = OnboardingPage.allCases // loop range.
 
         // One by one, initiates each page's view with the corresponding data on Page enum and appends
         // the view into pagesArray

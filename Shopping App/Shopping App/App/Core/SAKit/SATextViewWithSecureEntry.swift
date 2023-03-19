@@ -13,8 +13,8 @@ final class SATextViewWithSecureEntry: SATextView {
     // MARK: - Enum
     /// Icon Names in order to avoid typo.
     private enum IconNames: String {
-        case openEye
-        case closedEye
+        case openEye = "eye.open"
+        case closedEye = "eye.closed"
     }
 
     // MARK: - UI Elements
