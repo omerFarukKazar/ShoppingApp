@@ -26,10 +26,10 @@ final class MainTabBarController: UITabBarController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: true)
+
         setTabBarControllers()
     }
-
+    
     // MARK: - Methods
     /// Instantiates tab bar controllers, adds titles and images.
     /// Adds them into UITabBarController.
@@ -37,9 +37,14 @@ final class MainTabBarController: UITabBarController {
         // Instantiate ViewControllers for each tab.
         let productsViewModel = ProductsViewModel(service: ProductsService())
         let productsViewController = ProductsViewController(viewModel: productsViewModel)
-        
+        let productsNavigationController = UINavigationController(rootViewController: productsViewController)
+//        self.navigationController?.navigationBar = productsNavigationController.navigationBar
+
         let searchViewController = SearchViewController()
+        let searchNavigationController = UINavigationController(rootViewController: searchViewController)
+
         let profileViewController = ProfileViewController()
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
 
         // Set titles for each tab.
         productsViewController.title = TabBarTitles.products.rawValue
@@ -51,9 +56,10 @@ final class MainTabBarController: UITabBarController {
         searchViewController.tabBarItem.image = UIImage(named: TabBarImageNames.search.rawValue)
         profileViewController.tabBarItem.image = UIImage(named: TabBarImageNames.profile.rawValue)
 
-        let viewControllerArray = [productsViewController, searchViewController, profileViewController]
+        let viewControllerArray = [productsNavigationController, searchNavigationController, profileNavigationController]
 
         self.setViewControllers(viewControllerArray, animated: true)
 
     }
+
 }

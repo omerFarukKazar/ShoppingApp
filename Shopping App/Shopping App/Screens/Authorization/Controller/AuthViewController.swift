@@ -110,13 +110,9 @@ final class AuthViewController: SAViewController {
     @objc private func logInButtonTapped() {
         guard let email = logInView.emailTextView.text,
               let password = logInView.passwordTextView.text
-                // email.isEmpty || password.isEmpty
-                // This could be a solution
         else {
-            // showAlert(title: "Error", message: "Please fill all the fields.")
             return
         }
-
         viewModel.logIn(email: email, password: password)
     }
 
@@ -149,11 +145,13 @@ final class AuthViewController: SAViewController {
 // MARK: - AuthDelegate
 extension AuthViewController: AuthDelegate {
     func isSignUpSuccessful() {
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
+        let tabBarController = UITabBarController()
+        navigationController?.pushViewController(tabBarController, animated: true)
     }
 
     func isLogInSuccessful() {
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
+        let tabBarController = MainTabBarController()
+        navigationController?.pushViewController(tabBarController, animated: true)
     }
 
     func didErrorOccured(_ error: Error) {
