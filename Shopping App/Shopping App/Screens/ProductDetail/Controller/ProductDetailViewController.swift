@@ -47,7 +47,7 @@ final class ProductDetailViewController: SAViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = productDetailView
-
+        tabBarController?.tabBar.isHidden = true
         updateIsCartEmptyProperty()
         setViewData()
         addFavoriteButtonTarget()

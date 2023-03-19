@@ -32,8 +32,9 @@ final class ProductsViewController: SAViewController {
     // MARK: Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.navigationController?.navigationBar.isHidden = true
         title = "Products"
-
+        updateIsCartEmptyProperty()
         setCollectionView()
         setCollectionViewDelegateAndDataSource()
         setProductsViewModelDelegate()
@@ -45,6 +46,7 @@ final class ProductsViewController: SAViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        tabBarController?.tabBar.isHidden = false
         updateIsCartEmptyProperty()
 
         guard let indexPath = selectedCellIndexPath else { return }
@@ -55,7 +57,7 @@ final class ProductsViewController: SAViewController {
     // MARK: CartButton
     /// Sets navigation cart button with the given image.
     private func navigationBarCartButton(with image: UIImage?) {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: image,
             style: .plain,
             target: self,
