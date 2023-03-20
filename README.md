@@ -61,7 +61,6 @@ Simulator: https://youtu.be/AntzcKpYTDg
 
 * Since i need to use more than one pages with the same components, i create the OnboardingPageView to _**avoid code repetition.**_
 * OnboardingPageView contains the UI Elements in the blue frames.
-* By seperating Pages and OnboardingViewController i conform _**Single Responsibility and Interface Segregation Principles.**_
 
 ---
 ---
@@ -125,7 +124,6 @@ final class ProductsManager {
     static var favorites: [Int] = []
 }
 ```
-##### TODO: It'll be better to use CoreData and Firestore together and avoid Singleton and static values as much as possible.
 
 ---
 ---
