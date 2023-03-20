@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CartViewController: UIViewController {
+final class CartViewController: SAViewController {
     // MARK: - Properties
     private let viewModel: CartViewModel
     private var tableView: UITableView!
@@ -32,6 +32,7 @@ final class CartViewController: UIViewController {
     // MARK: - Method
     private func prepareTableView() {
         tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.rowHeight = screenHeight * 0.15
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -52,7 +53,7 @@ extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell
         guard let cell = cell else { fatalError("Cell not found!") }
-        cell.backgroundColor = .brown
+        cell.backgroundColor = .lightGray
         return cell
     }
 
