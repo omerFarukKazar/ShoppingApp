@@ -9,7 +9,8 @@ import UIKit
 
 final class CartViewController: UIViewController {
     // MARK: - Properties
-    let viewModel: CartViewModel
+    private let viewModel: CartViewModel
+    private var tableView: UITableView!
 
     // MARK: - Init
     init(viewModel: CartViewModel) {
@@ -23,8 +24,36 @@ final class CartViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .white
+        title = "Cart"
+        prepareTableView()
     }
 
     // MARK: - Method
+    private func prepareTableView() {
+        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(CartTableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+    }
+
+}
+
+extension CartViewController: UITableViewDelegate {
+
+}
+
+extension CartViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell
+        guard let cell = cell else { fatalError("Cell not found!") }
+        cell.backgroundColor = .brown
+        return cell
+    }
+
 }
