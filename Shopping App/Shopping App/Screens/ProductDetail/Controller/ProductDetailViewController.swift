@@ -89,6 +89,8 @@ final class ProductDetailViewController: SAViewController {
     @objc private func cartButtonTapped() {
         let viewModel = CartViewModel(service: ProductsService())
         let viewController = CartViewController(viewModel: viewModel)
+        viewController.products = self.viewModel.productsInCart
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 

@@ -59,8 +59,6 @@ extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell
         guard let cell = cell else { fatalError("Cell not found!") }
-        let keys = Array(ProductsManager.cart.keys)
-        let idArray = keys.sorted()
 
         guard let products = products,
               let imageUrl = products[indexPath.row].image else { return cell }
@@ -75,26 +73,15 @@ extension CartViewController: UITableViewDataSource {
             productImage = UIImage(data: data)
         }
 
+        guard let quantity = ProductsManager.cart[product.id ?? .zero],
+              let price = product.price,
+              let title = product.title else { return cell}
         DispatchQueue.main.async {
-            cell.productPriceLabel.text = "\(product.price ?? .zero)"
+            cell.productPriceLabel.text = "\(price * Double(quantity))"
             cell.productImageView.image = productImage
-            cell.productNameLabel.text = "\(product.title ?? "-")"
-            cell.stepperLabel.text = "\(ProductsManager.cart[indexPath.row] ?? .zero)"
+            cell.productNameLabel.text = "\(title)"
+            cell.stepperLabel.text = "\(quantity)"
         }
-
-                viewModel.getSingleProduct(with: idArray[indexPath.row]) { product, error in
-                    if let error = error {
-                        self.showError(error)
-                    } else {
-                        guard let product = product else { return }
-        
-                        DispatchQueue.main.async {
-                            cell.productNameLabel.text = product.title
-                            cell.stepperLabel.text = "\(ProductsManager.cart[product.id ?? 0] ?? 0)"
-                            cell.productPriceLabel.text = "\(product.price ?? 0)"
-                        }
-                    }
-                }
 
         cell.backgroundColor = .lightGray
         return cell
