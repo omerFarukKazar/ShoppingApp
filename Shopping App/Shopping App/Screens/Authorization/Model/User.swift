@@ -12,7 +12,7 @@ struct User: Codable {
     let email: String?
     let birthday: String?
     var favorites: [Int]? = []
-    var cart: [Int]? = []
+    var cart: [Int: Int]? = [:]
 }
 
 extension User {
@@ -23,6 +23,6 @@ extension User {
         email = dict["email"] as? String
         birthday = dict["birthday"] as? String
         favorites = dict["favorites"] as? [Int]
-        cart = dict["cart"] as? [Int]
+        cart = dict["cart"] as? [Int: Int]
     }
 }
