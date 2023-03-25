@@ -8,6 +8,12 @@
 import UIKit
 
 final class ProductsViewController: SAViewController {
+    func didOperationSuccess() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+
     // MARK: - Properties
     var collectionView: UICollectionView!
     let viewModel: ProductsViewModel
@@ -40,6 +46,7 @@ final class ProductsViewController: SAViewController {
         setProductsViewModelDelegate()
         viewModel.fetchFavoritesFromDB()
         viewModel.fetchProducts()
+        viewModel.delegate = self
     }
 
     // Used to reload cell in case of some changes in ProductDetailView made.
@@ -66,8 +73,18 @@ final class ProductsViewController: SAViewController {
 
     /// set and push CartViewController()
     @objc private func cartButtonTapped() {
-        let viewModel = CartViewModel()
+        let viewModel = CartViewModel(service: ProductsService())
         let viewController = CartViewController(viewModel: viewModel)
+
+        // I prefer passing them instead of sending request and downloading them again.
+        // Decrease server traffic.
+        // Filter for products already added to Cart and pass them to Cart Screen
+        let cartDictionaryKeys = Array(ProductsManager.cart.keys)
+        let cartIdArray = cartDictionaryKeys.sorted()
+        let filteredProducts = self.viewModel.products.filter { cartIdArray.contains($0.id!)
+        }
+        viewController.products = filteredProducts
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -98,7 +115,6 @@ final class ProductsViewController: SAViewController {
         collectionView.delegate = self
     }
 
-    // TODO: I'm aware that i use 'set' a lot. But i'm open to adapt the company's lingo.
     private func setProductsViewModelDelegate() {
         viewModel.delegate = self
     }
@@ -176,25 +192,21 @@ extension ProductsViewController: UICollectionViewDataSource {
         // Adds or removes product according to the state of cell's isFavorite property.
         cell.didTapFavoriteButton = {
             if cell.isFavorite {
-                self.viewModel.removeProductFromFavorites(documentPath: "favorites", productId: id) { error in
+                self.viewModel.removeFromFavorites(with: id) { error in
                     if let error = error {
                         self.showAlert(title: "Error", message: error.localizedDescription)
                         return
                     } else {
                         cell.isFavorite.toggle()
-                        guard let index = ProductsManager.favorites.firstIndex(of: id) else { return }
-                        ProductsManager.favorites.remove(at: index)
                     }
                 }
             } else {
-                self.viewModel.addProductToFavorites(documentPath: "favorites", productId: id) { error in
+                self.viewModel.addToFavorites(with: id) { error in
                     if let error = error {
                         self.showAlert(title: "Error", message: error.localizedDescription)
                         return
                     } else {
                         cell.isFavorite.toggle()
-                        guard let index = ProductsManager.favorites.firstIndex(of: id) else { return }
-                        ProductsManager.favorites.remove(at: index)
                     }
                 }
             }
@@ -218,5 +230,3 @@ extension ProductsViewController: ProductsViewModelDelegate {
     }
 }
 
-// MARK: - FirestoreReadAndWritable
-extension ProductsViewController: FirestoreReadAndWritable {}

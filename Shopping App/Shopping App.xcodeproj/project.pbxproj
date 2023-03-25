@@ -269,6 +269,15 @@
 			path = CartScreen;
 			sourceTree = "<group>";
 		};
+		9D50C3DE29CD56D0004B05B2 /* FireStoreHandler */ = {
+			isa = PBXGroup;
+			children = (
+				9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */,
+				9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */,
+			);
+			path = FireStoreHandler;
+			sourceTree = "<group>";
+		};
 		9D5BB69529C3F800008CA7CD /* Cart */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,12 +445,11 @@
 		9D91441D29A96F3B00065776 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9D91442129A96F9C00065776 /* AlertPresentable.swift */,
-				9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */,
+				9D50C3DE29CD56D0004B05B2 /* FireStoreHandler */,
 				9D5BB6B029C556BF008CA7CD /* DataDownloader.swift */,
 				9D5BB69629C3F80B008CA7CD /* ProductsManager.swift */,
+				9D91442129A96F9C00065776 /* AlertPresentable.swift */,
 				9D5BB6B229C61DE9008CA7CD /* UserDefaultsAccessible.swift */,
-				9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

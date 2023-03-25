@@ -29,7 +29,7 @@ final class MainTabBarController: UITabBarController {
 
         setTabBarControllers()
     }
-    
+
     // MARK: - Methods
     /// Instantiates tab bar controllers, adds titles and images.
     /// Adds them into UITabBarController.

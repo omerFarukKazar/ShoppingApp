@@ -17,5 +17,6 @@ struct ProductDetailViewModel {
     init(product: Product) {
         self.product = product
     }
-
 }
+
+extension ProductDetailViewModel: FirestoreReadAndWritable { }

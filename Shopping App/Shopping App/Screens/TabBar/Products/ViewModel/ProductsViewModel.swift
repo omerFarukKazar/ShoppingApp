@@ -60,17 +60,11 @@ final class ProductsViewModel: FireBaseFireStoreAccessible,
     /// If fetch failures, trigger the 'delegate.didErrorOccured'
     /// If fetch is success, assign that data to 'favorites' array in viewModel.
     func fetchFavoritesFromDB() {
-        guard let uid = uid else { return }
-        db.collection("users").document(uid).getDocument { snapshot, error in
+        ProductsManager().fetchFavoritesFromDB { error in
             if let error = error {
                 self.delegate?.didErrorOccured(error)
-                return
             } else {
-                if let data = snapshot?.data() {
-                    let dataAsInt = data["favorites"] as? [Int]
-                    guard let dataAsInt = dataAsInt else { return }
-                    ProductsManager.favorites = dataAsInt
-                }
+                self.delegate?.didFetchProducts()
             }
         }
     }
@@ -102,20 +96,11 @@ final class ProductsViewModel: FireBaseFireStoreAccessible,
 }
 // MARK: - Extensions
 // MARK: Extension FirestoreReadAndWritable Protocol
-extension ProductsViewModel: FirestoreReadAndWritable {
-    func addProductToFavorites(documentPath: String, productId: Int, completion: @escaping ((Error?) -> Void)) {
-        addProductTo(documentPath: documentPath, withId: productId, completion: completion)
-    }
-
-    func removeProductFromFavorites(documentPath: String, productId: Int, completion: @escaping ((Error?) -> Void)) {
-        removeProductFrom(documentPath: documentPath, withId: productId, completion: completion)
-    }
-
-}
+extension ProductsViewModel: FirestoreReadAndWritable { }
 
 // MARK: Extension DataDownloader Protocol
 extension ProductsViewModel: DataDownloader {
     func downloadImageWith(_ urlString: String, completion: ((Data?, Error?) -> Void)?) {
-        downloadImageData(urlString, completion: completion)
+        downloadDataWith(urlString, completion: completion)
     }
 }
