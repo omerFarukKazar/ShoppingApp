@@ -8,9 +8,11 @@
 import UIKit
 
 final class CartViewController: SAViewController {
+
     // MARK: - Properties
-    private let viewModel: CartViewModel
+    private var viewModel: CartViewModel
     private var tableView: UITableView!
+    var products: Products?
 
     // MARK: - Init
     init(viewModel: CartViewModel) {
@@ -26,7 +28,11 @@ final class CartViewController: SAViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Cart"
+
+        viewModel.delegate = self
+        viewModel.fetchCart()
         prepareTableView()
+//        print(products)
     }
 
     // MARK: - Method
@@ -47,7 +53,7 @@ extension CartViewController: UITableViewDelegate {
 
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        ProductsManager.cart.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,4 +63,14 @@ extension CartViewController: UITableViewDataSource {
         return cell
     }
 
+}
+
+extension CartViewController: CartViewModelDelegate {
+    func didErrorOccurred(_ error: Error) {
+        showError(error)
+    }
+
+    func didFetchCart() {
+        print("fetch")
+    }
 }
