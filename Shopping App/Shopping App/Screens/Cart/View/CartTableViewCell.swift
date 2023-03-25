@@ -22,14 +22,14 @@ final class CartTableViewCell: UITableViewCell {
     }()
 
     // MARK: UI Elements
-    private let productImageView: UIImageView = {
+    let productImageView: UIImageView = {
         let productImageView = UIImageView()
         productImageView.image = UIImage(named: "imagePlaceholder")
         productImageView.contentMode = .scaleToFill
         return productImageView
     }()
 
-    private let productNameLabel: UILabel = {
+    let productNameLabel: UILabel = {
         let productNameLabel = UILabel()
         productNameLabel.numberOfLines = 2
         productNameLabel.font = .systemFont(ofSize: 16)
@@ -40,7 +40,7 @@ final class CartTableViewCell: UITableViewCell {
         return productNameLabel
     }()
 
-    private let productPriceLabel: UILabel = {
+    let productPriceLabel: UILabel = {
         let productPriceLabel = UILabel()
         productPriceLabel.font = .systemFont(ofSize: 18)
         productPriceLabel.text = "$ 400"
@@ -53,7 +53,7 @@ final class CartTableViewCell: UITableViewCell {
         return removeButton
     }()
 
-    private let stepperLabel: UILabel = {
+    let stepperLabel: UILabel = {
         let stepperLabel = UILabel()
         stepperLabel.text = "1"
         stepperLabel.font = .systemFont(ofSize: 16.0)
