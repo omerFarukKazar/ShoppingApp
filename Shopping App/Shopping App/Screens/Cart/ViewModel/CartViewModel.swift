@@ -34,5 +34,21 @@ extension CartViewModel: UserDefaultsAccessible,
     }
 }
 
+extension CartViewModel: DataDownloader {
+    func downloadImageWith(_ urlString: String, completion: ((Data?, Error?) -> Void)?) {
+        downloadDataWith(urlString, completion: completion)
+    }
+}
 
+extension CartViewModel {
+    func getSingleProduct(with id: Int, completion: @escaping ((Product?, Error?) -> Void)) {
+        service?.getSingleProduct(with: id, completion: { result in
+            switch result {
+            case .success(let product):
+                completion(product, nil)
+            case .failure(let error):
+                completion(nil, error)
+            }
+        })
+    }
 }
