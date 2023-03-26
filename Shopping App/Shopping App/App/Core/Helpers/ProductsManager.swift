@@ -11,7 +11,6 @@ final class ProductsManager {
     static let products = ProductsManager()
     static var cart: [Int: Int] = [:]
     static var favorites: [Int] = []
-
 }
 
 extension ProductsManager: FireBaseFireStoreAccessible,

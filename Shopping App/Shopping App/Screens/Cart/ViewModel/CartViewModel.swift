@@ -13,15 +13,17 @@ protocol CartViewModelDelegate: AnyObject {
 }
 
 struct CartViewModel {
+    // MARK: - Properties
     weak var delegate: CartViewModelDelegate?
     var service: ProductsService?
+
+    // MARK: - Init
     init(service: ProductsServiceable) {
         self.service = service as? ProductsService
     }
 }
 
-extension CartViewModel: UserDefaultsAccessible,
-                         FireBaseFireStoreAccessible {
+extension CartViewModel: FirestoreReadAndWritable {
 
     func fetchCart() {
         ProductsManager().fetchCart { error in
