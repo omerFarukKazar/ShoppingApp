@@ -29,7 +29,26 @@ class ProfileViewController: SAViewController {
         view = profileView
     }
 
-        view.backgroundColor = .orange
+    func setCollectionView() {
+        profileView.collectionView.dataSource = self
+        profileView.collectionView.delegate = self
+        profileView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    }
+}
+
+extension ProfileViewController: UICollectionViewDelegate {
+
+}
+
+extension ProfileViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .brown
+        return cell
     }
 
 }

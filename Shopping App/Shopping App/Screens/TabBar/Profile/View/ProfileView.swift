@@ -38,6 +38,30 @@ final class ProfileView: UIView {
         emailLabel.numberOfLines = 3
         return emailLabel
     }()
+
+    let favoritesLabel: UILabel = {
+        let favoritesLabel = UILabel()
+        favoritesLabel.font = .systemFont(ofSize: 16.0, weight: .medium)
+        favoritesLabel.text = "Favorites"
+        return favoritesLabel
+    }()
+
+    // CollectionView
+    lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: screenWidth / 3, height: screenHeight * 0.18)
+        layout.scrollDirection = .horizontal
+        return layout
+    }()
+
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = true
+        return collectionView
+    }()
+
     let logOutButton: UIButton = {
         let logOutButton = UIButton()
         logOutButton.setTitleColor(.blue, for: .normal)
