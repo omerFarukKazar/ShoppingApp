@@ -45,4 +45,21 @@ final class ProfileViewModel {
         }
     }
 }
+
+extension ProfileViewModel: DataDownloader {
+    func downloadImageData(with imageUrl: String, completion: @escaping ((_ imageData: Data?, _ error: Error?) -> Void)) {
+
+        downloadDataWith(imageUrl) { imageData, error in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                guard let data = imageData else { return }
+                completion(data, nil)
+            }
+        }
+    }
+}
+
+extension ProfileViewModel: FirestoreReadAndWritable {
+
 }

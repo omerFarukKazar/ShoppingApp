@@ -46,13 +46,31 @@ extension ProfileViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        viewModel.favoriteProducts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? FavoritesCollectionViewCell else { fatalError("Cell not found") }
 
         cell.backgroundColor = .brown
+        let product = viewModel.favoriteProducts[indexPath.row]
+        guard let imageUrl = product.image,
+              let title = product.title,
+              let price = product.price else { return cell }
+
+        viewModel.downloadImageData(with: imageUrl) { imageData, error in
+            if let error = error {
+                self.showError(error)
+            } else {
+                guard let data = imageData,
+                      let image = UIImage(data: data) else { return }
+                cell.image = image
+            }
+        }
+
+        cell.title = title
+        cell.price = "\(price)"
+
         return cell
     }
 
