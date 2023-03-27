@@ -9,11 +9,11 @@ import UIKit
 
 class ProfileViewController: SAViewController {
     // MARK: - Properties
-    let viewModel: ProfileViewModel?
+    let viewModel: ProfileViewModel
     let profileView = ProfileView()
 
     // MARK: - Init
-    init(viewModel: ProfileViewModel?) {
+    init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,28 +25,32 @@ class ProfileViewController: SAViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCollectionView()
         view = profileView
+        setCollectionView()
     }
 
+    // MARK: - Methods
     func setCollectionView() {
         profileView.collectionView.dataSource = self
         profileView.collectionView.delegate = self
-        profileView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        profileView.collectionView.register(FavoritesCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension ProfileViewController: UICollectionViewDelegate {
 
 }
 
+// MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         10
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? FavoritesCollectionViewCell else { fatalError("Cell not found") }
+
         cell.backgroundColor = .brown
         return cell
     }

@@ -7,6 +7,17 @@
 
 import Foundation
 
-struct ProfileViewModel {
-    
+
+final class ProfileViewModel {
+    // MARK: - Properties
+    private var service: ProductsServiceable
+    // MARK: - Init
+    init(service: ProductsServiceable) {
+        self.service = service
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("NSCoder not found.")
+    }
+}
 }

@@ -29,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Does the necessarry settings for window to present the viewController properly.
     private func setWindow() {
         let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
-        let viewModel = ProfileViewModel()
-        let viewController = ProfileViewController(viewModel: viewModel)
-//        let viewModel = AuthViewModel()
-//        let viewController = AuthViewController(viewModel: viewModel)
+//        let viewModel = ProfileViewModel(service: ProductsService())
+//        let viewController = ProfileViewController(viewModel: viewModel)
+        let viewModel = AuthViewModel()
+        let viewController = AuthViewController(viewModel: viewModel)
         //        let viewModel = CartViewModel()
         //        let viewController = CartViewController(viewModel: viewModel)
         // Got an instance of the first screen's ViewController.
