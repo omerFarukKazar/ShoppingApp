@@ -10,9 +10,11 @@ import UIKit
 final class ProfileView: UIView {
 
     // MARK: UI Elements
-    let profilePhoto: UIImageView = {
+    lazy var profilePhoto: UIImageView = {
         let profilePhoto = UIImageView()
         profilePhoto.isUserInteractionEnabled = true
+        profilePhoto.clipsToBounds = true
+        profilePhoto.layer.cornerRadius = screenWidth * 0.5 / 2
         profilePhoto.image = UIImage(named: "imagePlaceholder")
         return profilePhoto
     }()
@@ -125,7 +127,7 @@ final class ProfileView: UIView {
         addSubview(logOutButton)
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            logOutButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor),
+            logOutButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -16.0),
             logOutButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             logOutButton.widthAnchor.constraint(equalToConstant: screenWidth * 0.8),
             logOutButton.heightAnchor.constraint(equalToConstant: screenWidth * 0.075)])
@@ -138,7 +140,7 @@ final class ProfileView: UIView {
             collectionView.topAnchor.constraint(equalTo: favoritesLabel.bottomAnchor, constant: 16.0),
             collectionView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -64.0)
+            collectionView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -48.0)
         ])
     }
 }

@@ -59,7 +59,24 @@ class ProfileViewController: SAViewController {
             self.present(imagePicker, animated: true)
         }
     }
-    
+}
+
+extension ProfileViewController: ProfileViewModelDelegate {
+    func didAppendToFavoriteProducts() { }
+
+    func didErrorOccured(_ error: Error) {
+        showError(error)
+    }
+
+    func didFetchUserData() {
+        DispatchQueue.main.async {
+            self.setUserLabels()
+        }
+    }
+
+    func didUploadImage(_ downloadUrl: URL) {
+        viewModel.imageUrl = downloadUrl
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -100,34 +117,17 @@ extension ProfileViewController: UICollectionViewDataSource {
 
 }
 
-extension ProfileViewController: ProfileViewModelDelegate {
-    func didAppendToFavoriteProducts() { }
-
-    func didErrorOccured(_ error: Error) {
-        showError(error)
-    }
-
-    func didFetchUserData() {
-        DispatchQueue.main.async {
-            self.setUserLabels()
-        }
-    }
-}
-
 extension ProfileViewController: UIImagePickerControllerDelegate,
                                  UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let editedImage = info[.editedImage] as? UIImage,
-           let jpegData = editedImage.jpegData(compressionQuality: 0.5),
-           let compressedImage = UIImage(data: jpegData) {
-            profileView.profilePhoto.image = compressedImage
-        }
-        else if let originalImage = info[.originalImage] as? UIImage,
-                let jpegData = originalImage.jpegData(compressionQuality: 0.5),
-                let compressedImage = UIImage(data: jpegData) {
-            profileView.profilePhoto.image = compressedImage
-        }
+
+        guard let editedImage = info[.editedImage] as? UIImage,
+              let jpegData = editedImage.jpegData(compressionQuality: 0.5),
+              let compressedImage = UIImage(data: jpegData) else { return }
+
+        viewModel.uploadProfilePhoto(with: jpegData)
+        profileView.profilePhoto.image = compressedImage
 
         dismiss(animated: true, completion: nil)
     }

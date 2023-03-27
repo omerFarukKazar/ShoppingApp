@@ -13,11 +13,11 @@ protocol FirebaseStorable: UserDefaultsAccessible,
                            FireBaseFireStoreAccessible {}
 
 extension FirebaseStorable {
-    func uploadFile(image: UIImage,
+    func upload(imageData: Data,
                     completion: @escaping ((_ url: URL?,
                                             _ error: Error?) -> Void)) {
         let storageRef = Storage.storage().reference(withPath: "profilePhotos")
-        let data = Data()
+        let data = imageData
 
         guard let uid = uid else { return }
         let imageRef = storageRef.child(uid)
