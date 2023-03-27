@@ -10,6 +10,7 @@ import Foundation
 protocol ProfileViewModelDelegate: AnyObject {
     func didAppendToFavoriteProducts()
     func didErrorOccured(_ error: Error)
+    func didFetchUserData()
 
 }
 
@@ -18,6 +19,7 @@ final class ProfileViewModel {
     private var service: ProductsServiceable
     weak var delegate: ProfileViewModelDelegate?
     var favoriteProducts: Products = []
+    var user: User = User(from: [:])
 
     // MARK: - Init
     init(service: ProductsServiceable) {
@@ -30,7 +32,6 @@ final class ProfileViewModel {
     }
 
     // MARK: - Methods
-
     func getFavorites() {
         ProductsManager.favorites.forEach { id in
             service.getSingleProduct(with: id) { result in
@@ -46,6 +47,7 @@ final class ProfileViewModel {
     }
 }
 
+// MARK: - Protocol DataDownloader
 extension ProfileViewModel: DataDownloader {
     func downloadImageData(with imageUrl: String, completion: @escaping ((_ imageData: Data?, _ error: Error?) -> Void)) {
 
@@ -60,6 +62,17 @@ extension ProfileViewModel: DataDownloader {
     }
 }
 
+// MARK: - Protocol FirestoreReadAndWritable
 extension ProfileViewModel: FirestoreReadAndWritable {
-
+    func getUserData() {
+        fetchUserData { userData, error in
+            if let error = error {
+                self.delegate?.didErrorOccured(error)
+            } else {
+                guard let userData = userData else { return }
+                self.user = userData
+                self.delegate?.didFetchUserData()
+            }
+        }
+    }
 }
