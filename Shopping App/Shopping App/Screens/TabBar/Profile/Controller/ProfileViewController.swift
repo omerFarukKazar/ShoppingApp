@@ -113,3 +113,27 @@ extension ProfileViewController: ProfileViewModelDelegate {
         }
     }
 }
+
+extension ProfileViewController: UIImagePickerControllerDelegate,
+                                 UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage,
+           let jpegData = editedImage.jpegData(compressionQuality: 0.5),
+           let compressedImage = UIImage(data: jpegData) {
+            profileView.profilePhoto.image = compressedImage
+        }
+        else if let originalImage = info[.originalImage] as? UIImage,
+                let jpegData = originalImage.jpegData(compressionQuality: 0.5),
+                let compressedImage = UIImage(data: jpegData) {
+            profileView.profilePhoto.image = compressedImage
+        }
+
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
