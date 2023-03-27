@@ -57,6 +57,7 @@
 		9DBF87DB29CED5EE00ADAEAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */; };
 		9DBF87DD29CED60A00ADAEAA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */; };
 		9DC2E09E29D18E7200AD5398 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2E09D29D18E7200AD5398 /* FavoritesCollectionViewCell.swift */; };
+		9DC2E0A029D1E46300AD5398 /* FirebaseStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2E09F29D1E46300AD5398 /* FirebaseStorable.swift */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
@@ -118,6 +119,7 @@
 		9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9DC2E09D29D18E7200AD5398 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		9DC2E09F29D1E46300AD5398 /* FirebaseStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorable.swift; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			children = (
 				9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */,
 				9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */,
+				9DC2E09F29D1E46300AD5398 /* FirebaseStorable.swift */,
 			);
 			path = FireStoreHandler;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				9D5BB6B329C61DE9008CA7CD /* UserDefaultsAccessible.swift in Sources */,
 				9DFDFF6529BCE4FE001EF43E /* Endpoint.swift in Sources */,
 				9D5BB69F29C3FABF008CA7CD /* CartTableViewCell.swift in Sources */,
+				9DC2E0A029D1E46300AD5398 /* FirebaseStorable.swift in Sources */,
 				9DFDFF7129BCF85E001EF43E /* ProductsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
