@@ -28,6 +28,8 @@ class ProfileViewController: SAViewController {
         view = profileView
         viewModel.delegate = self
         setCollectionView()
+        viewModel.getUserData()
+
     }
 
     // MARK: - Methods
@@ -35,6 +37,11 @@ class ProfileViewController: SAViewController {
         profileView.collectionView.dataSource = self
         profileView.collectionView.delegate = self
         profileView.collectionView.register(FavoritesCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    }
+
+    func setUserLabels() {
+        profileView.usernameLabel.text = viewModel.user.username
+        profileView.emailLabel.text = viewModel.user.email
     }
 }
 
@@ -52,7 +59,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? FavoritesCollectionViewCell else { fatalError("Cell not found") }
 
-        cell.backgroundColor = .brown
+        cell.backgroundColor = .white
         let product = viewModel.favoriteProducts[indexPath.row]
         guard let imageUrl = product.image,
               let title = product.title,
@@ -83,7 +90,9 @@ extension ProfileViewController: ProfileViewModelDelegate {
         showError(error)
     }
 
-    func didFetchImageData(_ data: Data) {
-        
+    func didFetchUserData() {
+        DispatchQueue.main.async {
+            self.setUserLabels()
+        }
     }
 }

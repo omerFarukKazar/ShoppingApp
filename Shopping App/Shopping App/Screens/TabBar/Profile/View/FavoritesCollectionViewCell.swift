@@ -38,20 +38,17 @@ final class FavoritesCollectionViewCell: UICollectionViewCell {
         let productImage = UIImageView()
         productImage.contentMode = .scaleToFill
         productImage.clipsToBounds = true
-        productImage.image = UIImage(named: "imagePlaceholder")
         return productImage
     }()
 
     private let nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = "FjallRaven No 134: 15 NoteBook Fit"
         nameLabel.font = .systemFont(ofSize: 12.0)
         return nameLabel
     }()
 
     private let priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.text = "$300"
         priceLabel.textAlignment = .right
         priceLabel.font = .systemFont(ofSize: 12.0)
         return priceLabel
@@ -78,7 +75,7 @@ final class FavoritesCollectionViewCell: UICollectionViewCell {
             productImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             productImage.topAnchor.constraint(equalTo: self.topAnchor),
             productImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            productImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18)])
+            productImage.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20)])
     }
 
     private func setNameLabelConstraints() {
