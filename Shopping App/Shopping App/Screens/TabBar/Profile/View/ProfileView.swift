@@ -12,6 +12,7 @@ final class ProfileView: UIView {
     // MARK: UI Elements
     let profilePhoto: UIImageView = {
         let profilePhoto = UIImageView()
+        profilePhoto.isUserInteractionEnabled = true
         profilePhoto.image = UIImage(named: "imagePlaceholder")
         return profilePhoto
     }()
@@ -20,10 +21,6 @@ final class ProfileView: UIView {
         let usernameLabel = UILabel()
         usernameLabel.font = .systemFont(ofSize: 16.0, weight: .bold)
         usernameLabel.textAlignment = .center
-        usernameLabel.text = """
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum augue est, non eleifend metus ultrices non.
-        In quis eros condimentum, congue dui varius, dapibus odio. Suspendisse potenti. Integer ut ipsum at nisl faucibus condimentum. Class aptent taciti
-        """
         usernameLabel.numberOfLines = 3
         return usernameLabel
     }()
@@ -31,10 +28,6 @@ final class ProfileView: UIView {
     let emailLabel: UILabel = {
         let emailLabel = UILabel()
         emailLabel.textAlignment = .center
-        emailLabel.text = """
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum augue est, non eleifend metus ultrices non.
-        In quis eros condimentum, congue dui varius, dapibus odio. Suspendisse potenti. Integer ut ipsum at nisl faucibus condimentum.
-        """
         emailLabel.numberOfLines = 3
         return emailLabel
     }()

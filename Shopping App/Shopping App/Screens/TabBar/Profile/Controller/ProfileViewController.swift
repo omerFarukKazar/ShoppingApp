@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class ProfileViewController: SAViewController {
     // MARK: - Properties
@@ -29,7 +30,7 @@ class ProfileViewController: SAViewController {
         viewModel.delegate = self
         setCollectionView()
         viewModel.getUserData()
-
+        addTapGestureToProfilePhoto()
     }
 
     // MARK: - Methods
@@ -43,6 +44,22 @@ class ProfileViewController: SAViewController {
         profileView.usernameLabel.text = viewModel.user.username
         profileView.emailLabel.text = viewModel.user.email
     }
+
+    func addTapGestureToProfilePhoto() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showImagePicker))
+        profileView.profilePhoto.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func showImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        showAlert(title: "Shopping App Would Like to Access Gallery", message: "Shopping App needs your permission to pick a profile photo from gallery.", cancelButtonTitle: "Don't Allow") { _ in
+            self.present(imagePicker, animated: true)
+        }
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate
