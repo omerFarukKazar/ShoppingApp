@@ -118,6 +118,16 @@ final class ProfileView: UIView {
             emailLabel.heightAnchor.constraint(equalToConstant: screenWidth * 0.18),
             emailLabel.widthAnchor.constraint(equalToConstant: screenWidth * 0.8)])
     }
+
+    private func setFavoritesLabelConstraints() {
+        addSubview(favoritesLabel)
+        favoritesLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            favoritesLabel.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+                                     favoritesLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8.0),
+            favoritesLabel.heightAnchor.constraint(equalToConstant: 32.0)])
+    }
+
     private func setLogOutButton() {
         addSubview(logOutButton)
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -126,5 +136,16 @@ final class ProfileView: UIView {
             logOutButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             logOutButton.widthAnchor.constraint(equalToConstant: screenWidth * 0.8),
             logOutButton.heightAnchor.constraint(equalToConstant: screenWidth * 0.075)])
+    }
+
+    private func setCollectionViewConstraints() {
+        addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: favoritesLabel.bottomAnchor, constant: 16.0),
+            collectionView.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -64.0)
+        ])
     }
 }
