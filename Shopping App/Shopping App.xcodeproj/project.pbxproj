@@ -56,6 +56,7 @@
 		9DBF87D929CED55800ADAEAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87D829CED55800ADAEAA /* ProfileView.swift */; };
 		9DBF87DB29CED5EE00ADAEAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */; };
 		9DBF87DD29CED60A00ADAEAA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */; };
+		9DC2E09E29D18E7200AD5398 /* FavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2E09D29D18E7200AD5398 /* FavoritesCollectionViewCell.swift */; };
 		9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCCF41729953169009FAFEC /* UIView+Extensions.swift */; };
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
@@ -116,6 +117,7 @@
 		9DBF87D829CED55800ADAEAA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9DC2E09D29D18E7200AD5398 /* FavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		9DCCF41729953169009FAFEC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				9DBF87D829CED55800ADAEAA /* ProfileView.swift */,
+				9DC2E09D29D18E7200AD5398 /* FavoritesCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				9D91442229A96F9C00065776 /* AlertPresentable.swift in Sources */,
 				9D9E132E29BA58B300B10C62 /* ProductsViewController.swift in Sources */,
 				9D9E132C29BA03DD00B10C62 /* MainTabBarViewController.swift in Sources */,
+				9DC2E09E29D18E7200AD5398 /* FavoritesCollectionViewCell.swift in Sources */,
 				9D5BB6B129C556BF008CA7CD /* DataDownloader.swift in Sources */,
 				9D91442029A96F7900065776 /* SAViewController.swift in Sources */,
 				9D5BB69729C3F80B008CA7CD /* ProductsManager.swift in Sources */,
