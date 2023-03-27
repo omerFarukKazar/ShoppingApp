@@ -25,6 +25,9 @@ class ProfileViewController: SAViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCollectionView()
+        view = profileView
+    }
 
         view.backgroundColor = .orange
     }

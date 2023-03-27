@@ -43,7 +43,8 @@ final class MainTabBarController: UITabBarController {
         let searchViewController = SearchViewController()
         let searchNavigationController = UINavigationController(rootViewController: searchViewController)
 
-        let profileViewController = ProfileViewController()
+        let profileViewModel = ProfileViewModel()
+        let profileViewController = ProfileViewController(viewModel: profileViewModel)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
 
         // Set titles for each tab.
