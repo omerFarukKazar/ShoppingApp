@@ -26,6 +26,7 @@ class ProfileViewController: SAViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = profileView
+        viewModel.delegate = self
         setCollectionView()
     }
 
@@ -55,4 +56,16 @@ extension ProfileViewController: UICollectionViewDataSource {
         return cell
     }
 
+}
+
+extension ProfileViewController: ProfileViewModelDelegate {
+    func didAppendToFavoriteProducts() { }
+
+    func didErrorOccured(_ error: Error) {
+        showError(error)
+    }
+
+    func didFetchImageData(_ data: Data) {
+        
+    }
 }
