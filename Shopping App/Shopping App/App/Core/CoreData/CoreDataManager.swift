@@ -32,16 +32,16 @@ extension CoreDataManager {
         }
     }
 
-    func getDataFromCoreData<T>(entityName: String,
+    func getDataFromCoreData(entityName: String,
                                 attributeName: String,
-                                completion: ((T?, Error?) -> Void)) {
+                                completion: ((AnyObject?, Error?) -> Void)) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
             guard let fetchResults = try context?.fetch(fetchRequest),
                   let fetchResultsObjects = fetchResults as? [NSManagedObject] else { return }
 
             for userCoreData in fetchResultsObjects {
-                if let data = userCoreData.value(forKey: attributeName) as? T {
+                if let data = userCoreData.value(forKey: attributeName) as? AnyObject {
                     completion(data, nil)
                 }
             }
