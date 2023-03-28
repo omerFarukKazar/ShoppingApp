@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import CoreData
 
 class ProfileViewController: SAViewController {
     // MARK: - Properties
@@ -28,10 +29,15 @@ class ProfileViewController: SAViewController {
         super.viewDidLoad()
         view = profileView
         viewModel.delegate = self
+        
         setCollectionView()
         viewModel.getUserData()
         addTapGestureToProfilePhoto()
         addLogOutButtonTarget()
+
+        let entity = CoreDataEntities.userCoreData.rawValue
+        let attribute = UserCoreDataAttributes.profilePhoto.rawValue
+        viewModel.getUserImageData(entityName: entity, attributeName: attribute)
     }
 
     // MARK: - Methods
@@ -145,11 +151,25 @@ extension ProfileViewController: UIImagePickerControllerDelegate,
         viewModel.uploadProfilePhoto(with: jpegData)
         profileView.profilePhoto.image = compressedImage
 
+        let entity = CoreDataEntities.userCoreData.rawValue
+        let attribute = UserCoreDataAttributes.profilePhoto.rawValue
+        viewModel.saveImageData(data: jpegData,
+                                entityName: entity,
+                                attributeName: attribute)
+
+
         dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+
+    func didGetUserImageData(_ imageData: Data) {
+        let image = UIImage(data: imageData)
+        DispatchQueue.main.async {
+            self.profileView.profilePhoto.image = image
+        }
     }
 
 }

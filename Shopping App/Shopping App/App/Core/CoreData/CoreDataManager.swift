@@ -8,6 +8,15 @@
 import UIKit
 import CoreData
 
+enum CoreDataEntities: String {
+    case userCoreData = "UserCoreData"
+}
+
+enum UserCoreDataAttributes: String {
+    case profilePhoto = "profilePhoto"
+}
+
+
 protocol CoreDataManager { }
 
 extension CoreDataManager {
