@@ -22,7 +22,9 @@ protocol ProductsServiceable {
 ///     - ProductsServiceable
 struct ProductsService: HTTPClient, ProductsServiceable {
     func getSingleProduct(with id: Int, completion: @escaping ((Result<Product, RequestError>) -> Void)) {
-        return sendRequest(endpoint: ProductsEndpoint.product(id: id), responseModel: Product.self, completion: completion)
+        return sendRequest(endpoint: ProductsEndpoint.product(id: id),
+                           responseModel: Product.self,
+                           completion: completion)
     }
 
     func getProducts(completion: @escaping ((Result<Products, RequestError>) -> Void)) {

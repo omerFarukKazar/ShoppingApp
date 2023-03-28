@@ -7,12 +7,23 @@
 
 import UIKit
 import FirebaseCore
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Properties
     var window: UIWindow? // Created window here because it is deleted with the SceneDelegate.swift file.
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "ShoppingAppDataModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     // MARK: - Methods
     // swiftlint:disable:next line_length
@@ -29,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Does the necessarry settings for window to present the viewController properly.
     private func setWindow() {
         let window = UIWindow(frame: UIScreen.main.bounds) // Created a temporary window and defined the bounds.
+//        let viewModel = ProfileViewModel(service: ProductsService())
+//        let viewController = ProfileViewController(viewModel: viewModel)
         let viewModel = AuthViewModel()
         let viewController = AuthViewController(viewModel: viewModel)
         //        let viewModel = CartViewModel()

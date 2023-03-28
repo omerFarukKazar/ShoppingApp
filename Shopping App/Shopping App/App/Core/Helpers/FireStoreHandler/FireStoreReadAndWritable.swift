@@ -18,9 +18,15 @@ enum CartOperation {
     case decrease
 }
 
+enum CollectionPath: String {
+    case users
+}
+
 /// Contains two methods to add and remove product in the specified document which is array  in Firestore
 protocol FirestoreReadAndWritable: FireBaseFireStoreAccessible,
                                    UserDefaultsAccessible {
+
+    func fetchUserData(completion: @escaping ((_ userData: User?, _ error: Error?) -> Void))
 
     func addToFavorites(with productId: Int?,
                         completion: @escaping ((_ error: Error?) -> Void))
@@ -33,6 +39,22 @@ protocol FirestoreReadAndWritable: FireBaseFireStoreAccessible,
 }
 
 extension FirestoreReadAndWritable {
+
+    func fetchUserData(completion: @escaping ((_ userData: User?, _ error: Error?) -> Void)) {
+        guard let uid = uid else { return }
+
+        let users = CollectionPath.users.rawValue
+
+        db.collection(users).document(uid).getDocument { document, error in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                guard let document = document?.data() else { return }
+                let user = User(from: document)
+                completion(user, nil)
+            }
+        }
+    }
     /// Accesses FireStore database with user's uid stored in defaults and **removes** the product's id from
     /// corresponding **array** that is stored in firestore db.
     /// - parameters:
