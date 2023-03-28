@@ -7,12 +7,23 @@
 
 import UIKit
 import FirebaseCore
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Properties
     var window: UIWindow? // Created window here because it is deleted with the SceneDelegate.swift file.
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "ShoppingAppDataModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     // MARK: - Methods
     // swiftlint:disable:next line_length
