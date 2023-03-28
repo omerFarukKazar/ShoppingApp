@@ -31,6 +31,7 @@ class ProfileViewController: SAViewController {
         setCollectionView()
         viewModel.getUserData()
         addTapGestureToProfilePhoto()
+        addLogOutButtonTarget()
     }
 
     // MARK: - Methods
@@ -57,6 +58,21 @@ class ProfileViewController: SAViewController {
         imagePicker.allowsEditing = true
         showAlert(title: "Shopping App Would Like to Access Gallery", message: "Shopping App needs your permission to pick a profile photo from gallery.", cancelButtonTitle: "Don't Allow") { _ in
             self.present(imagePicker, animated: true)
+        }
+    }
+
+    func addLogOutButtonTarget() {
+        profileView.logOutButton.addTarget(nil, action: #selector(logOutButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func logOutButtonTapped() {
+        showAlert(title: "Warning", message: "Are you sure you want to be log out?", cancelButtonTitle: "Cancel") { action in
+            do {
+                try self.auth.signOut()
+                self.tabBarController?.navigationController?.popToRootViewController(animated: true)
+            } catch let signOutError as NSError {
+                self.showError(signOutError)
+            }
         }
     }
 }
