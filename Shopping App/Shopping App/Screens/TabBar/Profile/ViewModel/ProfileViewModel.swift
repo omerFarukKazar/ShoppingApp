@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import CoreData
 
 protocol ProfileViewModelDelegate: AnyObject {
     func didAppendToFavoriteProducts()
     func didErrorOccured(_ error: Error)
     func didFetchUserData()
     func didUploadImage(_ downloadUrl: URL)
+    func didGetUserImageData(_ imageData: Data)
 }
 
 final class ProfileViewModel {
@@ -88,6 +90,28 @@ extension ProfileViewModel: FirebaseStorable {
                 guard let url = url else { return }
                 self.delegate?.didUploadImage(url)
             }
+        }
+    }
+}
+
+// MARK: - Protocol CoreDataManager
+extension ProfileViewModel: CoreDataManager {
+    func getUserImageData(entityName: String, attributeName: String) {
+        getDataFromCoreData(entityName: entityName, attributeName: attributeName) { data, error in
+            if let error = error {
+                self.delegate?.didErrorOccured(error)
+            } else {
+                guard let data = data as? Data else { return }
+                self.delegate?.didGetUserImageData(data)
+            }
+        }
+    }
+
+    func saveImageData(data: Data, entityName: String, attributeName: String) {
+        do {
+            try saveToCoreData(data: data, entityName: entityName, attributeName: attributeName)
+        } catch {
+            self.delegate?.didErrorOccured(error)
         }
     }
 }
