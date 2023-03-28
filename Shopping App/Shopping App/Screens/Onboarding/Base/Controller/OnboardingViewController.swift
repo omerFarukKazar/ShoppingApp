@@ -146,7 +146,11 @@ final class OnboardingViewController: SAViewController {
         if currentPageNumber < pagesArray.count - 1 {
             currentPageNumber += 1
         } else {
-            goToAuth()
+            showAlert(title: "Warning",
+                      message: "If you press OK, you won't be able to see Onboarding Pages again.",
+                      cancelButtonTitle: "Cancel") { _ in
+                self.goToAuth()
+            }
         }
     }
 

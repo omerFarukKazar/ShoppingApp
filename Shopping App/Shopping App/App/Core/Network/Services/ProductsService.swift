@@ -13,6 +13,7 @@ protocol ProductsServiceable {
     /// - parameters:
     ///     - completion: The closure that'll be passed to HTTPClient in order to conform and handle the possible outcomes.
     func getProducts(completion: @escaping ((Result<Products, RequestError>) -> Void))
+    func getSingleProduct(with id: Int, completion: @escaping ((Result<Product, RequestError>) -> Void))
 }
 
 /// Contains a method that sends a request to get products.
@@ -20,6 +21,12 @@ protocol ProductsServiceable {
 ///     - HTTPClient
 ///     - ProductsServiceable
 struct ProductsService: HTTPClient, ProductsServiceable {
+    func getSingleProduct(with id: Int, completion: @escaping ((Result<Product, RequestError>) -> Void)) {
+        return sendRequest(endpoint: ProductsEndpoint.product(id: id),
+                           responseModel: Product.self,
+                           completion: completion)
+    }
+
     func getProducts(completion: @escaping ((Result<Products, RequestError>) -> Void)) {
         return sendRequest(endpoint: ProductsEndpoint.products,
                            responseModel: Products.self,

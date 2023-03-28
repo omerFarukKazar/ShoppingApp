@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 struct ProductDetailViewModel {
     // MARK: - Properties
+    var productsInCart: Products?
     let product: Product
     lazy var favorites: [Int] = []
 
@@ -17,5 +18,6 @@ struct ProductDetailViewModel {
     init(product: Product) {
         self.product = product
     }
-
 }
+
+extension ProductDetailViewModel: FirestoreReadAndWritable { }

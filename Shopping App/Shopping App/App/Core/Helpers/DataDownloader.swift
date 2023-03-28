@@ -8,8 +8,9 @@
 import Foundation
 
 protocol DataDownloader {
-    func downloadImageData(_ urlString: String,
-                           completion: ((_ imageData: Data?, _ error: Error?) -> Void)? )
+    func downloadDataWith(_ urlString: String,
+                           completion: ((_ imageData: Data?,
+                                         _ error: Error?) -> Void)? )
 }
 
 extension DataDownloader {
@@ -18,8 +19,9 @@ extension DataDownloader {
     /// - parameters:
     ///     - urlString: String of the url for the desired image data.
     ///     - completion: Closure to handle data or error values.
-    func downloadImageData(_ urlString: String,
-                           completion: ((_ imageData: Data?, _ error: Error?) -> Void)? ) {
+    func downloadDataWith(_ urlString: String,
+                           completion: ((_ imageData: Data?,
+                                         _ error: Error?) -> Void)? ) {
         guard let url = URL(string: urlString) else {
             completion?(nil, NSError(domain: "fakestore.api", code: 400))
             return

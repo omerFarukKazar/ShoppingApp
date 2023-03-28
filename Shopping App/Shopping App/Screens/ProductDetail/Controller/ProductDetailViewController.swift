@@ -10,7 +10,7 @@ import UIKit
 final class ProductDetailViewController: SAViewController {
 
     // MARK: - Properties
-    let viewModel: ProductDetailViewModel
+    var viewModel: ProductDetailViewModel
     let productDetailView = ProductDetailView()
     var isFavorite = false {
         didSet {
@@ -87,8 +87,10 @@ final class ProductDetailViewController: SAViewController {
 
     /// set and push CartViewController
     @objc private func cartButtonTapped() {
-        let viewModel = CartViewModel()
+        let viewModel = CartViewModel(service: ProductsService())
         let viewController = CartViewController(viewModel: viewModel)
+        viewController.products = self.viewModel.productsInCart
+
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -103,29 +105,20 @@ final class ProductDetailViewController: SAViewController {
     /// Updates database
     /// Updates static 'favorites' property.
     @objc private func favoriteButtonTapped() {
-        let favorites = FirestoreDocumentPath.favorites.rawValue
         if isFavorite {
-            removeProductFrom(documentPath: favorites,
-                              withId: productId) { error in
+            viewModel.removeFromFavorites(with: productId) { error in
                 if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
-                    return
+                    self.showError(error)
                 } else {
-                    if let index = ProductsManager.favorites.firstIndex(of: self.productId!) {
-                        ProductsManager.favorites.remove(at: index)
-                    }
                     self.isFavorite.toggle()
+
                 }
             }
         } else {
-            addProductTo(documentPath: favorites,
-                         withId: productId) { error in
+            viewModel.addToFavorites(with: productId) { error in
                 if let error = error {
-                    self.showAlert(title: "Error", message: error.localizedDescription)
-                    return
+                    self.showError(error)
                 } else {
-                    if ProductsManager.favorites.firstIndex(of: self.productId!) != nil { return }
-                    ProductsManager.favorites.append(self.productId!)
                     self.isFavorite.toggle()
                 }
             }
@@ -143,17 +136,14 @@ final class ProductDetailViewController: SAViewController {
     /// Adds product to "cart" in FireStore
     /// Updates singleton cart property.
     @objc private func addToCartButtonTapped() {
-        addProductTo(documentPath: "cart", withId: viewModel.product.id) { error in
+        viewModel.updateCart(with: .increase, productId: productId) { error in
             if let error = error {
                 self.showAlert(title: "Error",
                                message: error.localizedDescription)
                 return
             } else {
-
                 self.productDetailView.addToCartButton.backgroundColor = UIColor(hex: "539165")
 
-                guard let id = self.productId else { return }
-                ProductsManager.cart[id] = 1
                 self.updateIsCartEmptyProperty()
                 self.showAlert(title: "Product added to Cart")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -164,5 +154,3 @@ final class ProductDetailViewController: SAViewController {
         }
     }
 }
-
-extension ProductDetailViewController: FirestoreReadAndWritable {}

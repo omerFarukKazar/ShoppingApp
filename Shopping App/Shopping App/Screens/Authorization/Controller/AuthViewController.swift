@@ -29,6 +29,7 @@ final class AuthViewController: SAViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.hidesBackButton = true
         viewModel.delegate = self
         switchToLogInView()
 
@@ -40,7 +41,6 @@ final class AuthViewController: SAViewController {
     private func switchToLogInView() {
         addCreateNewAccountButtonTarget()
         addLogInButtonTarget()
-
 
 #if targetEnvironment(simulator)
         logInView.emailTextView.text = "deneme@gmail.com"
@@ -145,7 +145,7 @@ final class AuthViewController: SAViewController {
 // MARK: - AuthDelegate
 extension AuthViewController: AuthDelegate {
     func isSignUpSuccessful() {
-        let tabBarController = UITabBarController()
+        let tabBarController = MainTabBarController()
         navigationController?.pushViewController(tabBarController, animated: true)
     }
 

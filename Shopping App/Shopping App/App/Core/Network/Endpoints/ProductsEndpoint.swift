@@ -9,9 +9,8 @@ import Foundation
 
 /// Different endpoint cases
 enum ProductsEndpoint {
+    case product(id: Int)
     case products
-//    case productDetail(id: Int) // productDetail will be fetched if product cell tapped.
-    // That'll save time, consume less data, decrease server side traffic.
     case categories // To be used in fast search buttons?
     case category // It's possible to limit(Number) and sort(asc|desc) as query parameters.
 }
@@ -20,6 +19,8 @@ enum ProductsEndpoint {
 extension ProductsEndpoint: Endpoint {
     var path: String {
         switch self {
+        case .product(let id):
+            return "/products/\(id)"
         case .products:
             return "/products"
         case .categories:
@@ -35,7 +36,7 @@ extension ProductsEndpoint: Endpoint {
 
     var method: RequestMethod {
         switch self {
-        case .products, .categories, .category:
+        case .product, .products, .categories, .category:
             return .get
         }
     }

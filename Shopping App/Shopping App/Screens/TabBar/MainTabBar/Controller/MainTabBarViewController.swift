@@ -28,8 +28,9 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         setTabBarControllers()
+        
     }
-    
+
     // MARK: - Methods
     /// Instantiates tab bar controllers, adds titles and images.
     /// Adds them into UITabBarController.
@@ -43,7 +44,8 @@ final class MainTabBarController: UITabBarController {
         let searchViewController = SearchViewController()
         let searchNavigationController = UINavigationController(rootViewController: searchViewController)
 
-        let profileViewController = ProfileViewController()
+        let profileViewModel = ProfileViewModel(service: ProductsService())
+        let profileViewController = ProfileViewController(viewModel: profileViewModel)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
 
         // Set titles for each tab.
