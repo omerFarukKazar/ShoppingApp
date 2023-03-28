@@ -64,6 +64,7 @@
 		9DE7781229B94CA400C83604 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */; };
 		9DE900E52993E16E0065416F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E42993E16E0065416F /* OnboardingViewController.swift */; };
 		9DE900E72993E84B0065416F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE900E62993E84B0065416F /* OnboardingView.swift */; };
+		9DEC28FF29D2B3EE004AFA03 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEC28FE29D2B3EE004AFA03 /* CoreDataManager.swift */; };
 		9DED6C3329B7E0C400366D2E /* SATextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED6C3229B7E0C400366D2E /* SATextView.swift */; };
 		9DFDFF6529BCE4FE001EF43E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6429BCE4FE001EF43E /* Endpoint.swift */; };
 		9DFDFF6729BCE7EF001EF43E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */; };
@@ -128,6 +129,7 @@
 		9DE7781129B94CA400C83604 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
 		9DE900E42993E16E0065416F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9DE900E62993E84B0065416F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9DEC28FE29D2B3EE004AFA03 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9DED6C3229B7E0C400366D2E /* SATextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SATextView.swift; sourceTree = "<group>"; };
 		9DFDFF6429BCE4FE001EF43E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		9DFDFF6629BCE7EF001EF43E /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -705,6 +707,7 @@
 			isa = PBXGroup;
 			children = (
 				9DBCBEE629D28DB300DC4B99 /* ShoppingAppDataModel.xcdatamodeld */,
+				9DEC28FE29D2B3EE004AFA03 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				9DFDFF6929BCE814001EF43E /* RequestError.swift in Sources */,
 				9DBCBEE829D28DB300DC4B99 /* ShoppingAppDataModel.xcdatamodeld in Sources */,
 				9D83EB3329B8D3F900B14C81 /* User.swift in Sources */,
+				9DEC28FF29D2B3EE004AFA03 /* CoreDataManager.swift in Sources */,
 				9DFDFF6B29BCE854001EF43E /* HTTPClient.swift in Sources */,
 				9D91440F29A9541B00065776 /* OnboardingViewModel.swift in Sources */,
 				9D91440B29A94BB300065776 /* PageModel.swift in Sources */,
