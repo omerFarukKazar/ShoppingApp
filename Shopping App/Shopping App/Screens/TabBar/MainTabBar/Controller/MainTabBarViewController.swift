@@ -28,6 +28,7 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         setTabBarControllers()
+        
     }
 
     // MARK: - Methods

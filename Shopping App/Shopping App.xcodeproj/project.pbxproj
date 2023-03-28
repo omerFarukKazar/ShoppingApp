@@ -53,6 +53,7 @@
 		9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */; };
 		9DAA3B1429BD694B0068FF2B /* ProductsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */; };
 		9DAA3B1A29BD6C9D0068FF2B /* ProductsScreen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */; };
+		9DBCBEE429D26C4900DC4B99 /* FirebaseAuthAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBCBEE329D26C4900DC4B99 /* FirebaseAuthAccessible.swift */; };
 		9DBF87D929CED55800ADAEAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87D829CED55800ADAEAA /* ProfileView.swift */; };
 		9DBF87DB29CED5EE00ADAEAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */; };
 		9DBF87DD29CED60A00ADAEAA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */; };
@@ -115,6 +116,7 @@
 		9DAA3B0F29BD616B0068FF2B /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
 		9DAA3B1329BD694B0068FF2B /* ProductsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewCell.swift; sourceTree = "<group>"; };
 		9DAA3B1929BD6C9D0068FF2B /* ProductsScreen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ProductsScreen.xcassets; sourceTree = "<group>"; };
+		9DBCBEE329D26C4900DC4B99 /* FirebaseAuthAccessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthAccessible.swift; sourceTree = "<group>"; };
 		9DBF87D829CED55800ADAEAA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		9DBF87DA29CED5EE00ADAEAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		9DBF87DC29CED60A00ADAEAA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				9D5BB6B429C61E5F008CA7CD /* FireStoreAccessible.swift */,
 				9D5BB6AE29C51B4A008CA7CD /* FireStoreReadAndWritable.swift */,
 				9DC2E09F29D1E46300AD5398 /* FirebaseStorable.swift */,
+				9DBCBEE329D26C4900DC4B99 /* FirebaseAuthAccessible.swift */,
 			);
 			path = FireStoreHandler;
 			sourceTree = "<group>";
@@ -898,6 +901,7 @@
 				9D7D6EBF29AFE0EE007A9F47 /* AuthViewModel.swift in Sources */,
 				9DCCF41829953169009FAFEC /* UIView+Extensions.swift in Sources */,
 				9DAA3B1029BD616B0068FF2B /* ProductsViewModel.swift in Sources */,
+				9DBCBEE429D26C4900DC4B99 /* FirebaseAuthAccessible.swift in Sources */,
 				9D12994129B4C2A7006A1E4A /* SignUpView.swift in Sources */,
 				9D9AAA9729B0D5420019F7EE /* SATextViewWithSecureEntry.swift in Sources */,
 				9DFDFF6F29BCF1F4001EF43E /* ProductsEndpoint.swift in Sources */,
