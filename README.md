@@ -167,7 +167,7 @@ extension CoreDataManager {
     }
 
      /**
-      This is a generic function to save given **data** to the CoreData easily.
+      This is a generic method to save given **data** to the CoreData easily.
 
       - parameters:
         - data::  Any kind of data.
