@@ -134,12 +134,88 @@ final class ProductsManager {
 * I didn't want to fetch user's profile picture from server everytime. So i add Core Data to project to be able to store profile picture of user locally if image picking and uploading to firebase firestore is successful.
 
 ```bash
-final class ProductsManager {
-    static let products = ProductsManager()
-    static var cart: [Int: Int] = [:]
-    static var favorites: [Int] = []
+import UIKit
+import CoreData
+
+/**
+ Entities  in Core Data
+ - Each entity has own related Attributes enum.
+ - To find related attributes enum, write < Entity name + Attributes >
+ - _*Example: Attributes for userCoreData is UserCoreDataAttributes*_
+ */
+enum CoreDataEntities: String {
+    case userCoreData = "UserCoreData"
 }
+
+enum UserCoreDataAttributes: String {
+    case profilePhoto
+}
+
+/**
+ Defined to ease CoreData usage and avoid Code Repetition.
+ */
+protocol CoreDataManager { }
+
+extension CoreDataManager {
+    var appDelegate: AppDelegate? {
+        UIApplication.shared.delegate as? AppDelegate
+    }
+
+    var context: NSManagedObjectContext? {
+        guard let appDelegate = appDelegate else { return nil }
+        return appDelegate.persistentContainer.viewContext
+    }
+
+     /**
+      This is a generic function to save given **data** to the CoreData easily.
+
+      - parameters:
+        - data::  Any kind of data.
+        - entityName:: Core Data Entity of the desired attribute
+        - attributeName:: The name of the attribute where the data is wanted to be stored.
+      */
+
+    func saveToCoreData<T>(data: T, entityName: String, attributeName: String) throws {
+        guard let context = context,
+              let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { return }
+        let object = NSManagedObject(entity: entity, insertInto: context)
+        object.setValue(data, forKey: attributeName)
+        do {
+            try context.save()
+        } catch {
+            throw(error)
+        }
+    }
+
+    /**
+     This is a function to get the desired **data** from CoreData easily.
+
+     - parameters:
+       - entityName:: Core Data Entity of the desired attribute
+       - attributeName:: The name of the attribute where the data is wanted to be stored.
+       - completion:: Closure to handle possible Object or Error.
+     */
+    func getDataFromCoreData(entityName: String,
+                             attributeName: String,
+                             completion: ((AnyObject?, Error?) -> Void)) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        do {
+            guard let fetchResults = try context?.fetch(fetchRequest),
+                  let fetchResultsObjects = fetchResults as? [NSManagedObject] else { return }
+
+            for userCoreData in fetchResultsObjects {
+                if let data = userCoreData.value(forKey: attributeName) as? AnyObject {
+                    completion(data, nil)
+                }
+            }
+        } catch {
+            completion(nil, error)
+        }
+    }
+}
+
 ```
+
 
 ## License
 
