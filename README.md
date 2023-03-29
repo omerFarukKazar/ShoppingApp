@@ -116,7 +116,7 @@ That's how, i avoided hard code and also if there are new pages be added or remo
 
 #### Storing Favorites and Cart items
 * I thought about using CoreData to store them but in case of changing to another platform or device user would lost that data.
-* I preffered Singleton and Static methods for cart and favorites list and kept them up to date with FireStore.
+* I preferred Singleton and Static methods for cart and favorites list and kept them up to date with FireStore.
 ```bash
 final class ProductsManager {
     static let products = ProductsManager()
@@ -128,6 +128,18 @@ final class ProductsManager {
 ---
 ---
 ---
+
+### Profile Screen
+
+* I didn't want to fetch user's profile picture from server everytime. So i add Core Data to project to be able to store profile picture of user locally if image picking and uploading to firebase firestore is successful.
+
+```bash
+final class ProductsManager {
+    static let products = ProductsManager()
+    static var cart: [Int: Int] = [:]
+    static var favorites: [Int] = []
+}
+```
 
 ## License
 
