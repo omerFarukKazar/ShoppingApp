@@ -12,6 +12,13 @@ final class SearchViewController: SAViewController {
     // MARK: - Properties
     let viewModel: SearchViewModel
     let searchView = SearchView()
+    var filteredProducts: Products = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.searchView.collectionView.reloadData()
+            }
+        }
+    }
 
     // MARK: - Init
     init(viewModel: SearchViewModel) {
@@ -28,9 +35,11 @@ final class SearchViewController: SAViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view = searchView
-        setCollectionViewDelegateAndDataSource()
         addSearchBar()
         setSearchBarDelegate()
+        setCollectionViewDelegateAndDataSource()
+        viewModel.fetchAllProducts()
+        viewModel.fetchCategories()
     }
 
     // MARK: - Methods
@@ -47,18 +56,64 @@ final class SearchViewController: SAViewController {
     }
 }
 
-extension SearchViewController: UISearchBarDelegate { }
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count >= 3 {
+            guard let products = viewModel.products else { return }
+            let filteredProducts = products.filter({ product in
+
+                let isTitleContains = product.title?.contains(searchText) ?? false
+                let isDescriptionContains = product.description?.contains(searchText) ?? false
+
+                return isTitleContains || isDescriptionContains
+            })
+
+            self.filteredProducts = filteredProducts
+            print("Search text: \(searchText)")
+        }
+    }
+}
 
 extension SearchViewController: UICollectionViewDelegate { }
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        filteredProducts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell else { fatalError("Cell Not Found") }
-        cell.backgroundColor = .cyan
+
+        let product = filteredProducts[indexPath.row]
+        guard let name = product.title,
+              let rating = product.rating,
+              let rate = rating.rate,
+              let count = rating.count,
+              let price = product.price,
+              let imageUrl = product.image,
+              let id = product.id else { fatalError("product couldn't found")}
+
+        viewModel.fetchImageData(imageUrl) { imageData, error in
+            if let error = error {
+                self.showError(error)
+            } else {
+                guard let data = imageData else { return }
+                cell.productImage = UIImage(data: data)
+            }
+        }
+
+        let rgbaValues = viewModel.setRatingViewBackgroundColor(withRespectTo: rate)
+        cell.ratingStackView.backgroundColor = UIColor(red: rgbaValues[0],
+                                                       green: rgbaValues[1],
+                                                       blue: rgbaValues[2],
+                                                       alpha: rgbaValues[3])
+        cell.isFavorite = ProductsManager.favorites.contains(id)
+        cell.titleLabel.text = name
+        cell.rateLabel.text = "\(rate)"
+        cell.countLabel.text = "(\(count))"
+        cell.priceLabel.text = "$ \(price)"
+
+
         return cell
     }
 }
