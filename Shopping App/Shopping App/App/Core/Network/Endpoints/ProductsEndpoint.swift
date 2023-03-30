@@ -12,7 +12,7 @@ enum ProductsEndpoint {
     case product(id: Int)
     case products
     case categories // To be used in fast search buttons?
-    case category // It's possible to limit(Number) and sort(asc|desc) as query parameters.
+    case category(category: String) // It's possible to limit(Number) and sort(asc|desc) as query parameters.
 }
 
 /// Rest of the Endpoint for Products 
@@ -25,8 +25,8 @@ extension ProductsEndpoint: Endpoint {
             return "/products"
         case .categories:
             return "/categories"
-        case .category:
-            return "/products/category"
+        case .category(let category):
+            return "/products/category/\(category)"
         }
     }
 

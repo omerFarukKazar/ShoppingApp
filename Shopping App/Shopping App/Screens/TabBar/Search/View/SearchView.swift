@@ -11,7 +11,7 @@ final class SearchView: UIView {
     // MARK: - UI Elements
     let searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
-        sc.searchBar.placeholder = "Search"
+        sc.searchBar.placeholder = "Type more than 2 characters to begin searching"
         return sc
     }()
 
@@ -26,7 +26,6 @@ final class SearchView: UIView {
 
     var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        cv.backgroundColor = .brown
         return cv
     }()
 
