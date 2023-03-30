@@ -15,6 +15,10 @@ final class SearchView: UIView {
         return sc
     }()
 
+    lazy var segmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: screenWidth * 0.8, height: 32))
+        return sc
+    }()
 
     var collectionViewFlowLayout: UICollectionViewFlowLayout {
         let cvfl = UICollectionViewFlowLayout()
@@ -34,6 +38,7 @@ final class SearchView: UIView {
         super.init(frame: frame)
         setCollectionView()
         setCollectionViewConstraints()
+        setSegmentedControlConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -54,5 +59,9 @@ final class SearchView: UIView {
             collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)])
+    }
+
+    func setSegmentedControlConstraints() {
+        segmentedControl.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
 }

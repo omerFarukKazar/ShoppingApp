@@ -19,6 +19,7 @@ final class SearchViewController: SAViewController {
             }
         }
     }
+    var isSegmentedControlSelected: Bool = false
 
     // MARK: - Init
     init(viewModel: SearchViewModel) {
@@ -35,11 +36,15 @@ final class SearchViewController: SAViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view = searchView
-        addSearchBar()
-        setSearchBarDelegate()
-        setCollectionViewDelegateAndDataSource()
+        viewModel.delegate = self
         viewModel.fetchAllProducts()
         viewModel.fetchCategories()
+
+        addSearchBar()
+        setSearchBarDelegate()
+
+        addSegmentedControlTarget()
+        setCollectionViewDelegateAndDataSource()
     }
 
     // MARK: - Methods
@@ -50,6 +55,32 @@ final class SearchViewController: SAViewController {
     func setSearchBarDelegate() {
         searchView.searchController.searchBar.delegate = self
     }
+
+    func setSegmentedControlSegments() {
+        let categories = viewModel.category
+        categories.forEach({ category in
+            guard let index = categories.firstIndex(of: category) else { return }
+            searchView.segmentedControl.insertSegment(withTitle: category, at: index, animated: false)
+        })
+    }
+
+    func addSegmentedControl() {
+        navigationItem.titleView = searchView.segmentedControl
+    }
+
+    func addSegmentedControlTarget() {
+        searchView.segmentedControl.addTarget(self,
+                                              action: #selector(segmentedControlValueChanged(_:)),
+                                              for: .valueChanged)
+    }
+
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        let selectedSegment = sender.selectedSegmentIndex
+        guard let category = sender.titleForSegment(at: selectedSegment) else { return }
+        viewModel.fetchProductsBy(category: category)
+        isSegmentedControlSelected = true
+    }
+
     func setCollectionViewDelegateAndDataSource() {
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
@@ -58,8 +89,9 @@ final class SearchViewController: SAViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var products = Products()
         if searchText.count >= 3 {
-            guard let products = viewModel.products else { return }
+
             let filteredProducts = products.filter({ product in
 
                 let isTitleContains = product.title?.contains(searchText) ?? false
@@ -74,18 +106,27 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+
 extension SearchViewController: UICollectionViewDelegate { }
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        filteredProducts.count
+        isSegmentedControlSelected ? viewModel.categorizedProducts.count : filteredProducts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell else { fatalError("Cell Not Found") }
 
-        let product = filteredProducts[indexPath.row]
-        guard let name = product.title,
+        var product: Product?
+
+        if isSegmentedControlSelected {
+            product = viewModel.categorizedProducts[indexPath.row]
+        } else {
+            product = filteredProducts[indexPath.row]
+        }
+
+        guard let product = product,
+              let name = product.title,
               let rating = product.rating,
               let rate = rating.rate,
               let count = rating.count,
@@ -113,7 +154,27 @@ extension SearchViewController: UICollectionViewDataSource {
         cell.countLabel.text = "(\(count))"
         cell.priceLabel.text = "$ \(price)"
 
-
         return cell
+    }
+}
+
+extension SearchViewController: SearchViewModelDelegate {
+    func didFetchCategories() {
+        DispatchQueue.main.async {
+            self.setSegmentedControlSegments()
+            self.addSegmentedControl()
+        }
+    }
+
+    func didFetchProductsByCategory() {
+        DispatchQueue.main.async {
+            self.searchView.collectionView.reloadData()
+        }
+    }
+
+    func didErrorOccured(_ error: Error) {
+        DispatchQueue.main.async {
+            self.showError(error)
+        }
     }
 }
