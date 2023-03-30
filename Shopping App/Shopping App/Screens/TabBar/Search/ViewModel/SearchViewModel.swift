@@ -8,14 +8,16 @@
 import Foundation
 
 protocol SearchViewModelDelegate: AnyObject {
+    func didFetchCategories()
     func didFetchProductsByCategory()
     func didErrorOccured(_ error: Error)
 }
 
 final class SearchViewModel {
     // MARK: - Properties
-    var categories: Categories?
+    var category: [String] = []
     var products: Products?
+    var categorizedProducts: Products = []
     let service: ProductsServiceable
     weak var delegate: SearchViewModelDelegate?
 
@@ -42,23 +44,24 @@ final class SearchViewModel {
             case .failure(let error):
                 self.delegate?.didErrorOccured(error)
             case .success(let categories):
-                self.categories = categories
+                self.category = categories
+                self.delegate?.didFetchCategories()
             }
         }
     }
 
     func fetchProductsBy(category: String) {
-        service.getProductsInCategory(category: category) { result in
+        service.getSpecificCategory(category: category) { result in
             switch result {
             case .failure(let error):
                 self.delegate?.didErrorOccured(error)
             case .success(let products):
-                self.products = products
+                self.categorizedProducts = products
                 self.delegate?.didFetchProductsByCategory()
             }
         }
     }
-    
+
     func setRatingViewBackgroundColor(withRespectTo rate: Double) -> [CGFloat] {
         switch rate {
         case 0...2.5:

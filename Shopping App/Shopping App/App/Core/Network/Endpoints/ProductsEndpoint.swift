@@ -24,7 +24,7 @@ extension ProductsEndpoint: Endpoint {
         case .products:
             return "/products"
         case .categories:
-            return "/categories"
+            return "/products/categories"
         case .category(let category):
             return "/products/category/\(category)"
         }

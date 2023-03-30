@@ -15,8 +15,8 @@ protocol ProductsServiceable {
     func getProducts(completion: @escaping ((Result<Products, RequestError>) -> Void))
     func getSingleProduct(with id: Int,
                           completion: @escaping ((Result<Product, RequestError>) -> Void))
-    func getCategories(completion: @escaping ((Result<Categories, RequestError>) -> Void))
-    func getProductsInCategory(category: String,
+    func getCategories(completion: @escaping ((Result<[String], RequestError>) -> Void))
+    func getSpecificCategory(category: String,
                                completion: @escaping ((Result<Products, RequestError>) -> Void))
 }
 
@@ -25,13 +25,13 @@ protocol ProductsServiceable {
 ///     - HTTPClient
 ///     - ProductsServiceable
 struct ProductsService: HTTPClient, ProductsServiceable {
-    func getCategories(completion: @escaping ((Result<Categories, RequestError>) -> Void)) {
+    func getCategories(completion: @escaping ((Result<[String], RequestError>) -> Void)) {
         return sendRequest(endpoint: ProductsEndpoint.categories,
-                           responseModel: Categories.self,
+                           responseModel: [String].self,
                            completion: completion)
     }
 
-    func getProductsInCategory(category: String, completion: @escaping ((Result<Products, RequestError>) -> Void)) {
+    func getSpecificCategory(category: String, completion: @escaping ((Result<Products, RequestError>) -> Void)) {
         return sendRequest(endpoint: ProductsEndpoint.category(category: category),
                            responseModel: Products.self,
                            completion: completion)
