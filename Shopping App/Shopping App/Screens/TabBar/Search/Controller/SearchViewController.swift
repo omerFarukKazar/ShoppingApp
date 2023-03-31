@@ -12,14 +12,7 @@ final class SearchViewController: SAViewController {
     // MARK: - Properties
     let viewModel: SearchViewModel
     let searchView = SearchView()
-    var filteredProducts: Products = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.searchView.collectionView.reloadData()
-            }
-        }
-    }
-    var isSegmentedControlSelected: Bool = false
+    var isSearching: Bool = false
 
     // MARK: - Init
     init(viewModel: SearchViewModel) {
@@ -78,7 +71,6 @@ final class SearchViewController: SAViewController {
         let selectedSegment = sender.selectedSegmentIndex
         guard let category = sender.titleForSegment(at: selectedSegment) else { return }
         viewModel.fetchProductsBy(category: category)
-        isSegmentedControlSelected = true
     }
 
     func setCollectionViewDelegateAndDataSource() {
@@ -89,7 +81,9 @@ final class SearchViewController: SAViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        var products = Products()
+
+        guard let products = viewModel.products else { return }
+
         if searchText.count >= 3 {
 
             let filteredProducts = products.filter({ product in
@@ -100,18 +94,19 @@ extension SearchViewController: UISearchBarDelegate {
                 return isTitleContains || isDescriptionContains
             })
 
-            self.filteredProducts = filteredProducts
-            print("Search text: \(searchText)")
+            viewModel.searchFilteredProducts = filteredProducts
+            isSearching = true
+        } else {
+            isSearching = false
         }
     }
 }
-
 
 extension SearchViewController: UICollectionViewDelegate { }
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        isSegmentedControlSelected ? viewModel.categorizedProducts.count : filteredProducts.count
+        isSearching ? viewModel.searchFilteredProducts.count : viewModel.categorizedProducts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -119,12 +114,9 @@ extension SearchViewController: UICollectionViewDataSource {
 
         var product: Product?
 
-        if isSegmentedControlSelected {
-            product = viewModel.categorizedProducts[indexPath.row]
-        } else {
-            product = filteredProducts[indexPath.row]
-        }
-
+        product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
+        isSearching = false
+        
         guard let product = product,
               let name = product.title,
               let rating = product.rating,
@@ -159,19 +151,19 @@ extension SearchViewController: UICollectionViewDataSource {
 }
 
 extension SearchViewController: SearchViewModelDelegate {
+    func isFilteringProducts() {
+        DispatchQueue.main.async {
+            self.searchView.collectionView.reloadData()
+        }
+    }
+
     func didFetchCategories() {
         DispatchQueue.main.async {
             self.setSegmentedControlSegments()
             self.addSegmentedControl()
         }
     }
-
-    func didFetchProductsByCategory() {
-        DispatchQueue.main.async {
-            self.searchView.collectionView.reloadData()
-        }
-    }
-
+    
     func didErrorOccured(_ error: Error) {
         DispatchQueue.main.async {
             self.showError(error)

@@ -9,17 +9,27 @@ import Foundation
 
 protocol SearchViewModelDelegate: AnyObject {
     func didFetchCategories()
-    func didFetchProductsByCategory()
     func didErrorOccured(_ error: Error)
+    func isFilteringProducts()
 }
 
 final class SearchViewModel {
     // MARK: - Properties
-    var category: [String] = []
-    var products: Products?
-    var categorizedProducts: Products = []
     let service: ProductsServiceable
     weak var delegate: SearchViewModelDelegate?
+
+    var category: [String] = []
+    var products: Products?
+    var searchFilteredProducts: Products = [] {
+        didSet {
+            self.delegate?.isFilteringProducts()
+        }
+    }
+    var categorizedProducts: Products = [] {
+        didSet {
+            self.delegate?.isFilteringProducts()
+        }
+    }
 
     // MARK: - Init
     init(service: ProductsServiceable) {
@@ -57,7 +67,6 @@ final class SearchViewModel {
                 self.delegate?.didErrorOccured(error)
             case .success(let products):
                 self.categorizedProducts = products
-                self.delegate?.didFetchProductsByCategory()
             }
         }
     }
