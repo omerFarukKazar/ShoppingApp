@@ -11,10 +11,17 @@ enum CartIcons: String {
     case trash
 }
 
+protocol CellDelegate: AnyObject {
+    func didStepperValueChanged(_ operation: CartOperation,
+                                _ value: Int,
+                                _ indexPath: IndexPath)
+}
+
 final class CartTableViewCell: UITableViewCell {
     // MARK: Properties
     var didStepperValueChanged: ((CartOperation, Int) -> Void)?
-
+    weak var delegate: CellDelegate?
+    var indexPath: IndexPath = []
     var quantity: Int? {
         didSet {
             DispatchQueue.main.async {
@@ -91,16 +98,17 @@ final class CartTableViewCell: UITableViewCell {
     @objc func stepperValueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         guard let previousValue = quantity else { return }
+        self.quantity = value
 
         if previousValue > value {
-            didStepperValueChanged?(.decrease, value)
+            delegate?.didStepperValueChanged(.decrease, value, indexPath)
         } else if previousValue < value {
-            didStepperValueChanged?(.increase, value)
+            delegate?.didStepperValueChanged(.increase, value, indexPath)
         }
     }
 
     private func setProductImageViewConstraints() {
-        self.addSubview(productImageView)
+        contentView.addSubview(productImageView)
         productImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
             [productImageView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
@@ -111,7 +119,7 @@ final class CartTableViewCell: UITableViewCell {
     }
 
     private func setRemoveButtonConstraints() {
-        self.addSubview(removeButton)
+        contentView.addSubview(removeButton)
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
             [removeButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
@@ -122,7 +130,7 @@ final class CartTableViewCell: UITableViewCell {
     }
 
     private func setProductNameLabelConstraints() {
-        self.addSubview(productNameLabel)
+        contentView.addSubview(productNameLabel)
         productNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
             [productNameLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16.0),
