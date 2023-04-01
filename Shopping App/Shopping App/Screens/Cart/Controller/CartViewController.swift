@@ -58,17 +58,21 @@ extension CartViewController: UITableViewDataSource {
         cell.delegate = self
         let product = viewModel.productsInCart[indexPath.row]
         guard let imageUrl = product.image else { return cell }
-        
+
         // Download and assign product image
-        var productImage: UIImage?
+        // TODO: Product images could be cached.
         viewModel.downloadImageWith(imageUrl) { data, error in
             if let error = error {
                 self.showError(error)
             }
             guard let data = data else { return }
-            productImage = UIImage(data: data)
+            let productImage = UIImage(data: data)
+            DispatchQueue.main.async {
+                cell.productImageView.image = productImage
+            }
         }
- 
+
+        // pass related product's data
         guard let id = product.id,
               let quantity = ProductsManager.cart[id],
               let price = product.price,
@@ -78,7 +82,6 @@ extension CartViewController: UITableViewDataSource {
             cell.stepper.value = Double(quantity)
             cell.productPriceLabel.text = "\(price * Double(quantity))"
             cell.productNameLabel.text = "\(title)"
-            cell.productImageView.image = productImage
             cell.indexPath = indexPath
         }
 
@@ -106,24 +109,22 @@ extension CartViewController: CartViewModelDelegate {
 extension CartViewController: CellDelegate {
     func didStepperValueChanged(_ operation: CartOperation, _ value: Int, _ indexPath: IndexPath) {
         guard let cell = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+
+        // cell's product
         let product = viewModel.productsInCart[indexPath.row]
         guard let id = product.id else { return }
 
         self.viewModel.updateCart(with: operation, productId: id) { [weak self] error in
             guard let self = self else { return }
-
             if let error = error {
                 self.showError(error)
                 return
             } else {
                 if value == 0 {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    self.viewModel.productsInCart.remove(at: indexPath.row)
+                    self.tableView.reloadData()
                 } else {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
             }
         }

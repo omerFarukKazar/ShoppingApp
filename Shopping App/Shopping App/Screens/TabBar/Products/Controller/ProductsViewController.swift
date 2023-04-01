@@ -129,8 +129,9 @@ extension ProductsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Instantiate View Controller
         guard let product = viewModel.productFor(indexPath) else { return }
-        var viewModel = ProductDetailViewModel(product: product)
+        var viewModel = ProductDetailViewModel(product: product, service: ProductsService())
         viewModel.productsInCart = productsInCart()
+        ProductsManager.productsInCart = productsInCart() ?? []
 
         let viewController = ProductDetailViewController(viewModel: viewModel)
 

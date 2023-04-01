@@ -68,6 +68,8 @@ extension FirestoreReadAndWritable {
                     productId: Int?,
                     completion: @escaping ((_ error: Error?) -> Void)) {
 
+        let cartBackup = ProductsManager.cart
+
         guard let id = productId,
               let uid = uid else { return }
 
@@ -93,13 +95,15 @@ extension FirestoreReadAndWritable {
         do {
             jsonData = try JSONEncoder().encode(ProductsManager.cart)
         } catch {
-            print("Error converting dictionary to JSON: \(error.localizedDescription)")
+            ProductsManager.cart = cartBackup
+            completion(error)
         }
 
         let documentPath = FirestoreDocumentPath.cart.rawValue
 
         db.collection("users").document(uid).updateData([documentPath: jsonData]) { error in
             if let error = error {
+                ProductsManager.cart = cartBackup
                 completion(error)
                 return
             } else {
