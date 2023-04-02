@@ -117,13 +117,10 @@ extension CartViewController: CellDelegate {
                 return
             } else {
                 if value == 0 {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    self.viewModel.productsInCart.remove(at: indexPath.row)
+                    self.tableView.reloadData()
                 } else {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
             }
         }
