@@ -61,7 +61,6 @@ Simulator: https://youtu.be/AntzcKpYTDg
 
 * Since i need to use more than one pages with the same components, i create the OnboardingPageView to _**avoid code repetition.**_
 * OnboardingPageView contains the UI Elements in the blue frames.
-* By seperating Pages and OnboardingViewController i conform _**Single Responsibility and Interface Segregation Principles.**_
 
 ---
 ---
@@ -117,7 +116,7 @@ That's how, i avoided hard code and also if there are new pages be added or remo
 
 #### Storing Favorites and Cart items
 * I thought about using CoreData to store them but in case of changing to another platform or device user would lost that data.
-* I preffered Singleton and Static methods for cart and favorites list and kept them up to date with FireStore.
+* I preferred Singleton and Static methods for cart and favorites list and kept them up to date with FireStore.
 ```bash
 final class ProductsManager {
     static let products = ProductsManager()
@@ -125,11 +124,98 @@ final class ProductsManager {
     static var favorites: [Int] = []
 }
 ```
-##### TODO: It'll be better to use CoreData and Firestore together and avoid Singleton and static values as much as possible.
 
 ---
 ---
 ---
+
+### Profile Screen
+
+* I didn't want to fetch user's profile picture from server everytime. So i add Core Data to project to be able to store profile picture of user locally if image picking and uploading to firebase firestore is successful.
+
+```bash
+import UIKit
+import CoreData
+
+/**
+ Entities  in Core Data
+ - Each entity has own related Attributes enum.
+ - To find related attributes enum, write < Entity name + Attributes >
+ - _*Example: Attributes for userCoreData is UserCoreDataAttributes*_
+ */
+enum CoreDataEntities: String {
+    case userCoreData = "UserCoreData"
+}
+
+enum UserCoreDataAttributes: String {
+    case profilePhoto
+}
+
+/**
+ Defined to ease CoreData usage and avoid Code Repetition.
+ */
+protocol CoreDataManager { }
+
+extension CoreDataManager {
+    var appDelegate: AppDelegate? {
+        UIApplication.shared.delegate as? AppDelegate
+    }
+
+    var context: NSManagedObjectContext? {
+        guard let appDelegate = appDelegate else { return nil }
+        return appDelegate.persistentContainer.viewContext
+    }
+
+     /**
+      This is a generic method to save given **data** to the CoreData easily.
+
+      - parameters:
+        - data::  Any kind of data.
+        - entityName:: Core Data Entity of the desired attribute
+        - attributeName:: The name of the attribute where the data is wanted to be stored.
+      */
+
+    func saveToCoreData<T>(data: T, entityName: String, attributeName: String) throws {
+        guard let context = context,
+              let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { return }
+        let object = NSManagedObject(entity: entity, insertInto: context)
+        object.setValue(data, forKey: attributeName)
+        do {
+            try context.save()
+        } catch {
+            throw(error)
+        }
+    }
+
+    /**
+     This is a function to get the desired **data** from CoreData easily.
+
+     - parameters:
+       - entityName:: Core Data Entity of the desired attribute
+       - attributeName:: The name of the attribute where the data is wanted to be stored.
+       - completion:: Closure to handle possible Object or Error.
+     */
+    func getDataFromCoreData(entityName: String,
+                             attributeName: String,
+                             completion: ((AnyObject?, Error?) -> Void)) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        do {
+            guard let fetchResults = try context?.fetch(fetchRequest),
+                  let fetchResultsObjects = fetchResults as? [NSManagedObject] else { return }
+
+            for userCoreData in fetchResultsObjects {
+                if let data = userCoreData.value(forKey: attributeName) as? AnyObject {
+                    completion(data, nil)
+                }
+            }
+        } catch {
+            completion(nil, error)
+        }
+    }
+}
+
+```
+
 
 ## License
 
