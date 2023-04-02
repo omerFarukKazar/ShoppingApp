@@ -89,7 +89,7 @@ final class ProductDetailViewController: SAViewController {
     @objc private func cartButtonTapped() {
         let viewModel = CartViewModel(service: ProductsService())
         let viewController = CartViewController(viewModel: viewModel)
-
+        viewModel.productsInCart = self.viewModel.productsInCart ?? []
 
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -97,8 +97,8 @@ final class ProductDetailViewController: SAViewController {
     // MARK: FavoriteButtonFunctionality
     private func addFavoriteButtonTarget() {
         productDetailView.favoriteButton.addTarget(nil,
-                                             action: #selector(favoriteButtonTapped),
-                                             for: .touchUpInside)
+                                                   action: #selector(favoriteButtonTapped),
+                                                   for: .touchUpInside)
     }
 
     /// Checks the isFavorite property and oggles the favorite state of product.
@@ -128,8 +128,8 @@ final class ProductDetailViewController: SAViewController {
     // MARK: AddToCartButtonFunctionality
     private func addCartButtonTarget() {
         productDetailView.addToCartButton.addTarget(nil,
-                                              action: #selector(addToCartButtonTapped),
-                                              for: .touchUpInside)
+                                                    action: #selector(addToCartButtonTapped),
+                                                    for: .touchUpInside)
 
     }
 
@@ -142,8 +142,24 @@ final class ProductDetailViewController: SAViewController {
                                message: error.localizedDescription)
                 return
             } else {
-                self.productDetailView.addToCartButton.backgroundColor = UIColor(hex: "539165")
+                // Search if productsInCart is already contains the product
+                guard let productId = self.productId else { return }
+                if ((self.viewModel.productsInCart?.contains( where: { product in
+                    product.id == productId })) == false) {
 
+                    // get the product's data
+                    self.viewModel.service?.getSingleProduct(with: productId, completion: { result in
+                        switch result {
+                        case .success(let product):
+                            self.viewModel.productsInCart?.append(product)
+                        case . failure(let error):
+                            self.showError(error)
+                        }
+                    })
+                }
+
+                // Animate Button
+                self.productDetailView.addToCartButton.backgroundColor = UIColor(hex: "539165")
                 self.updateIsCartEmptyProperty()
                 self.showAlert(title: "Product added to Cart")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
