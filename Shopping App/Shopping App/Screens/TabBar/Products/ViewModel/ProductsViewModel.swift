@@ -25,7 +25,6 @@ final class ProductsViewModel: FireBaseFireStoreAccessible,
             delegate?.didFetchProducts()
         }
     }
-//    lazy var favorites: [Int] = []
 
     // MARK: - Init
     init(service: ProductsServiceable) {

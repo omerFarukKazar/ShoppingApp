@@ -79,7 +79,7 @@ final class ProductsViewController: SAViewController {
         // I prefer passing products instead of sending request and downloading them again.
         // Decrease server traffic.
         // Filter for products already added to Cart and pass them to Cart Screen
-        viewController.products = productsInCart()
+        viewModel.productsInCart = productsInCart()!
 
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -197,7 +197,8 @@ extension ProductsViewController: UICollectionViewDataSource {
 
         // When favorite button is tapped, this closure will work for that cell.
         // Adds or removes product according to the state of cell's isFavorite property.
-        cell.didTapFavoriteButton = {
+        cell.didTapFavoriteButton = { [weak self] in
+            guard let self else { return }
             if cell.isFavorite {
                 self.viewModel.removeFromFavorites(with: id) { error in
                     if let error = error {

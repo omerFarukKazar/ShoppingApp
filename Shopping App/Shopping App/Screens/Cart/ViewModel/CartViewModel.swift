@@ -10,16 +10,23 @@ import Foundation
 protocol CartViewModelDelegate: AnyObject {
     func didErrorOccurred(_ error: Error)
     func didFetchCart()
+    func didFetchProducts()
 }
 
-struct CartViewModel {
+final class CartViewModel {
     // MARK: - Properties
     weak var delegate: CartViewModelDelegate?
     var service: ProductsService?
+    var productsInCart: Products = []
 
     // MARK: - Init
     init(service: ProductsServiceable) {
         self.service = service as? ProductsService
+//        fetchProductsInCart()
+    }
+
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) is not implemented.")
     }
 }
 
@@ -32,6 +39,20 @@ extension CartViewModel: FirestoreReadAndWritable {
             } else {
                 self.delegate?.didFetchCart()
             }
+        }
+    }
+
+    func fetchProductsInCart() {
+        ProductsManager.cart.keys.forEach { (getSingleProduct(with: $0, completion: { product, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                guard let product = product else { return }
+                self.productsInCart.append(product)
+                self.delegate?.didFetchProducts()
+            }
+        }))
         }
     }
 }

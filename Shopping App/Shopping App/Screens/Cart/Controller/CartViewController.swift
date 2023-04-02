@@ -12,7 +12,6 @@ final class CartViewController: SAViewController {
     // MARK: - Properties
     private var viewModel: CartViewModel
     private var tableView: UITableView!
-    var products: Products?
 
     // MARK: - Init
     init(viewModel: CartViewModel) {
@@ -50,15 +49,15 @@ extension CartViewController: UITableViewDelegate { }
 
 extension CartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ProductsManager.cart.count
+        viewModel.productsInCart.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell
-        guard let cell = cell else { fatalError("Cell not found!") }
-        
-        guard let product = products?[indexPath.row],
-              let imageUrl = product.image else { return cell }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell else { fatalError("Cell not found!") }
+
+        cell.delegate = self
+        let product = viewModel.productsInCart[indexPath.row]
+        guard let imageUrl = product.image else { return cell }
         
         // Download and assign product image
         var productImage: UIImage?
@@ -69,7 +68,7 @@ extension CartViewController: UITableViewDataSource {
             guard let data = data else { return }
             productImage = UIImage(data: data)
         }
-        
+ 
         guard let id = product.id,
               let quantity = ProductsManager.cart[id],
               let price = product.price,
@@ -80,30 +79,9 @@ extension CartViewController: UITableViewDataSource {
             cell.productPriceLabel.text = "\(price * Double(quantity))"
             cell.productNameLabel.text = "\(title)"
             cell.productImageView.image = productImage
+            cell.indexPath = indexPath
         }
-        
-        
-        cell.didStepperValueChanged = { operation, value in
-            self.viewModel.updateCart(with: operation, productId: id) { error in
-                if let error = error {
-                    self.showError(error)
-                    return
-                } else {
-                    if value == 0 {
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                            cell.quantity = value
-                        }
-                    }
-                }
-            }
-            print(ProductsManager.cart)
-        }
-        
+
         cell.backgroundColor = .lightGray
         return cell
     }
@@ -117,4 +95,38 @@ extension CartViewController: CartViewModelDelegate {
     func didFetchCart() {
         print("fetch")
     }
+
+    func didFetchProducts() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension CartViewController: CellDelegate {
+    func didStepperValueChanged(_ operation: CartOperation, _ value: Int, _ indexPath: IndexPath) {
+        guard let cell = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+        let product = viewModel.productsInCart[indexPath.row]
+        guard let id = product.id else { return }
+
+        self.viewModel.updateCart(with: operation, productId: id) { [weak self] error in
+            guard let self = self else { return }
+
+            if let error = error {
+                self.showError(error)
+                return
+            } else {
+                if value == 0 {
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            }
+        }
+    }
+
 }
