@@ -16,6 +16,7 @@ enum FirestoreDocumentPath: String {
 enum CartOperation {
     case increase
     case decrease
+    case remove
 }
 
 enum CollectionPath: String {
@@ -88,6 +89,10 @@ extension FirestoreReadAndWritable {
                 } else {
                     ProductsManager.cart.updateValue(count - 1, forKey: id)
                 }
+            }
+        case .remove:
+            if let count = ProductsManager.cart[id] {
+                ProductsManager.cart.removeValue(forKey: id)
             }
         }
 

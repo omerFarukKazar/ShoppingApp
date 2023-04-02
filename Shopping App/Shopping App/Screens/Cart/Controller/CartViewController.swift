@@ -121,11 +121,27 @@ extension CartViewController: CellDelegate {
                 return
             } else {
                 if value == 0 {
-                    self.viewModel.productsInCart.remove(at: indexPath.row)
+//                    self.viewModel.productsInCart.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 } else {
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
+            }
+        }
+    }
+
+    func didTapRemoveButton(_ indexPath: IndexPath) {
+        guard let cell = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+        let product = viewModel.productsInCart[indexPath.row]
+        guard let id = product.id else { return }
+
+        viewModel.updateCart(with: .remove, productId: id) { [weak self] error in
+            guard let self else { return }
+            if let error = error {
+                self.showError(error)
+            } else {
+                self.viewModel.productsInCart.remove(at: indexPath.row)
+                self.tableView.reloadData()
             }
         }
     }

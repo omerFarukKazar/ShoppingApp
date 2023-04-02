@@ -131,7 +131,7 @@ extension ProductsViewController: UICollectionViewDelegate {
         guard let product = viewModel.productFor(indexPath) else { return }
         var viewModel = ProductDetailViewModel(product: product, service: ProductsService())
         viewModel.productsInCart = productsInCart()
-        ProductsManager.productsInCart = productsInCart() ?? []
+//        ProductsManager.productsInCart = productsInCart() ?? []
 
         let viewController = ProductDetailViewController(viewModel: viewModel)
 

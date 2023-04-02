@@ -15,6 +15,7 @@ protocol CellDelegate: AnyObject {
     func didStepperValueChanged(_ operation: CartOperation,
                                 _ value: Int,
                                 _ indexPath: IndexPath)
+    func didTapRemoveButton(_ indexPath: IndexPath)
 }
 
 final class CartTableViewCell: UITableViewCell {
@@ -62,6 +63,7 @@ final class CartTableViewCell: UITableViewCell {
     private let removeButton: UIButton = {
         let removeButton = UIButton()
         removeButton.setBackgroundImage(UIImage(named: CartIcons.trash.rawValue), for: .normal)
+        removeButton.addTarget(nil, action: #selector(removeProduct), for: .touchUpInside)
         return removeButton
     }()
 
@@ -94,6 +96,10 @@ final class CartTableViewCell: UITableViewCell {
     }
 
     // MARK: - Methods
+
+    @objc func removeProduct() {
+        delegate?.didTapRemoveButton(indexPath)
+    }
 
     @objc func stepperValueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
