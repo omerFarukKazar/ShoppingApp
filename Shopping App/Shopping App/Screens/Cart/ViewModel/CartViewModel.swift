@@ -9,7 +9,6 @@ import Foundation
 
 protocol CartViewModelDelegate: AnyObject {
     func didErrorOccurred(_ error: Error)
-    func didFetchCart()
     func didFetchProducts()
 }
 
@@ -36,12 +35,11 @@ extension CartViewModel: FirestoreReadAndWritable {
         ProductsManager().fetchCart { error in
             if let error = error {
                 self.delegate?.didErrorOccurred(error)
-            } else {
-                self.delegate?.didFetchCart()
             }
         }
     }
 
+    /// Fetch each product in cart and append them to **productsInCart** variable
     func fetchProductsInCart() {
         ProductsManager.cart.keys.forEach { (getSingleProduct(with: $0, completion: { product, error in
             if let error = error {

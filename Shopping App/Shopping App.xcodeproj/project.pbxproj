@@ -301,7 +301,6 @@
 		9D5BB69529C3F800008CA7CD /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				9D5BB69B29C3F820008CA7CD /* Model */,
 				9D5BB69A29C3F81E008CA7CD /* View */,
 				9D5BB69929C3F816008CA7CD /* Controller */,
 				9D5BB69829C3F811008CA7CD /* ViewModel */,
@@ -331,13 +330,6 @@
 				9D5BB69E29C3FABF008CA7CD /* CartTableViewCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		9D5BB69B29C3F820008CA7CD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9D6A28372992829E002454ED = {
@@ -626,33 +618,9 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		9D9E132729BA036C00B10C62 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		9D9E132829BA037800B10C62 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		9D9E132929BA037B00B10C62 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		9D9E132A29BA039000B10C62 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				9D9E132929BA037B00B10C62 /* Model */,
-				9D9E132829BA037800B10C62 /* View */,
-				9D9E132729BA036C00B10C62 /* ViewModel */,
 				9D9E132629BA036700B10C62 /* Controller */,
 			);
 			path = MainTabBar;

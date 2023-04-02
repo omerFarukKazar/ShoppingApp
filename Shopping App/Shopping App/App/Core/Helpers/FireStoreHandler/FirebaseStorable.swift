@@ -13,9 +13,19 @@ protocol FirebaseStorable: UserDefaultsAccessible,
                            FireBaseFireStoreAccessible {}
 
 extension FirebaseStorable {
+    /**
+     Uploads the given image data to FirebaseStorage.
+
+     - parameters:
+        - imageData:: Data of the image.
+        - completion:: If upload operation is successful, returns url which is the URL of uploaded image on Firebase. Else returns error.
+
+     # Notes: #
+     1.  uploadTask returns metadata and downloadURL, these parameters can be used in the future in case of need.
+     */
     func upload(imageData: Data,
                 completion: @escaping ((_ url: URL?,
-                                            _ error: Error?) -> Void)) {
+                                        _ error: Error?) -> Void)) {
         let storageRef = Storage.storage().reference(withPath: "profilePhotos")
         let data = imageData
 

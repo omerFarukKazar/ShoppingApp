@@ -45,6 +45,19 @@ final class CartViewController: SAViewController {
 
 }
 
+extension CartViewController: CartViewModelDelegate {
+    func didErrorOccurred(_ error: Error) {
+        showError(error)
+    }
+    
+    func didFetchProducts() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+
 extension CartViewController: UITableViewDelegate { }
 
 extension CartViewController: UITableViewDataSource {
@@ -56,7 +69,7 @@ extension CartViewController: UITableViewDataSource {
         // swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell else { fatalError("Cell not found!") }
 
-        cell.delegate = self
+        cell.delegate = self // to handle button taps in cell.
         let product = viewModel.productsInCart[indexPath.row]
         guard let imageUrl = product.image else { return cell }
 
@@ -91,30 +104,14 @@ extension CartViewController: UITableViewDataSource {
     }
 }
 
-extension CartViewController: CartViewModelDelegate {
-    func didErrorOccurred(_ error: Error) {
-        showError(error)
-    }
-
-    func didFetchCart() {
-        print("fetch")
-    }
-
-    func didFetchProducts() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-}
-
 extension CartViewController: CellDelegate {
     func didStepperValueChanged(_ operation: CartOperation, _ value: Int, _ indexPath: IndexPath) {
-        guard let _ = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
 
         // cell's product
         let product = viewModel.productsInCart[indexPath.row]
         guard let id = product.id else { return }
 
+        // Update cart with given parameters and reload tableView.
         self.viewModel.updateCart(with: operation, productId: id) { [weak self] error in
             guard let self = self else { return }
             if let error = error {
@@ -132,10 +129,11 @@ extension CartViewController: CellDelegate {
     }
 
     func didTapRemoveButton(_ indexPath: IndexPath) {
-        guard let _ = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+        // get related product's id
         let product = viewModel.productsInCart[indexPath.row]
         guard let id = product.id else { return }
-
+        
+        // Remove the product with given id from firebase and reload tableView.
         viewModel.updateCart(with: .remove, productId: id) { [weak self] error in
             guard let self else { return }
             if let error = error {
@@ -146,5 +144,4 @@ extension CartViewController: CellDelegate {
             }
         }
     }
-
 }

@@ -116,10 +116,16 @@ final class ProductsViewController: SAViewController {
         viewModel.delegate = self
     }
 
+    /**
+     Filters product by their id's and if condition is matched, appends that to return value.
+
+     - returns: Products?
+     */
     private func productsInCart() -> Products? {
-        let cartDictionaryKeys = Array(ProductsManager.cart.keys)
-        let cartIdArray = cartDictionaryKeys.sorted()
-        let filteredProducts = self.viewModel.products.filter { cartIdArray.contains($0.id!)
+        let cartDictionaryKeys = Array(ProductsManager.cart.keys) // transform keys into array
+        let cartIdArray = cartDictionaryKeys.sorted() // sort them
+        let filteredProducts = self.viewModel.products.filter {
+            cartIdArray.contains($0.id!) // If array contains that product, add it.
         }
         return filteredProducts
     }
