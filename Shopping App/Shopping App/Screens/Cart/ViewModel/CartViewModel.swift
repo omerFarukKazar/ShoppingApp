@@ -22,7 +22,7 @@ final class CartViewModel {
     // MARK: - Init
     init(service: ProductsServiceable) {
         self.service = service as? ProductsService
-        fetchProductsInCart()
+//        fetchProductsInCart()
     }
 
     required init(coder: NSCoder) {
