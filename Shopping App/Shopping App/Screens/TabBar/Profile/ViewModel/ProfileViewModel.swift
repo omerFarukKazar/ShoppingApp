@@ -9,7 +9,6 @@ import Foundation
 import CoreData
 
 protocol ProfileViewModelDelegate: AnyObject {
-    func didAppendToFavoriteProducts()
     func didErrorOccured(_ error: Error)
     func didFetchUserData()
     func didUploadImage(_ downloadUrl: URL)
