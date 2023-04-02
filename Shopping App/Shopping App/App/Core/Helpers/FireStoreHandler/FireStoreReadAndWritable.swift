@@ -40,7 +40,12 @@ protocol FirestoreReadAndWritable: FireBaseFireStoreAccessible,
 }
 
 extension FirestoreReadAndWritable {
+    /**
+     Download's user's data from Firebase and returns that data with completion.
 
+     - parameters:
+        - completion:: Closure that holds User? or Error? with respect to the response from firebase.
+     */
     func fetchUserData(completion: @escaping ((_ userData: User?, _ error: Error?) -> Void)) {
         guard let uid = uid else { return }
 
@@ -91,7 +96,7 @@ extension FirestoreReadAndWritable {
                 }
             }
         case .remove:
-            if let count = ProductsManager.cart[id] {
+            if let _ = ProductsManager.cart[id] {
                 ProductsManager.cart.removeValue(forKey: id)
             }
         }
@@ -144,6 +149,13 @@ extension FirestoreReadAndWritable {
         }
     }
 
+    /**
+     Removes the product with given id from FireBase favorites array.
+
+     - parameters:
+        - productId:: id of the product that'll be removed from favorites.
+        - completion:: Completion handler closure. Passes error if any error occurs.
+     */
     func removeFromFavorites(with productId: Int?, completion: @escaping ((_ error: Error?) -> Void)) {
 
         guard let id = productId,

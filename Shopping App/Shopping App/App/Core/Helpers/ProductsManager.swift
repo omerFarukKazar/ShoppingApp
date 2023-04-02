@@ -16,6 +16,12 @@ final class ProductsManager {
 extension ProductsManager: FireBaseFireStoreAccessible,
                            UserDefaultsAccessible {
 
+    /**
+     Downloads the user data from Firebase, gets cart data, decodes it as static *cart* variable and sets it to the local static cart variable.
+
+     - parameters:
+        - completion: To handle possible error.
+     */
     func fetchCart(completion: @escaping ((_ error: Error?) -> Void) ) {
         guard let uid = uid else { return }
         db.collection("users").document(uid).getDocument { snapshot, error in
@@ -36,6 +42,12 @@ extension ProductsManager: FireBaseFireStoreAccessible,
         }
     }
 
+    /**
+     Downloads the user data from Firebase, gets favorites data, sets that array to local *favorites* variable.
+
+     - parameters:
+        - completion: To handle possible error.
+     */
     func fetchFavoritesFromDB(completion: @escaping ((_ error: Error?) -> Void)) {
         guard let uid = uid else { return }
         db.collection("users").document(uid).getDocument { snapshot, error in

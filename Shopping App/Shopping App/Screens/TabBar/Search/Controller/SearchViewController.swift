@@ -10,9 +10,9 @@ import UIKit
 final class SearchViewController: SAViewController {
 
     // MARK: - Properties
-    let viewModel: SearchViewModel
-    let searchView = SearchView()
-    var isSearching: Bool = false
+    private let viewModel: SearchViewModel
+    private let searchView = SearchView()
+    private var isSearching: Bool = false
 
     // MARK: - Init
     init(viewModel: SearchViewModel) {
@@ -29,27 +29,26 @@ final class SearchViewController: SAViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view = searchView
+
         viewModel.delegate = self
         viewModel.fetchAllProducts()
         viewModel.fetchCategories()
 
+        addSegmentedControlTarget()
+
         addSearchBar()
         setSearchBarDelegate()
 
-        addSegmentedControlTarget()
         setCollectionViewDelegateAndDataSource()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+
     // MARK: - Methods
-    func addSearchBar() {
-        navigationItem.searchController = searchView.searchController
-    }
 
-    func setSearchBarDelegate() {
-        searchView.searchController.searchBar.delegate = self
-    }
-
-    func setSegmentedControlSegments() {
+    private func setSegmentedControlSegments() {
         let categories = viewModel.category
         categories.forEach({ category in
             guard let index = categories.firstIndex(of: category) else { return }
@@ -57,35 +56,46 @@ final class SearchViewController: SAViewController {
         })
     }
 
-    func addSegmentedControl() {
+    private func addSegmentedControl() {
         navigationItem.titleView = searchView.segmentedControl
     }
 
-    func addSegmentedControlTarget() {
+    private func addSegmentedControlTarget() {
         searchView.segmentedControl.addTarget(self,
                                               action: #selector(segmentedControlValueChanged(_:)),
                                               for: .valueChanged)
     }
 
-    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         let selectedSegment = sender.selectedSegmentIndex
         guard let category = sender.titleForSegment(at: selectedSegment) else { return }
         viewModel.fetchProductsBy(category: category)
     }
 
-    func setCollectionViewDelegateAndDataSource() {
+    private func addSearchBar() {
+        navigationItem.searchController = searchView.searchController
+    }
+
+    private func setSearchBarDelegate() {
+        searchView.searchController.searchBar.delegate = self
+    }
+
+    private func setCollectionViewDelegateAndDataSource() {
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
     }
 }
 
+// MARK: - Extensions
+// MARK: UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         guard let products = viewModel.products else { return }
 
-        if searchText.count >= 3 {
+        if searchText.count >= 3 { // Begin filtering
 
+            // Filters products with the given conditions.
             let filteredProducts = products.filter({ product in
 
                 let isTitleContains = product.title?.contains(searchText) ?? false
@@ -102,21 +112,35 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate { }
+// MARK: UICollectionViewDelegate
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // swiftlint:disable:next line_length
+        let product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
 
+        let service = ProductsService()
+        let viewModel = ProductDetailViewModel(product: product, service: service)
+        let viewController = ProductDetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+// MARK: UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         isSearching ? viewModel.searchFilteredProducts.count : viewModel.categorizedProducts.count
     }
-
+    // swiftlint:disable:next function_body_length
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // swiftlint:disable:next line_length
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell else { fatalError("Cell Not Found") }
 
         var product: Product?
-
+        // swiftlint:disable:next line_length
         product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
         isSearching = false
-        
+
+        // unwrap optionals
         guard let product = product,
               let name = product.title,
               let rating = product.rating,
@@ -126,6 +150,7 @@ extension SearchViewController: UICollectionViewDataSource {
               let imageUrl = product.image,
               let id = product.id else { fatalError("product couldn't found")}
 
+        // download and assign product's image
         viewModel.fetchImageData(imageUrl) { imageData, error in
             if let error = error {
                 self.showError(error)
@@ -135,6 +160,31 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
 
+        // Handle favorite button taps
+        cell.didTapFavoriteButton = { [weak self] in
+            guard let self else { return }
+            if cell.isFavorite {
+                self.viewModel.removeFromFavorites(with: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                    }
+                }
+            } else {
+                self.viewModel.addToFavorites(with: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                    }
+                }
+            }
+        }
+
+        // Assign cell's data.
         let rgbaValues = viewModel.setRatingViewBackgroundColor(withRespectTo: rate)
         cell.ratingStackView.backgroundColor = UIColor(red: rgbaValues[0],
                                                        green: rgbaValues[1],
@@ -150,6 +200,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: SearchViewModelDelegate
 extension SearchViewController: SearchViewModelDelegate {
     func isFilteringProducts() {
         DispatchQueue.main.async {
@@ -163,7 +214,7 @@ extension SearchViewController: SearchViewModelDelegate {
             self.addSegmentedControl()
         }
     }
-    
+
     func didErrorOccured(_ error: Error) {
         DispatchQueue.main.async {
             self.showError(error)

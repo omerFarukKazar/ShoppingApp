@@ -101,3 +101,5 @@ extension SearchViewModel: DataDownloader {
         }
     }
 }
+
+extension SearchViewModel: FirestoreReadAndWritable { }

@@ -9,7 +9,6 @@ import Foundation
 import CoreData
 
 protocol ProfileViewModelDelegate: AnyObject {
-    func didAppendToFavoriteProducts()
     func didErrorOccured(_ error: Error)
     func didFetchUserData()
     func didUploadImage(_ downloadUrl: URL)
@@ -52,7 +51,8 @@ final class ProfileViewModel {
 
 // MARK: - Protocol DataDownloader
 extension ProfileViewModel: DataDownloader {
-    func downloadImageData(with imageUrl: String, completion: @escaping ((_ imageData: Data?, _ error: Error?) -> Void)) {
+    func downloadImageData(with imageUrl: String,
+                           completion: @escaping ((_ imageData: Data?, _ error: Error?) -> Void)) {
 
         downloadDataWith(imageUrl) { imageData, error in
             if let error = error {

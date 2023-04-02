@@ -23,6 +23,7 @@ final class CartTableViewCell: UITableViewCell {
     var didStepperValueChanged: ((CartOperation, Int) -> Void)?
     weak var delegate: CellDelegate?
     var indexPath: IndexPath = []
+    /// quantity of product in cart.
     var quantity: Int? {
         didSet {
             DispatchQueue.main.async {

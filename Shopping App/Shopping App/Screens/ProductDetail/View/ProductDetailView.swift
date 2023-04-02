@@ -15,7 +15,6 @@ enum ProductViewAssets: String {
 final class ProductDetailView: UIView {
     // MARK: - Properties
     var didTapFavoriteButton: (() -> Void)?
-    // TODO: Another scaling for fonts maybe?
     lazy var scaledScreenWidth: CGFloat = {
         screenWidth * 0.5
     }()
@@ -23,8 +22,6 @@ final class ProductDetailView: UIView {
         screenHeight * 0.4
     }()
     // MARK: - UI Elements
-    // TODO: I can't decide if creating new computed properties is better than
-    // setting UI elements to internal.
     var image: UIImage? {
         get {
             productImageView.image
@@ -237,5 +234,4 @@ final class ProductDetailView: UIView {
             addToCartButton.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor, constant: -(screenWidth * 0.1)),
             addToCartButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -(screenWidth * 0.025))])
     }
-
 }
