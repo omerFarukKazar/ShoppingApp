@@ -29,25 +29,24 @@ final class SearchViewController: SAViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view = searchView
+
         viewModel.delegate = self
         viewModel.fetchAllProducts()
         viewModel.fetchCategories()
 
+        addSegmentedControlTarget()
+
         addSearchBar()
         setSearchBarDelegate()
 
-        addSegmentedControlTarget()
         setCollectionViewDelegateAndDataSource()
     }
 
-    // MARK: - Methods
-    func addSearchBar() {
-        navigationItem.searchController = searchView.searchController
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
 
-    func setSearchBarDelegate() {
-        searchView.searchController.searchBar.delegate = self
-    }
+    // MARK: - Methods
 
     func setSegmentedControlSegments() {
         let categories = viewModel.category
@@ -71,6 +70,14 @@ final class SearchViewController: SAViewController {
         let selectedSegment = sender.selectedSegmentIndex
         guard let category = sender.titleForSegment(at: selectedSegment) else { return }
         viewModel.fetchProductsBy(category: category)
+    }
+
+    func addSearchBar() {
+        navigationItem.searchController = searchView.searchController
+    }
+
+    func setSearchBarDelegate() {
+        searchView.searchController.searchBar.delegate = self
     }
 
     func setCollectionViewDelegateAndDataSource() {
@@ -102,7 +109,18 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate { }
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
+
+        let service = ProductsService()
+        let viewModel = ProductDetailViewModel(product: product, service: service)
+        let viewController = ProductDetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
+        
+
+    }
+}
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -135,6 +153,29 @@ extension SearchViewController: UICollectionViewDataSource {
             }
         }
 
+        cell.didTapFavoriteButton = { [weak self] in
+            guard let self else { return }
+            if cell.isFavorite {
+                self.viewModel.removeFromFavorites(with: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                    }
+                }
+            } else {
+                self.viewModel.addToFavorites(with: id) { error in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    } else {
+                        cell.isFavorite.toggle()
+                    }
+                }
+            }
+        }
+
         let rgbaValues = viewModel.setRatingViewBackgroundColor(withRespectTo: rate)
         cell.ratingStackView.backgroundColor = UIColor(red: rgbaValues[0],
                                                        green: rgbaValues[1],
@@ -163,7 +204,7 @@ extension SearchViewController: SearchViewModelDelegate {
             self.addSegmentedControl()
         }
     }
-    
+
     func didErrorOccured(_ error: Error) {
         DispatchQueue.main.async {
             self.showError(error)
