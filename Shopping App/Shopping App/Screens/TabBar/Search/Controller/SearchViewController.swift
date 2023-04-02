@@ -111,14 +111,13 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // swiftlint:disable:next line_length
         let product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
 
         let service = ProductsService()
         let viewModel = ProductDetailViewModel(product: product, service: service)
         let viewController = ProductDetailViewController(viewModel: viewModel)
         navigationController?.pushViewController(viewController, animated: true)
-        
-
     }
 }
 
@@ -126,15 +125,16 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         isSearching ? viewModel.searchFilteredProducts.count : viewModel.categorizedProducts.count
     }
-
+    // swiftlint:disable:next function_body_length
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // swiftlint:disable:next line_length
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProductsViewCell else { fatalError("Cell Not Found") }
 
         var product: Product?
-
+        // swiftlint:disable:next line_length
         product = isSearching ? viewModel.searchFilteredProducts[indexPath.row] : viewModel.categorizedProducts[indexPath.row]
         isSearching = false
-        
+
         guard let product = product,
               let name = product.title,
               let rating = product.rating,

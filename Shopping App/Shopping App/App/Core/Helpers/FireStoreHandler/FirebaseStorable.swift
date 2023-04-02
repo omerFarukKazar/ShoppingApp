@@ -14,7 +14,7 @@ protocol FirebaseStorable: UserDefaultsAccessible,
 
 extension FirebaseStorable {
     func upload(imageData: Data,
-                    completion: @escaping ((_ url: URL?,
+                completion: @escaping ((_ url: URL?,
                                             _ error: Error?) -> Void)) {
         let storageRef = Storage.storage().reference(withPath: "profilePhotos")
         let data = imageData
@@ -22,7 +22,7 @@ extension FirebaseStorable {
         guard let uid = uid else { return }
         let imageRef = storageRef.child(uid)
 
-        let uploadTask = imageRef.putData(data, metadata: nil) { (metadata, error) in
+        let uploadTask = imageRef.putData(data, metadata: nil) { (_, error) in
             if let error = error {
                 completion(nil, error)
                 return

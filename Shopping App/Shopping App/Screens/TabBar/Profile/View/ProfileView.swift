@@ -119,7 +119,7 @@ final class ProfileView: UIView {
         favoritesLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             favoritesLabel.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-                                     favoritesLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8.0),
+            favoritesLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8.0),
             favoritesLabel.heightAnchor.constraint(equalToConstant: 32.0)])
     }
 

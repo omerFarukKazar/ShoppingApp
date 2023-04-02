@@ -13,9 +13,8 @@ enum CoreDataEntities: String {
 }
 
 enum UserCoreDataAttributes: String {
-    case profilePhoto = "profilePhoto"
+    case profilePhoto
 }
-
 
 protocol CoreDataManager { }
 
@@ -42,8 +41,8 @@ extension CoreDataManager {
     }
 
     func getDataFromCoreData(entityName: String,
-                                attributeName: String,
-                                completion: ((AnyObject?, Error?) -> Void)) {
+                             attributeName: String,
+                             completion: ((AnyObject?, Error?) -> Void)) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
             guard let fetchResults = try context?.fetch(fetchRequest),
@@ -58,5 +57,5 @@ extension CoreDataManager {
             completion(nil, error)
         }
     }
-    
+
 }

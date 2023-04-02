@@ -53,6 +53,7 @@ extension CartViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CartTableViewCell else { fatalError("Cell not found!") }
 
         cell.delegate = self
@@ -108,7 +109,7 @@ extension CartViewController: CartViewModelDelegate {
 
 extension CartViewController: CellDelegate {
     func didStepperValueChanged(_ operation: CartOperation, _ value: Int, _ indexPath: IndexPath) {
-        guard let cell = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+        guard let _ = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
 
         // cell's product
         let product = viewModel.productsInCart[indexPath.row]
@@ -131,7 +132,7 @@ extension CartViewController: CellDelegate {
     }
 
     func didTapRemoveButton(_ indexPath: IndexPath) {
-        guard let cell = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
+        guard let _ = self.tableView.cellForRow(at: indexPath) as? CartTableViewCell else { return }
         let product = viewModel.productsInCart[indexPath.row]
         guard let id = product.id else { return }
 

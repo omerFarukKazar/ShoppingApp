@@ -27,6 +27,7 @@ final class ProductDetailViewController: SAViewController {
     }
     var isCartEmpty = true {
         didSet {
+            // swiftlint:disable:next line_length
             let image = isCartEmpty ? UIImage(named: ProductViewAssets.cart.rawValue) : UIImage(named: ProductViewAssets.cartCheckout.rawValue)
             navigationBarCartButton(with: image)
         }

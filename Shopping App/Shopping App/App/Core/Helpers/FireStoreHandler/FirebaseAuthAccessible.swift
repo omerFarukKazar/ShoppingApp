@@ -11,7 +11,6 @@ import FirebaseAuth
 protocol FirebaseAuthAccessible {}
 
 extension FirebaseAuthAccessible {
-    // swiftlint:disable:next identifier_name
     var auth: Auth {
         Auth.auth()
     }

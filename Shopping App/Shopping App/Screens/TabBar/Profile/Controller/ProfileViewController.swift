@@ -29,7 +29,7 @@ class ProfileViewController: SAViewController {
         super.viewDidLoad()
         view = profileView
         viewModel.delegate = self
-        
+
         setCollectionView()
         viewModel.getUserData()
         addTapGestureToProfilePhoto()
@@ -62,7 +62,9 @@ class ProfileViewController: SAViewController {
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
-        showAlert(title: "Shopping App Would Like to Access Gallery", message: "Shopping App needs your permission to pick a profile photo from gallery.", cancelButtonTitle: "Don't Allow") { _ in
+        showAlert(title: "Shopping App Would Like to Access Gallery",
+                  message: "Shopping App needs your permission to pick a profile photo from gallery.",
+                  cancelButtonTitle: "Don't Allow") { _ in
             self.present(imagePicker, animated: true)
         }
     }
@@ -72,7 +74,9 @@ class ProfileViewController: SAViewController {
     }
 
     @objc func logOutButtonTapped() {
-        showAlert(title: "Warning", message: "Are you sure you want to be log out?", cancelButtonTitle: "Cancel") { action in
+        showAlert(title: "Warning",
+                  message: "Are you sure you want to be log out?",
+                  cancelButtonTitle: "Cancel") { _ in
             do {
                 try self.auth.signOut()
                 self.tabBarController?.navigationController?.popToRootViewController(animated: true)
@@ -111,8 +115,9 @@ extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.favoriteProducts.count
     }
-
+    // swiftlint:disable:next line_length
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // swiftlint:disable:next line_length
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? FavoritesCollectionViewCell else { fatalError("Cell not found") }
 
         cell.backgroundColor = .white
@@ -142,7 +147,8 @@ extension ProfileViewController: UICollectionViewDataSource {
 extension ProfileViewController: UIImagePickerControllerDelegate,
                                  UINavigationControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         guard let editedImage = info[.editedImage] as? UIImage,
               let jpegData = editedImage.jpegData(compressionQuality: 0.5),
@@ -156,7 +162,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate,
         viewModel.saveImageData(data: jpegData,
                                 entityName: entity,
                                 attributeName: attribute)
-
 
         dismiss(animated: true, completion: nil)
     }

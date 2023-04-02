@@ -11,13 +11,13 @@ protocol ProductsServiceable {
     /// Sends a request by using HTTPClient method.
     /// That request is adapted to get Products.
     /// - parameters:
-    ///     - completion: The closure that'll be passed to HTTPClient in order to conform and handle the possible outcomes.
+    ///     - completion: The closure that'll be passed to HTTPClient to conform and handle the possible results.
     func getProducts(completion: @escaping ((Result<Products, RequestError>) -> Void))
     func getSingleProduct(with id: Int,
                           completion: @escaping ((Result<Product, RequestError>) -> Void))
     func getCategories(completion: @escaping ((Result<[String], RequestError>) -> Void))
     func getSpecificCategory(category: String,
-                               completion: @escaping ((Result<Products, RequestError>) -> Void))
+                             completion: @escaping ((Result<Products, RequestError>) -> Void))
 }
 
 /// Contains a method that sends a request to get products.

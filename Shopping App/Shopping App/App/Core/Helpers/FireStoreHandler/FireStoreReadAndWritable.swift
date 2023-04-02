@@ -91,7 +91,7 @@ extension FirestoreReadAndWritable {
                 }
             }
         case .remove:
-            if let count = ProductsManager.cart[id] {
+            if let _ = ProductsManager.cart[id] {
                 ProductsManager.cart.removeValue(forKey: id)
             }
         }

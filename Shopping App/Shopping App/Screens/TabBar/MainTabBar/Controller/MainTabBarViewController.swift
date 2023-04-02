@@ -28,7 +28,7 @@ final class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         setTabBarControllers()
-        
+
     }
 
     // MARK: - Methods
@@ -59,7 +59,9 @@ final class MainTabBarController: UITabBarController {
         searchViewController.tabBarItem.image = UIImage(named: TabBarImageNames.search.rawValue)
         profileViewController.tabBarItem.image = UIImage(named: TabBarImageNames.profile.rawValue)
 
-        let viewControllerArray = [productsNavigationController, searchNavigationController, profileNavigationController]
+        let viewControllerArray = [productsNavigationController,
+                                   searchNavigationController,
+                                   profileNavigationController]
 
         self.setViewControllers(viewControllerArray, animated: true)
 

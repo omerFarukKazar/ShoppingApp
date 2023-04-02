@@ -10,12 +10,14 @@ import UIKit
 final class SearchView: UIView {
     // MARK: - UI Elements
     let searchController: UISearchController = {
+        // swiftlint:disable:next identifier_name
         let sc = UISearchController(searchResultsController: nil)
         sc.searchBar.placeholder = "Type more than 2 characters to begin searching"
         return sc
     }()
 
     lazy var segmentedControl: UISegmentedControl = {
+        // swiftlint:disable:next identifier_name
         let sc = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: screenWidth * 0.8, height: 32))
         return sc
     }()
@@ -29,6 +31,7 @@ final class SearchView: UIView {
     }
 
     var collectionView: UICollectionView = {
+        // swiftlint:disable:next identifier_name
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         return cv
     }()
