@@ -4,6 +4,10 @@ _Under Construction_ 🛠️
 * I gotta say that i didn't have aesthetic concerns while developing this App. Focused more on the _**Logic and Clean Code.**_
 * Minimum Deployment Version: iOS 12.0
 
+## Screen Recording
+
+Simulator: https://youtu.be/6KC8JGtA0qg
+
 ## How To Install
   Open the destination folder in terminal and paste the following code
 
@@ -41,10 +45,6 @@ git clone https://github.com/omerFarukKazar/ShoppingApp.git
   
   * Dependencies
     * Firebase
-  
-## Screen Recording
-
-Simulator: https://youtu.be/AntzcKpYTDg
 
 ## Some explanations about how i thought
 
@@ -117,7 +117,7 @@ That's how, i avoided hard code and also if there are new pages be added or remo
 #### Storing Favorites and Cart items
 * I thought about using CoreData to store them but in case of changing to another platform or device user would lost that data.
 * I preferred Singleton and Static methods for cart and favorites list and kept them up to date with FireStore.
-```bash
+```swift
 final class ProductsManager {
     static let products = ProductsManager()
     static var cart: [Int: Int] = [:]
@@ -129,11 +129,46 @@ final class ProductsManager {
 ---
 ---
 
+### Search Screen
+
+* If new segments will be added to Segmented Control in the future, adding that category to API response is enough.
+* It'll automatically added to viewModel.category and since all the segmented control based on it with 'forEach' method, no need to do anything else.
+
+```swift
+    private func setSegmentedControlSegments() {
+        let categories = viewModel.category
+        categories.forEach({ category in
+            guard let index = categories.firstIndex(of: category) else { return }
+            searchView.segmentedControl.insertSegment(withTitle: category, at: index, animated: false)
+        })
+    }
+
+    private func addSegmentedControl() {
+        navigationItem.titleView = searchView.segmentedControl
+    }
+
+    private func addSegmentedControlTarget() {
+        searchView.segmentedControl.addTarget(self,
+                                              action: #selector(segmentedControlValueChanged(_:)),
+                                              for: .valueChanged)
+    }
+
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        let selectedSegment = sender.selectedSegmentIndex
+        guard let category = sender.titleForSegment(at: selectedSegment) else { return }
+        viewModel.fetchProductsBy(category: category)
+    }
+```
+
+---
+---
+---
+
 ### Profile Screen
 
 * I didn't want to fetch user's profile picture from server everytime. So i add Core Data to project to be able to store profile picture of user locally if image picking and uploading to firebase firestore is successful.
 
-```bash
+```swift
 import UIKit
 import CoreData
 
@@ -216,6 +251,9 @@ extension CoreDataManager {
 
 ```
 
+---
+---
+---
 
 ## License
 
