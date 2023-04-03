@@ -42,7 +42,6 @@ final class ProfileViewModel {
                     self.delegate?.didErrorOccured(error)
                 case .success(let product):
                     self.favoriteProducts.append(product)
-                    self.delegate?.didAppendToFavoriteProducts()
                 }
             }
         }
