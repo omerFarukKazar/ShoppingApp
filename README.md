@@ -1,5 +1,5 @@
 # eCommerceApp
-_Under Construction_ 🛠️
+_Under Construction_ **% 95** 🛠️
 
 * I gotta say that i didn't have aesthetic concerns while developing this App. Focused more on the _**Logic and Clean Code.**_
 * Minimum Deployment Version: iOS 12.0
