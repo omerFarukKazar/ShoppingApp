@@ -29,9 +29,10 @@ class ProfileViewController: SAViewController {
         super.viewDidLoad()
         view = profileView
         viewModel.delegate = self
-
-        setCollectionView()
         viewModel.getUserData()
+        viewModel.getFavorites()
+        setCollectionView()
+
         addTapGestureToProfilePhoto()
         addLogOutButtonTarget()
 
@@ -90,6 +91,12 @@ class ProfileViewController: SAViewController {
 // MARK: - Extensions
 // MARK: - ProfileViewModelDelegate
 extension ProfileViewController: ProfileViewModelDelegate {
+    func didFetchFavorites() {
+        DispatchQueue.main.async {
+            self.profileView.collectionView.reloadData()
+        }
+    }
+
 
     func didErrorOccured(_ error: Error) {
         showError(error)

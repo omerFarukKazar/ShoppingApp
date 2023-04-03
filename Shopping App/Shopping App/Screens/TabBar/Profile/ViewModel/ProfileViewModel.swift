@@ -13,6 +13,7 @@ protocol ProfileViewModelDelegate: AnyObject {
     func didFetchUserData()
     func didUploadImage(_ downloadUrl: URL)
     func didGetUserImageData(_ imageData: Data)
+    func didFetchFavorites()
 }
 
 final class ProfileViewModel {
@@ -26,7 +27,6 @@ final class ProfileViewModel {
     // MARK: - Init
     init(service: ProductsServiceable) {
         self.service = service
-        getFavorites()
     }
 
     required init?(coder: NSCoder) {
@@ -42,6 +42,7 @@ final class ProfileViewModel {
                     self.delegate?.didErrorOccured(error)
                 case .success(let product):
                     self.favoriteProducts.append(product)
+                    self.delegate?.didFetchFavorites()
                 }
             }
         }
