@@ -38,6 +38,8 @@ final class OnboardingPageView: UIView {
     private let headingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .orange
         label.numberOfLines = 0
         label.minimumScaleFactor = 16
         return label
@@ -72,7 +74,8 @@ final class OnboardingPageView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
+            imageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor,
+                                           constant: screenHeight * 0.1),
             imageView.widthAnchor.constraint(equalToConstant: screenWidth * 0.8),
             imageView.heightAnchor.constraint(equalToConstant: screenHeight * 0.3)
         ]) // Used screenHeight and ScreenWidth in order to maintain the responsive design.
