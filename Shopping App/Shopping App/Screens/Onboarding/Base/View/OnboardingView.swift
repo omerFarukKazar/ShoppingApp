@@ -61,7 +61,7 @@ final class OnboardingView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .lightGray
+        backgroundColor = .white
         setConstraints()
     }
 
