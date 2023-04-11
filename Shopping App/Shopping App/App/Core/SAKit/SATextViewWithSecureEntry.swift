@@ -21,7 +21,7 @@ final class SATextViewWithSecureEntry: SATextView {
     /// The eye shaped button with the ability to toggle secure entry for touch up inside.
     private let toggleSecureEntryButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: IconNames.openEye.rawValue), for: .normal)
+        button.setImage(UIImage(named: IconNames.closedEye.rawValue), for: .normal)
         button.addTarget(nil, action: #selector(toggleSecureEntry), for: .touchUpInside)
         return button
     }()
@@ -29,7 +29,7 @@ final class SATextViewWithSecureEntry: SATextView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textField.isSecureTextEntry = false
+        textField.isSecureTextEntry = true
         addSecureEntry()
     }
 

@@ -45,6 +45,7 @@ final class OnboardingView: UIView {
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = .blue
+        pageControl.pageIndicatorTintColor = .orange
         return pageControl
     }()
 

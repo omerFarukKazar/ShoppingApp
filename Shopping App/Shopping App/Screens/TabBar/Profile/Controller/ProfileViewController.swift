@@ -97,7 +97,6 @@ extension ProfileViewController: ProfileViewModelDelegate {
         }
     }
 
-
     func didErrorOccured(_ error: Error) {
         showError(error)
     }
