@@ -24,6 +24,7 @@ final class ProfileView: UIView {
         usernameLabel.font = .systemFont(ofSize: 16.0, weight: .bold)
         usernameLabel.textAlignment = .center
         usernameLabel.numberOfLines = 3
+        usernameLabel.textColor = .orange
         return usernameLabel
     }()
 
@@ -31,6 +32,7 @@ final class ProfileView: UIView {
         let emailLabel = UILabel()
         emailLabel.textAlignment = .center
         emailLabel.numberOfLines = 3
+        emailLabel.textColor = .orange
         return emailLabel
     }()
 
@@ -38,6 +40,7 @@ final class ProfileView: UIView {
         let favoritesLabel = UILabel()
         favoritesLabel.font = .systemFont(ofSize: 16.0, weight: .medium)
         favoritesLabel.text = "Favorites"
+        favoritesLabel.textColor = .purple
         return favoritesLabel
     }()
 
@@ -100,7 +103,7 @@ final class ProfileView: UIView {
         NSLayoutConstraint.activate([
             usernameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             usernameLabel.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 16.0),
-            usernameLabel.heightAnchor.constraint(equalToConstant: screenWidth * 0.18),
+            usernameLabel.heightAnchor.constraint(equalToConstant: screenWidth * 0.1),
             usernameLabel.widthAnchor.constraint(equalToConstant: screenWidth * 0.8)])
     }
 
@@ -109,8 +112,8 @@ final class ProfileView: UIView {
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emailLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 8.0),
-            emailLabel.heightAnchor.constraint(equalToConstant: screenWidth * 0.18),
+            emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor),
+            emailLabel.heightAnchor.constraint(equalToConstant: screenWidth * 0.1),
             emailLabel.widthAnchor.constraint(equalToConstant: screenWidth * 0.8)])
     }
 
@@ -119,8 +122,8 @@ final class ProfileView: UIView {
         favoritesLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             favoritesLabel.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-            favoritesLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 8.0),
-            favoritesLabel.heightAnchor.constraint(equalToConstant: 32.0)])
+            favoritesLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 48.0),
+            favoritesLabel.heightAnchor.constraint(equalToConstant: 16.0)])
     }
 
     private func setLogOutButton() {

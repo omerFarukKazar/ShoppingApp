@@ -45,6 +45,7 @@ final class OnboardingView: UIView {
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = .blue
+        pageControl.pageIndicatorTintColor = .orange
         return pageControl
     }()
 
@@ -61,7 +62,7 @@ final class OnboardingView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .lightGray
+        backgroundColor = .white
         setConstraints()
     }
 

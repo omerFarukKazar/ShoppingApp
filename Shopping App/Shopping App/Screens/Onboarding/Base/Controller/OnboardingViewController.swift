@@ -22,8 +22,10 @@ final class OnboardingViewController: SAViewController {
         didSet {
             if currentPageNumber == pagesArray.count - 1 {
                 onboardingView.nextButton.setTitle("Done", for: .normal)
+                onboardingView.skipButton.isHidden = true
             } else {
                 onboardingView.nextButton.setTitle("Next", for: .normal)
+                onboardingView.skipButton.isHidden = false
             }
 
             if currentPageNumber == .zero {
